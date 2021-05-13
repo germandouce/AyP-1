@@ -1,5 +1,5 @@
 Algortimos y Programacion I - 95.14-75.40
-Catedra Costa - 2021 - 1C
+2021 - 1C
 
 Repositorio en construccion.
 
