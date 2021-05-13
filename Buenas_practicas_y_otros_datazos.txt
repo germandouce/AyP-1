@@ -1,0 +1,45 @@
+*COMMANDS*
+
+Run python file: python[3] <file_name>
+See python version: python --version
+mypy <file_name>
+
+*DATAZOS Y BUENAS PRÁCTICAS*
+
+CONSTANTESENMAYUSCULAYTODOJUNTO
+
+Espacios entre operadores (ej: a = 4, b = a + 5, NO: c=b+3)
+
+CamelCase xa funciones: 1era letra de c/plbr en mayucula
+
+Snake_case xa variables : plbrs separadas con guion
+
+Una funcion tiene q devolver el mismo tipo de datos xa todo lo q devuelve!
+
+Dejar 2 print()'s de espacio entre funcones
+
+No usar variables globales!! todas las varuables deben estar 
+defindidas en su ambito de uso (dentro de la funcino o el pro
+grama principal)
+
+Procedimientos y funciones son todas "funciones", pero un
+Procedimiento: no devuelve nada -> None en gral
+Funcion: devuelve "algo"
+
+Parametros: Lo q "meto" en la funcion cuando la llamo
+Argumento: Lo q lleva la funcion  en su definición
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
