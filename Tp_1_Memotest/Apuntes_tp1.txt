@@ -1,0 +1,40 @@
+	APUNTES TP_1 - MEMOTEST 
+
+*8 de junio hasta 21 HRS, con un (doc) con lineamientos basicos e hipotesis
+asumidas. puede estar en el cuerpo del mail. Tp nivelador, 
+La nota y devolucion depende de cada tutor. Hablarle a cada tutor por
+privado.
+
+*El usuario define si quiere arrancar una partida de nuevo desde un menu
+
+*En cada partido hay solo 2 jugadores, en gral 2 distintos. Nos manejamos 
+con el nombre que poenen
+
+*Se pueden sugerir probabilidades por defecto y q el usuario elija
+
+*la probabilida va entre 0 y 1 (0.4, 0.5 etc)
+
+*SOLO SE PUEDE USAR RANDOM, funciones, ciclicas, selecivas, 
+listas, strings y tuplas
+
+*Todo dde terminal
+
+*cada carta tiene su probabilidad de q salgo
+
+*espejar espeja como un espejo (??
+
+*todas las carta juegan contra MI tablero. MI TABLERO ES EL Q MI 
+CONTRARIO DEBE ADIVINAR !!!!
+
+*las fichas estaria bueno q t muestre donde tenes huecos
+
+*Aylen y ari(adna) son las mas exigentes
+
+*No le tengan miedo a google, animense a googlear.. (lo dijo xa random no xa copiarse)
+
+*Ranking con las ultimas 4 partidas
+
+*Todo lo q sea del TP, preguntarlo en el canal TP
+
+*No copiarse xd motor de comparacion (Moss) de Stanford. Mas importante
+hacer solución individual y 1/2 chota q copiada
