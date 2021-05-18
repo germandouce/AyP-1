@@ -233,7 +233,7 @@ def guardar_score():
     pass
 
 
-def main():
+def main() -> None:
     """
     con un for in range (4) corre xa cada partida
     defino variable con nuemero de partida ()

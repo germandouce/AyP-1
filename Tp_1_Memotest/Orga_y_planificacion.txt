@@ -1,3 +1,8 @@
+#OJOOOOOOOO
+dividir en 2 funciones la funcion parametros()
+sacar directamente duracion()
+y probabilidades de menu principal()
+
 Primero voy a listar todas las funciones, (lo mas modularizado posible) que vaya a usar en 
 el TP. 
 A medida q vaya necesitando mas, ire subdividiendo.
