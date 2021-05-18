@@ -499,5 +499,5 @@ main()
 #CLASE 10 - MAYUSCULA
 
 #Se vio pptx
-#ejs propuestos: 
-#holasa
+#ejs propuestos
+
