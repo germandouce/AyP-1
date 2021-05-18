@@ -1,40 +1,59 @@
-def datos_jugadores():
+def datos_jugadores() -> tuple:
     """
-    pide datos jugadores
+    GRAL: pide datos de los jugadores jugadores
+    ARGS: no recibe argumentos
+    RETURNS: los nombres de los 2 jugadores
     """
-    pass
+    jug_1 = input ('Ingrese nombre del jugador 1: ')
+    jug_2 = input ('Ingrese nombre del jugador 2: ')
+
+    return jug_1, jug_2
 
 
 def duracion():
     """
-    defino duracion del juego
+    ARGS: no recibe argumentos
+    GRAL:defino duracion del juego
+    RETURN: devuelve una variable con la duracion
     """
+    print("Defini duracion del juego")
+
     pass
 
 
 def proba_cartas():
     """
-    defino proba de cada carta. solo va a devolver 4 valores n una lista, 1 xa ca carta
+    ARGS: No recibe argumentos
+    GRAl: Defino proba de cada carta. solo va a devolver 4 valores n una lista, 1 xa ca carta
+    RETURNS: lista con 4 valores de probabilidad
     """
     pass
 
 
-def parametros():
+def parametros() -> tuple:
     """
-    define los parametros del juego n.
-    Args:
-    returns: duarcion del juego en variable y lista con probabilidad de cada carta
+    GRAL: define los parametros del juego n.
+    ARGS: numero de juego
+    RETURN: duarcion del juego en  una variable variable y lista con probabilidad de cada carta
     """
-    duracion()
-    proba_cartas() 
-    pass
+    duracion = duracion()
+    #proba_cartas = proba_cartas()
+    proba_cartas = [0.1,0.2,0.3,0.4]
+    return duracion, proba_cartas 
 
 
-def crear_tableros():
+def crear_tableros(duracion: int) -> list:
     """
     GRAL:crea los dos tableros
+    ARGS: la duracion ingresada en parametros()
     RETURNS: 2 listas de listas con tableros
     """
+    if duracion == 1:
+        tablero_1 = []
+    #elif duracion = 2:
+    
+    #else:
+
     pass
 
 
@@ -49,9 +68,9 @@ def cargar_tableros():
 def nueva_partida():
     """crea una nueva partida, solo trae el numero de partida como parametro xa mejor refrerencia
     """
-    datos_jugadores()
-    parametros()
-    crear_tableros()
+    jug_1 ,jug_2 = datos_jugadores()
+    duracion, proba_cartas = parametros()
+    crear_tableros(duracion)
     cargar_tableros()
     pass
 
@@ -67,8 +86,26 @@ def menu_principal():
     """
     recibe numero de partida, xa el score, si es primera partida muestra lista vacia
     """
-    nueva_partida()
-    score()
+    seguir = True
+    while seguir:
+        print("MENU PRINCIPAL")
+        print("0 - nueva partida\n1 - mostrar ultimos 4 scores")
+
+        opc = input('')
+        while (not opc.isnumeric) or (opc not in ('0','1') ):
+            opc = input('Por favor ingrese una opcion valida: ')
+        opc = int(opc)
+
+        if opc == 0:
+            nueva_partida()
+        else:
+            score()
+
+        seguir = input('Desea permanecer del menu principal? 1-Si otro-No: ')
+        if seguir =='1':
+            seguir = True       
+        else:
+            seguir = False
 
 
 def mostrar_tablero():
