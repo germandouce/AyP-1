@@ -1,15 +1,3 @@
-def datos_jugadores() -> tuple:
-    """
-    GRAL: pide datos de los jugadores jugadores
-    ARGS: no recibe argumentos
-    RETURNS: los nombres de los 2 jugadores
-    """
-    jug_1 = input ('Ingrese nombre del jugador 1: ')
-    jug_2 = input ('Ingrese nombre del jugador 2: ')
-
-    return jug_1, jug_2
-
-
 def duracion():
     """
     ARGS: no recibe argumentos
@@ -28,18 +16,6 @@ def proba_cartas():
     RETURNS: lista con 4 valores de probabilidad
     """
     pass
-
-
-def parametros() -> tuple:
-    """
-    GRAL: define los parametros del juego n.
-    ARGS: numero de juego
-    RETURN: duarcion del juego en  una variable variable y lista con probabilidad de cada carta
-    """
-    duracion = duracion()
-    #proba_cartas = proba_cartas()
-    proba_cartas = [0.1,0.2,0.3,0.4]
-    return duracion, proba_cartas 
 
 
 def crear_tableros(duracion: int) -> list:
@@ -68,8 +44,11 @@ def cargar_tableros():
 def nueva_partida():
     """crea una nueva partida, solo trae el numero de partida como parametro xa mejor refrerencia
     """
-    jug_1 ,jug_2 = datos_jugadores()
-    duracion, proba_cartas = parametros()
+    jug_1 = input ('Ingrese nombre del jugador 1: ')
+    jug_2 = input ('Ingrese nombre del jugador 2: ')
+
+    duracion()
+    proba_cartas()
     crear_tableros(duracion)
     cargar_tableros()
     pass
@@ -86,8 +65,8 @@ def menu_principal():
     """
     recibe numero de partida, xa el score, si es primera partida muestra lista vacia
     """
-    seguir = True
-    while seguir:
+    salir = False
+    while not salir:
         print("MENU PRINCIPAL")
         print("0 - nueva partida\n1 - mostrar ultimos 4 scores")
 
@@ -101,11 +80,11 @@ def menu_principal():
         else:
             score()
 
-        seguir = input('Desea permanecer del menu principal? 1-Si otro-No: ')
-        if seguir =='1':
-            seguir = True       
+        salir = input('Desea salir del menu principal? 1-Si otro-No: ')
+        if salir =='1':
+            salir = True       
         else:
-            seguir = False
+            salir = False
 
 
 def mostrar_tablero():
