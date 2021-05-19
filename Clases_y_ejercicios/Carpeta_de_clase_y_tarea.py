@@ -501,3 +501,39 @@ main()
 #Se vio pptx
 #ejs propuestos
 
+#CLASE 11 - BUENAS PRACTICAS + PRACTICA MATRICES
+'''
+def generar_matriz_identidad(tam_matriz: int) -> list: #A completar
+    """
+    Pre: Recibe el tamaño deseado de la matriz a generar.
+    Post: Retorna una matriz identidad de tamaño N.
+    """
+    matriz_identidad = []
+    for i in range(tam_matriz):
+        fila = []
+        for j in range(tam_matriz):
+            if i == j:
+                fila.append(1)
+            else:
+                fila.append(0)
+        matriz_identidad.append(fila)
+    return matriz_identidad
+
+m1 = generar_matriz_identidad(3)
+m2 = generar_matriz_identidad(3)
+for i in range (len(m1)):
+    print (m1[i])
+print()
+for i in range (len(m2)):
+    print (m2[i])
+
+matriz_suma = []
+for i in range (3):
+    matriz_suma.append([])
+for i in range (len(m1)):
+    for j in range (len(m2)):
+        matriz_suma[i][j]= i+j
+
+for i in range (len(matriz_suma)):
+    print (matr[i])
+'''
