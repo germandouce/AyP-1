@@ -41,7 +41,7 @@ def cargar_tableros():
 
 def nueva_partida():
     """
-    PRE: cuando este terminada, va a recibir el numero de partida
+    PRE: cuando la funcion este terminada, va a recibir el numero de partida
     POST: crea una nueva partida, devolviendo 2 listas con  los tableros creados y cargados
     """
     jug_1 = input ('Ingrese nombre del jugador 1: ')
@@ -68,26 +68,28 @@ def menu_principal():
     PRE: numero de partida
     POST: no devuelve nada, simplemente es un menu de opciones
     """
+    iniciada = False
     salir = False
     while not salir:
-        print("MENU PRINCIPAL")
-        print("0 - nueva partida\n1 - mostrar ultimos 4 scores")
+        print("---MENU PRINCIPAL---")
+        print("0 - Nueva partida\n1 - Comenzar partida\n2 - Mostrar scores")
 
         opc = input('')
-        while (not opc.isnumeric) or (opc not in ('0','1') ):
+        while (not opc.isnumeric) or (opc not in ('0','1','2') ):
             opc = input('Por favor ingrese una opcion valida: ')
         opc = int(opc)
 
         if opc == 0:
             nueva_partida()
+            iniciada = True
+        elif opc == 1: 
+            if iniciada:
+                salir = True
+            else:
+                print('Debe crear una nueva partida antes de comenzarla')
+                salir = False
         else:
-            score()
-
-        salir = input('Desea salir del menu principal? 1-Si otro-No: ')
-        if salir =='1':
-            salir = True       
-        else:
-            salir = False 
+            score()       
 
 
 def mostrar_tablero():
