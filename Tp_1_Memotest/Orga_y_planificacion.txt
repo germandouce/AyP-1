@@ -1,7 +1,12 @@
 #OJOOOOOOOO
-dividir en 2 funciones la funcion parametros()
+*ver si pedir nombres de usuario en una funcion por separado
+*dividir en 2 funciones la funcion parametros()
 sacar directamente duracion()
 y probabilidades de menu principal()
+* en vez de seguir, usar while nor cortar!!! mejor practica xa entender variable de corte
+*invertir filas y columnas!! (no esta la funcion todavi, ver la de short algor...)
+*cambiar doctype de funcion crear y modificar tablero. DICE: tengo q guardar la matriz e  ina variable.
+Y no! no es necesario xq es pasaje x referencia!!
 
 Primero voy a listar todas las funciones, (lo mas modularizado posible) que vaya a usar en 
 el TP. 
