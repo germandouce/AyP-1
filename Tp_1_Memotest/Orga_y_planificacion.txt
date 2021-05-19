@@ -1,8 +1,11 @@
 #OJOOOOOOOO
-* en vez de seguir, usar while nor cortar!!! mejor practica xa entender variable de corte
-*invertir filas y columnas!! (no esta la funcion todavi, ver la de short algor...)
-*cambiar doctype de funcion crear y modificar tablero. DICE: tengo q guardar la matriz e  ina variable.
-Y no! no es necesario xq es pasaje x referencia!!
+*invertir filas y columnas!! (no esta la funcion todavi, ver la de 
+short algor...)
+
+
+APARTADO XA DUDAS
+puede haber una probabilidad de "no carta"? es decir que haya 5 probabiliades, una xa cada una
+de las 4 cartas y una 5ta de q "no salga carta"?
 
 Primero voy a listar todas las funciones, (lo mas modularizado posible) que vaya a usar en 
 el TP. 
@@ -34,5 +37,3 @@ OJO SE PUEDE GUARDAR LA CART Y USAR DSPS. VER COMO HACER ESTO. UNA ""MEMORIA""""
 el tablero de cada uno es el q el otro necesita adivinar.
 Por defecto será el tamaño       Corto: medio - largo
 3 tableros, a elegir x el ususario 4x4 8x8 12x12
-
-APARTADO XA DUDAS
