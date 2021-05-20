@@ -28,9 +28,9 @@ def proba_cartas():
     pass
 
 
-def mostrar_tableros_temporal(tablero):
-    for i in range(4):
-        for j in range(4):
+def mostrar_tableros_temporal(tablero, tam_matriz):
+    for i in range(tam_matriz):
+        for j in range(tam_matriz):
             print(tablero[i][j], end =' ')
         print()
 
@@ -44,7 +44,7 @@ def crear_tablero(tam_matriz: int) -> list:
     for fila in range(tam_matriz):
         tablero.append([])
         for columna in range(tam_matriz):
-            tablero[fila].append(' ')
+            tablero[fila].append('1')
     
     return tablero
 
@@ -74,14 +74,19 @@ def nueva_partida() -> tuple:
     tablero_1 = crear_tablero(tam_matriz)  
     tablero_2 = crear_tablero(tam_matriz)  
 
-    mostrar_tableros_temporal(tablero_1)
-    mostrar_tableros_temporal(tablero_2)
+    print('tab 1')
+    mostrar_tableros_temporal(tablero_1, tam_matriz)
+    print('tab 2')
+    mostrar_tableros_temporal(tablero_2, tam_matriz)
 
     tablero_cargado_1 = cargar_tableros(tablero_2)
     tablero_cargado_2 = cargar_tableros(tablero_2)
-
+    
     print('OK  cargados')
-    #return tablero_cargado_1, tablero_cargado_2
+    print('OK  cargados')
+    print('ok mostrado ya cargado')
+    
+    return tablero_cargado_1, tablero_cargado_2
 
 
 def score():
