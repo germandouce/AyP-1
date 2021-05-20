@@ -1,12 +1,23 @@
-def duracion():
+def duracion_juego() -> int:
     """
     PRE: no recibe argumentos
-    POST: devuelve una variable con la duracion del juego
+    POST: devuelve una entero con el tamaño de la matriz (correspondiente a la duracion)
     """
     print("Defini duracion del juego")
+    print('0 - corto\n1 - Medio\n2 - Largo')
+    opc = input('')
+    while (not opc.isnumeric) or (opc not in ('0','1','2') ):
+        opc = input('Por favor ingrese una opcion valida: ')
+    opc = int(opc)
 
-    pass
+    if opc ==0:
+        tam_matriz = 4
+    elif opc == 1:
+        tam_matriz = 8
+    elif opc == 2:
+        tam_matriz = 12
 
+    return tam_matriz
 
 def proba_cartas():
     """
@@ -17,18 +28,18 @@ def proba_cartas():
     pass
 
 
-def crear_tableros(duracion: int) -> list:
+def crear_tablero(tam_matriz: int) -> list:
     """
     PRE: duarcion es un entero pedido en la funcion duracion()
     POST: devuelve 2 listas de listas con tableros
     """
-    if duracion == 1:
-        tablero_1 = []
-    #elif duracion = 2:
+    tablero=[]
+    for fila in range(tam_matriz):
+        tablero.append([])
+        for columna in range(tam_matriz):
+            tablero[fila].append(' ')
     
-    #else:
-
-    pass
+    return tablero
 
 
 def cargar_tableros():
@@ -47,10 +58,12 @@ def nueva_partida():
     jug_1 = input ('Ingrese nombre del jugador 1: ')
     jug_2 = input ('Ingrese nombre del jugador 2: ')
 
-    duracion()
+    tam_matriz = duracion_juego()
     proba_cartas()
-    crear_tableros(duracion)
+    tablero_1 = crear_tablero(tam_matriz)  #me parecio mas facil usar 2 veces la funcion xa crear 1
+    tablero_2 = crear_tablero(tam_matriz)  #solo tablero que devolver 2 tableros con la funcion
     cargar_tableros()
+    print('OK  creados')
     pass
 
 
@@ -63,11 +76,14 @@ def score():
     pass
 
 
-def menu_principal():
+def menu_principal() ->tuple:
     """
     PRE: numero de partida
     POST: no devuelve nada, simplemente es un menu de opciones
     """
+    tablero_cargado_1, tablero_cargado_2 = nueva_partida()
+    return tablero_cargado_1, tablero_cargado_2
+    
     iniciada = False
     salir = False
     while not salir:
@@ -80,7 +96,7 @@ def menu_principal():
         opc = int(opc)
 
         if opc == 0:
-            nueva_partida()
+            tablero_cargado_1, tablero_cargado_2 = nueva_partida()
             iniciada = True
         elif opc == 1: 
             if iniciada:
@@ -89,8 +105,10 @@ def menu_principal():
                 print('Debe crear una nueva partida antes de comenzarla')
                 salir = False
         else:
-            score()       
+            score()
 
+    
+     
 
 def mostrar_tablero():
     """
@@ -200,7 +218,6 @@ def ganar():
     """
     pass
     
-
 
 def jugando():
     """
