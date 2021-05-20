@@ -28,6 +28,13 @@ def proba_cartas():
     pass
 
 
+def mostrar_tableros_temporal(tablero):
+    for i in range(4):
+        for j in range(4):
+            print(tablero[i][j], end =' ')
+        print()
+
+
 def crear_tablero(tam_matriz: int) -> list:
     """
     PRE: duarcion es un entero pedido en la funcion duracion()
@@ -42,7 +49,7 @@ def crear_tablero(tam_matriz: int) -> list:
     return tablero
 
 
-def cargar_tableros():
+def cargar_tableros(tablero):
     """
     PRE: No recibe argumentos
     RETURNS: devuelve 2 listas de listas con los tableros cargados
@@ -50,7 +57,7 @@ def cargar_tableros():
     pass
 
 
-def nueva_partida():
+def nueva_partida() -> tuple:
     """
     PRE: cuando la funcion este terminada, va a recibir el numero de partida
     POST: crea una nueva partida, devolviendo 2 listas con  los tableros creados y cargados
@@ -59,12 +66,22 @@ def nueva_partida():
     jug_2 = input ('Ingrese nombre del jugador 2: ')
 
     tam_matriz = duracion_juego()
+    
     proba_cartas()
-    tablero_1 = crear_tablero(tam_matriz)  #me parecio mas facil usar 2 veces la funcion xa crear 1
-    tablero_2 = crear_tablero(tam_matriz)  #solo tablero que devolver 2 tableros con la funcion
-    cargar_tableros()
-    print('OK  creados')
-    pass
+    #me parecio mas facil usar 2 veces cada funcion xa los tableros que una sola que 
+    #devolviese los 2 tableros
+
+    tablero_1 = crear_tablero(tam_matriz)  
+    tablero_2 = crear_tablero(tam_matriz)  
+
+    mostrar_tableros_temporal(tablero_1)
+    mostrar_tableros_temporal(tablero_2)
+
+    tablero_cargado_1 = cargar_tableros(tablero_2)
+    tablero_cargado_2 = cargar_tableros(tablero_2)
+
+    print('OK  cargados')
+    #return tablero_cargado_1, tablero_cargado_2
 
 
 def score():
@@ -76,14 +93,14 @@ def score():
     pass
 
 
-def menu_principal() ->tuple:
+def menu_principal() -> tuple:
     """
     PRE: numero de partida
     POST: no devuelve nada, simplemente es un menu de opciones
     """
     tablero_cargado_1, tablero_cargado_2 = nueva_partida()
     return tablero_cargado_1, tablero_cargado_2
-    
+
     iniciada = False
     salir = False
     while not salir:
@@ -107,8 +124,6 @@ def menu_principal() ->tuple:
         else:
             score()
 
-    
-     
 
 def mostrar_tablero():
     """
