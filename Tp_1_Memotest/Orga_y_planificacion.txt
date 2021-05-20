@@ -1,7 +1,19 @@
 #OJOOOOOOOO
+*crear funcion xa validar opciones (!!al finall!!!!!)
+
 *invertir filas y columnas!! (no esta la funcion todavi, ver la de 
 short algor...)
 
+*Que salga una carta está sujeta a una probabilidad, esa probabilidad se dió el ejemplo del dado, 
+pero no hay que tomarlo así literalmente. Vos deberías usar la librería random y calcular una 
+probabilidad. Por ejemplo valor = random(1,10) te va a dar un valor random entre 1 y 10, luego 
+podés decir que si valor es 1 o 2 entonces estarás en el 10%, si el valor es entre 4 y 8 estás en 
+el 40% y así con el rango y valores que quieras.
+
+*La estructura del código está bien, claramente muy incompleta, pero vas bien encaminado, podré darte
+un mejor feedback cuando vea algo más de código. En principio trataría de imprimir los tableros, 
+mostrar las cartas, luego ver de lograr jugar dos jugadores y para lo último implementar las cartas 
+especiales
 
 APARTADO XA DUDAS
 puede haber una probabilidad de "no carta"? es decir que haya 5 probabiliades, una xa cada una
