@@ -224,14 +224,20 @@ def jugar_carta():
     pass
 
 
-def ganar():
+def gano_alguien() -> bool:
     """
     GRAL: Chequea si el jugador gano o no, xa ver si arranco de nuevo el loop cambiando de turno
     OJO VER COMO CHEQUEO ESO...
     RETURN: un bool si gano o no
-    """
-    pass
+    # """
+    gano = False
+    lo_hizo = input(int('gano? (1 xa si): '))
+    if lo_hizo == 1:
+        gano = True
+    else:
+        gano = False
     
+    return gano      
 
 def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     """
@@ -241,15 +247,18 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     La carta se guarda predeterminada//. Dsps damos opcion de jugar carta inmediata// o no.
     POST: devuelve si gano alguien y quien
     """
-    #if turno = jug1
-    #     tablero = tablero_cargado_1
-    # else:
-    #     tablero = tablero_cargado_2
-    hacer_memoria(tablero)
-    levantar_carta()
-    guardar_carta()
-    jugar_carta()
-    ganar()
+    ganar = False
+    while not ganar:
+        for turno in range(2):
+            if turno == 0:
+                tablero = tablero_cargado_1
+            else:
+                tablero = tablero_cargado_2
+            hacer_memoria(tablero)
+            levantar_carta()
+            guardar_carta()
+            jugar_carta()
+            gano_alguien()
 
 
 def guardar_score():
