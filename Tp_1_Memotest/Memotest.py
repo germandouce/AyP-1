@@ -1,3 +1,5 @@
+from random import randint, choice, shuffle 
+
 def duracion_juego() -> int:
     """
     PRE: no recibe argumentos
@@ -19,6 +21,7 @@ def duracion_juego() -> int:
 
     return tam_matriz
 
+
 def proba_cartas():
     """
     PRE: No recibe argumentos
@@ -26,13 +29,6 @@ def proba_cartas():
     n una lista, 1 xa cada carta
     """
     pass
-
-
-def mostrar_tableros_temporal(tablero, tam_matriz):
-    for i in range(tam_matriz):
-        for j in range(tam_matriz):
-            print(tablero[i][j], end =' ')
-        print()
 
 
 def crear_tablero(tam_matriz: int) -> list:
@@ -44,17 +40,48 @@ def crear_tablero(tam_matriz: int) -> list:
     for fila in range(tam_matriz):
         tablero.append([])
         for columna in range(tam_matriz):
-            tablero[fila].append('1')
+            tablero[fila].append('')
     
     return tablero
 
 
-def cargar_tableros(tablero):
+def cargar_tablero(tablero,tam_matriz) -> list:
     """
     PRE: No recibe argumentos
     RETURNS: devuelve 2 listas de listas con los tableros cargados
     """
-    pass
+    elementos =['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 
+    'S', 'Cl', 'Cl', 'Ar', 'K', 'Ca', 'Sc', 'Ti', 'V','Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 
+    'Ga',  'Ge', 'As', 'Se', 'Br', 'Kr', 'Rb', 'Sr', 'Y', 'Ru', 'Ag', 'Cd', 'In', 'Sn', 'Sb', 'Te', 
+    'I', 'Xe', 'Cs', 'Ba', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Lu', 'Pt', 'Au', 'Hg', 'Pb', 
+    'Bi', 'Po', 'Rn', 'Fr', 'Ra', 'U', 'Np','Es', 'Rf']
+    
+    elementos_xa_tablero =[]
+
+    for i in range(int((tam_matriz**2)/2)):
+        elegido = choice(elementos)
+        elementos_xa_tablero.append(elegido)
+        elementos_xa_tablero.append(elegido)
+        elementos.pop(elementos.index(elegido))
+
+    print(int((tam_matriz**2)/2))
+    shuffle(elementos_xa_tablero)
+    print(elementos_xa_tablero)
+
+    indice = 0
+    for fila in range(tam_matriz):
+        for columna in range(tam_matriz):
+            tablero[fila][columna] = elementos_xa_tablero[indice]
+            indice += 1 
+    
+    return tablero
+
+
+def mostrar_tablero_temporal(tablero, tam_matriz):
+    for i in range(tam_matriz):
+        for j in range(tam_matriz):
+            print(tablero[i][j].ljust(2), end ='  ')
+        print()
 
 
 def nueva_partida() -> tuple:
@@ -74,16 +101,23 @@ def nueva_partida() -> tuple:
     tablero_1 = crear_tablero(tam_matriz)  
     tablero_2 = crear_tablero(tam_matriz)  
 
-    print('tab 1')
-    mostrar_tableros_temporal(tablero_1, tam_matriz)
-    print('tab 2')
-    mostrar_tableros_temporal(tablero_2, tam_matriz)
-
-    tablero_cargado_1 = cargar_tableros(tablero_2)
-    tablero_cargado_2 = cargar_tableros(tablero_2)
+    print('OK  cargados')
     
+    print('tab 1\n')
+    mostrar_tablero_temporal(tablero_1, tam_matriz)
+    print('tab 2\n')
+    mostrar_tablero_temporal(tablero_2, tam_matriz)
+
+    tablero_cargado_1 = cargar_tablero(tablero_1, tam_matriz)
+    tablero_cargado_2 = cargar_tablero(tablero_2, tam_matriz)
+
     print('OK  cargados')
-    print('OK  cargados')
+
+    print('tab 1')
+    mostrar_tablero_temporal(tablero_cargado_1, tam_matriz)
+    print('tab 2')
+    mostrar_tablero_temporal(tablero_cargado_2, tam_matriz)
+
     print('ok mostrado ya cargado')
     
     return tablero_cargado_1, tablero_cargado_2
