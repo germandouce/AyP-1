@@ -98,13 +98,6 @@ def cargar_tablero(tam_matriz, tablero, elementos_xa_tablero) -> list:
     return tablero
 
 
-def mostrar_tablero_temporal(tablero, tam_matriz) -> None:
-    for i in range(tam_matriz):
-        for j in range(tam_matriz):
-            print(tablero[i][j].ljust(2), end ='  ')
-        print()
-
-
 def nueva_partida(tam_matriz) -> tuple:
     """
     PRE: cuando la funcion este terminada, va a recibir el numero de partida
@@ -130,11 +123,24 @@ def score():
     pass
 
 
-def mostrar_tablero():
+def mostrar_tablero(tablero, tam_matriz) -> None:
+    """
+    PRE: 'tablero' es el tablero del juagador que corresponda
+    POST: No devuelve nada solo muestra el tablero
+    """
+    for i in range(tam_matriz):
+        for j in range(tam_matriz):
+            print(tablero[i][j].ljust(2), end ='  ')
+        print()
+
+
+def elegir_ficha(tablero:list):
     """
     PRE:
-    POST: no devuelve nada. Muestra el tablero
+    POS: Eleccion de fichas xa ver si coinciden. De aca se deduciran otras funciones xa corrborar
+    si fue correcta la eleccion o no y xa la consiguiente modificacion del tablero.
     """
+    pareja_encontrada(tablero: list)
     pass
 
 
@@ -143,16 +149,6 @@ def pareja_encontrada():
     PRE: fichas del jugador
     POST: devuelve un bool si encontro o no la pareja
     """
-    pass
-
-
-def elegir_ficha():
-    """
-    PRE:
-    POS: Eleccion de fichas xa ver si coinciden. De aca se deduciran otras funciones xa corrborar
-    si fue correcta la eleccion o no y xa la consiguiente modificacion del tablero.
-    """
-    pareja_encontrada()
     pass
 
 
@@ -249,7 +245,6 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     #     tablero = tablero_cargado_1
     # else:
     #     tablero = tablero_cargado_2
-    tablero = 1
     hacer_memoria(tablero)
     levantar_carta()
     guardar_carta()
