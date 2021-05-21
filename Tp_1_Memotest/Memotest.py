@@ -129,10 +129,13 @@ def mostrar_tablero(tablero:list) -> None:
     PRE: 'tablero' es el tablero del juagador que corresponda
     POST: No devuelve nada solo muestra el tablero
     """
-    for fila in range(len(tablero)):
-        for columna in range(len(tablero)):
-            print(tablero[fila][columna].ljust(2), end ='  ')
-        print()
+    for i in range(len(tablero)):
+                for j in range(len(tablero)):
+                    if tablero[i][j][1] == ' ':   # en [1] está el indicador de adivinado (* o ' ')
+                        print(tablero[i][j][0].ljust(2), end ='  ') # en [0] esta la ficha
+                    else:
+                        print('*'.ljust(2), end = '  ')
+                print()
 
 
 def pareja_encontrada(tablero: list):
