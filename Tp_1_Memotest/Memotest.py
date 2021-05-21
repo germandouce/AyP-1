@@ -94,42 +94,19 @@ def mostrar_tablero_temporal(tablero, tam_matriz) -> None:
         print()
 
 
-def nueva_partida() -> tuple:
+def nueva_partida(tam_matriz) -> tuple:
     """
     PRE: cuando la funcion este terminada, va a recibir el numero de partida
     POST: crea una nueva partida, devolviendo 2 listas con  los tableros creados y cargados
     """
-    jug_1 = input ('Ingrese nombre del jugador 1: ')
-    jug_2 = input ('Ingrese nombre del jugador 2: ')
-
-    tam_matriz = duracion_juego()
-    
-    proba_cartas()
-
     tablero_1 = crear_tablero(tam_matriz)  
     tablero_2 = crear_tablero(tam_matriz)  
-
-    print('OK  creados')
-    
-    print('tablero 1\n')
-    mostrar_tablero_temporal(tablero_1, tam_matriz)
-    print('tablero 2\n')
-    mostrar_tablero_temporal(tablero_2, tam_matriz)
 
     elementos_xa_tablero = preparar_carga_tablero(tam_matriz)
 
     tablero_cargado_1 = cargar_tablero(tam_matriz, tablero_1, elementos_xa_tablero)
     tablero_cargado_2 = cargar_tablero(tam_matriz, tablero_2, elementos_xa_tablero)
-
-    print('OK  cargados')
-
-    print('tab 1')
-    mostrar_tablero_temporal(tablero_cargado_1, tam_matriz)
-    print('tab 2')
-    mostrar_tablero_temporal(tablero_cargado_2, tam_matriz)
-
-    print('ok mostrado ya cargado')
-    
+ 
     return tablero_cargado_1, tablero_cargado_2
 
 
@@ -148,7 +125,7 @@ def menu_principal() -> tuple:
     POST: no devuelve nada, simplemente es un menu de opciones
     """
     tablero_cargado_1, tablero_cargado_2 = nueva_partida()
-    return tablero_cargado_1, tablero_cargado_2
+    
 
     iniciada = False
     salir = False
@@ -162,16 +139,25 @@ def menu_principal() -> tuple:
         opc = int(opc)
 
         if opc == 0:
-            tablero_cargado_1, tablero_cargado_2 = nueva_partida()
+            jug_1 = input ('Ingrese nombre del jugador 1: ')
+            jug_2 = input ('Ingrese nombre del jugador 2: ')
+            tam_matriz = duracion_juego()
+            probabilidades = proba_cartas()
+            tablero_cargado_1, tablero_cargado_2 = nueva_partida(tam_matriz)
+
             iniciada = True
+
         elif opc == 1: 
             if iniciada:
                 salir = True
             else:
                 print('Debe crear una nueva partida antes de comenzarla')
                 salir = False
+        
         else:
             score()
+    
+    return tablero_cargado_1, tablero_cargado_2
 
 
 def mostrar_tablero():
@@ -200,15 +186,15 @@ def elegir_ficha():
     pass
 
 
-def hacer_memoria():
+def hacer_memoria(tablero:list ):
     """
     GRAL: muestra tableros y permite jugar. si encontro correcta// (pareja_enconyrada(), corre de 
     nuevo hasta q pierda)
     PRE: recibe el tablero del judaor a o b
     POST: devuelve el tablero nuevo segun lo q adivinado
     """
-    mostrar_tablero()
-    elegir_ficha()
+    mostrar_tablero(tablero)
+    elegir_ficha(tablero)
     pass
 
 
@@ -281,7 +267,7 @@ def ganar():
     pass
     
 
-def jugando():
+def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     """
     GRAL: el juego en si. Primero se inenta encontrar las cartas iguales. Dsps con otras funciones 
     se levanta la carta ys juega.
@@ -289,7 +275,12 @@ def jugando():
     La carta se guarda predeterminada//. Dsps damos opcion de jugar carta inmediata// o no.
     POST: devuelve si gano alguien y quien
     """
-    hacer_memoria()
+    if turno = jug1
+        tablero = tablero_cargado_1
+    else:
+        tablero = tablero_cargado_2
+
+    hacer_memoria(tablero)
     levantar_carta()
     guardar_carta()
     jugar_carta()
