@@ -241,7 +241,7 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     La carta se guarda predeterminada//. Dsps damos opcion de jugar carta inmediata// o no.
     POST: devuelve si gano alguien y quien
     """
-    # if turno = jug1
+    #if turno = jug1
     #     tablero = tablero_cargado_1
     # else:
     #     tablero = tablero_cargado_2
