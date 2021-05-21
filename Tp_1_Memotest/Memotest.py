@@ -48,7 +48,7 @@ def crear_tablero(tam_matriz: int) -> list:
 def preparar_carga_tablero(tam_matriz: int) -> list:
     """
     PRE: tam_matrix es el tamaño de la matriz
-    RETURNS: devuelve la lista 'elementos_xa_tablero' con los elementos a cargar en los 
+    POST: devuelve la lista 'elementos_xa_tablero' con los elementos a cargar en los 
     tableros (ambos tableros tienen los mismos elementos)
     """
     elementos =['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 
@@ -75,7 +75,7 @@ def cargar_tablero(tam_matriz, tablero, elementos_xa_tablero) -> list:
     """
     PRE: 'tam_matriz' es el tamaño de la matriz, 'tablero' es el tablero creado pero vacio, 
     'elementos_xa_tablero' son los elemntos que se cargaran en el tablero
-    RETURNS: devuelve la lista de listas 'tablero' con el tablero ya cargado
+    POST: devuelve la lista de listas 'tablero' con el tablero ya cargado
     """
     
     indice = 0
@@ -186,8 +186,6 @@ def pareja_encontrada():
     """
     PRE: fichas del jugador
     POST: devuelve un bool si encontro o no la pareja
-    
-    RETURNS: bool
     """
     pass
 
@@ -264,7 +262,7 @@ def jugar_carta():
     GRAL: incluir posibilidad de jugar mas de una carta e las q se guardaron en guardar carta.
     Las funciones se ejecutan segun la carta q se juegue
     PRE: cartas guardadas de guardar carta y el tablero
-    Returns: en principio, si no entendi mal, no devuelve nada. xq el tablero se modifica x 
+    POST: en principio, si no entendi mal, no devuelve nada. xq el tablero se modifica x 
     referencia.
     """
     carta_replay()
@@ -303,7 +301,7 @@ def guardar_score():
     GRAL: cuando alguien gano, se guarda su score. va a haber 4 scores en total. Aqui tengo q crear la
     lista con los scores xa consultar dsps.
     PRE: datos jugador
-    POSTS: nada. solo guarda scores
+    POST: nada. solo guarda scores
     """
     pass
 
