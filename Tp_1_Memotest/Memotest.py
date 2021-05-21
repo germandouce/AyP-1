@@ -8,6 +8,7 @@ def validar_opcion(opc_minimas: int, opc_maximas: int) -> str:
     opc = input("Ingrese una opción: ")
     while not opc.isnumeric() or int(opc) > opc_maximas or int(opc) < opc_minimas:
         opc = input("Por favor, ingrese una opcion valida: ")
+    
     return opc
 
 
@@ -283,9 +284,9 @@ def main() -> None:
         salir_del_menu_principal = False
         while not salir_del_menu_principal:
             print("---MENU PRINCIPAL---")
-            print("0 - Nueva partida\n1 - Comenzar partida\n2 - Mostrar scores\n3 - Salir del juego")
+            print("0 - Nueva partida\n1 - Comenzar partida\n2 - Mostrar scores")
 
-            opc = validar_opcion(0,3)
+            opc = int(validar_opcion(0,2))
 
             if opc == 0:
                 jug_1 = input ('Ingrese nombre del jugador 1: ')
@@ -308,17 +309,15 @@ def main() -> None:
             
             elif opc == 2:
                 score()
-            
+
             else:
                 salir_del_menu_principal = True
-
+                
         jugando(tablero_cargado_1, tablero_cargado_2)
         guardar_score()
         
         print('0 - Volver al menu principal\n1 - Salir del juego')
-        opc = input('')
-        while (not opc.isnumeric) or (opc not in ('0','1') ):
-            opc = input('Por favor ingrese una opcion valida: ')
+        opc = int(validar_opcion(0,1))
         if opc == 1:
             print('Esta seguro que desea salir del juego? Se perderan los scores')
             si_quiero_salir = input('1-Si\notro - No')
