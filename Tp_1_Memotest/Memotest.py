@@ -77,13 +77,12 @@ def preparar_carga_tablero(tam_matriz: int) -> list:
         elementos_xa_tablero.append(elegido)
         elementos.pop(elementos.index(elegido))
 
-    print(int((tam_matriz**2)/2))
     shuffle(elementos_xa_tablero)
-    print(elementos_xa_tablero)
-
+    
     return elementos_xa_tablero
 
-def cargar_tablero(tam_matriz, tablero, elementos_xa_tablero) -> list:
+
+def cargar_tablero(tablero:list, elementos_xa_tablero:list) -> list:
     """
     PRE: 'tam_matriz' es el tamaño de la matriz, 'tablero' es el tablero creado pero vacio, 
     'elementos_xa_tablero' son los elemntos que se cargaran en el tablero
@@ -91,8 +90,8 @@ def cargar_tablero(tam_matriz, tablero, elementos_xa_tablero) -> list:
     """
     
     indice = 0
-    for fila in range(tam_matriz):
-        for columna in range(tam_matriz):
+    for fila in range(len(tablero)):
+        for columna in range(len(tablero)):
             tablero[fila][columna] = elementos_xa_tablero[indice]
             indice += 1 
     
@@ -109,8 +108,8 @@ def nueva_partida(tam_matriz) -> tuple:
 
     elementos_xa_tablero = preparar_carga_tablero(tam_matriz)
 
-    tablero_cargado_1 = cargar_tablero(tam_matriz, tablero_1, elementos_xa_tablero)
-    tablero_cargado_2 = cargar_tablero(tam_matriz, tablero_2, elementos_xa_tablero)
+    tablero_cargado_1 = cargar_tablero(tablero_1, elementos_xa_tablero)
+    tablero_cargado_2 = cargar_tablero(tablero_2, elementos_xa_tablero)
  
     return tablero_cargado_1, tablero_cargado_2
 
@@ -124,13 +123,13 @@ def score():
     pass
 
 
-def mostrar_tablero(tablero, tam_matriz) -> None:
+def mostrar_tablero(tablero:list) -> None:
     """
     PRE: 'tablero' es el tablero del juagador que corresponda
     POST: No devuelve nada solo muestra el tablero
     """
-    for fila in range(tam_matriz):
-        for columna in range(tam_matriz):
+    for fila in range(len(tablero)):
+        for columna in range(len(tablero)):
             print(tablero[fila][columna].ljust(2), end ='  ')
         print()
 
@@ -153,7 +152,7 @@ def elegir_ficha(tablero:list):
     pass
 
 
-def hacer_memoria(tablero:list ):
+def hacer_memoria(tablero:list):
     """
     GRAL: muestra tableros y permite jugar. si encontro correcta// (pareja_enconyrada(), corre de 
     nuevo hasta q pierda)
@@ -304,7 +303,7 @@ def main() -> None:
                 if iniciada:
                     salir_del_menu_principal = True
                 else:
-                    print('Debe crear una nueva partida antes de comenzarla')
+                    print('\nDebe crear una nueva partida antes de comenzarla\n')
                     salir_del_menu_principal = False
             
             elif opc == 2:
