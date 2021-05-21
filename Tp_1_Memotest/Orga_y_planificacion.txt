@@ -4,6 +4,15 @@
 *invertir filas y columnas!! (no esta la funcion todavi, ver la de 
 short algor...)
 
+*posibilidad de usar un indice xa llenar la matriz
+
+*no globales
+*no break
+*ojo con ciclos definidos y no definidos
+*ojo q las funciones no hagan varias cosas
+*documentar funciones
+*
+
 *Que salga una carta está sujeta a una probabilidad, esa probabilidad se dió el ejemplo del dado, 
 pero no hay que tomarlo así literalmente. Vos deberías usar la librería random y calcular una 
 probabilidad. Por ejemplo valor = random(1,10) te va a dar un valor random entre 1 y 10, luego 
@@ -16,8 +25,7 @@ mostrar las cartas, luego ver de lograr jugar dos jugadores y para lo último im
 especiales
 
 APARTADO XA DUDAS
-puede haber una probabilidad de "no carta"? es decir que haya 5 probabiliades, una xa cada una
-de las 4 cartas y una 5ta de q "no salga carta"?
+*carta si o carta no. y por otro lado probabilidad de cartas
 
 Primero voy a listar todas las funciones, (lo mas modularizado posible) que vaya a usar en 
 el TP. 
