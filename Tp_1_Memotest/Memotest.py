@@ -76,8 +76,6 @@ def preparar_carga_tablero(tam_matriz: int) -> list:
         elementos_xa_tablero.append(elegido)
         elementos_xa_tablero.append(elegido)
         elementos.pop(elementos.index(elegido))
-
-    shuffle(elementos_xa_tablero)
     
     return elementos_xa_tablero
 
@@ -88,7 +86,10 @@ def cargar_tablero(tablero:list, elementos_xa_tablero:list) -> list:
     'elementos_xa_tablero' son los elemntos que se cargaran en el tablero
     POST: devuelve la lista de listas 'tablero' con el tablero ya cargado
     """
-    
+
+    shuffle(elementos_xa_tablero)
+    print(elementos_xa_tablero)
+
     indice = 0
     for fila in range(len(tablero)):
         for columna in range(len(tablero)):
@@ -106,7 +107,7 @@ def nueva_partida(tam_matriz) -> tuple:
     tablero_1 = crear_tablero(tam_matriz)  
     tablero_2 = crear_tablero(tam_matriz)  
 
-    elementos_xa_tablero = preparar_carga_tablero(tam_matriz)
+    elementos_xa_tablero = (preparar_carga_tablero(tam_matriz))
 
     tablero_cargado_1 = cargar_tablero(tablero_1, elementos_xa_tablero)
     tablero_cargado_2 = cargar_tablero(tablero_2, elementos_xa_tablero)
@@ -231,11 +232,11 @@ def gano_alguien() -> bool:
     RETURN: un bool si gano o no
     # """
     gano = False
-    lo_hizo = input(int('gano? (1 xa si): '))
+    print('gano? 1\n1 - si\n2 - no')
+    lo_hizo = int(validar_opcion(1,2))
+
     if lo_hizo == 1:
         gano = True
-    else:
-        gano = False
     
     return gano      
 
@@ -247,18 +248,23 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     La carta se guarda predeterminada//. Dsps damos opcion de jugar carta inmediata// o no.
     POST: devuelve si gano alguien y quien
     """
-    ganar = False
-    while not ganar:
-        for turno in range(2):
+    gano = False
+    while not gano:
+        turno = 0
+        while turno !=2 and not gano:
+            print(turno)
             if turno == 0:
+                print('trablero 1')
                 tablero = tablero_cargado_1
             else:
+                print('tablero 2')
                 tablero = tablero_cargado_2
             hacer_memoria(tablero)
             levantar_carta()
             guardar_carta()
             jugar_carta()
-            gano_alguien()
+            gano = gano_alguien()
+            turno += 1
 
 
 def guardar_score():
@@ -278,9 +284,9 @@ def main() -> None:
     definir variable con numero de partida (). cuando se acaba guarda el score de dicha partida.
     """
     salir_del_juego = False
-    while not salir_del_juego:
-        iniciada = False
+    while not salir_del_juego:        
         salir_del_menu_principal = False
+        iniciada = False
         while not salir_del_menu_principal:
             print("---MENU PRINCIPAL---")
             print("0 - Nueva partida\n1 - Comenzar partida\n2 - Mostrar scores")
@@ -319,12 +325,11 @@ def main() -> None:
         opc = int(validar_opcion(0,1))
         if opc == 1:
             print('Esta seguro que desea salir del juego? Se perderan los scores')
-            si_quiero_salir = input('1-Si\notro - No')
+            print('1-Si\n2 - No')
+            si_quiero_salir = int(validar_opcion(1,2))
+
             if si_quiero_salir == 1:
+                #salir_del_menu_principal = True
                 salir_del_juego = True
-            else:
-                salir_del_juego = False
-        else:
-            salir_del_juego = True
 
 main()
