@@ -128,10 +128,18 @@ def mostrar_tablero(tablero, tam_matriz) -> None:
     PRE: 'tablero' es el tablero del juagador que corresponda
     POST: No devuelve nada solo muestra el tablero
     """
-    for i in range(tam_matriz):
-        for j in range(tam_matriz):
-            print(tablero[i][j].ljust(2), end ='  ')
+    for fila in range(tam_matriz):
+        for columna in range(tam_matriz):
+            print(tablero[fila][columna].ljust(2), end ='  ')
         print()
+
+
+def pareja_encontrada(tablero: list):
+    """
+    PRE: fichas del jugador
+    POST: devuelve un bool si encontro o no la pareja
+    """
+    pass
 
 
 def elegir_ficha(tablero:list):
@@ -140,15 +148,7 @@ def elegir_ficha(tablero:list):
     POS: Eleccion de fichas xa ver si coinciden. De aca se deduciran otras funciones xa corrborar
     si fue correcta la eleccion o no y xa la consiguiente modificacion del tablero.
     """
-    pareja_encontrada(tablero: list)
-    pass
-
-
-def pareja_encontrada():
-    """
-    PRE: fichas del jugador
-    POST: devuelve un bool si encontro o no la pareja
-    """
+    pareja_encontrada(tablero)
     pass
 
 
