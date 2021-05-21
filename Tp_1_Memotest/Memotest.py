@@ -119,47 +119,6 @@ def score():
     pass
 
 
-def menu_principal() -> tuple:
-    """
-    PRE: numero de partida
-    POST: no devuelve nada, simplemente es un menu de opciones
-    """
-    tablero_cargado_1, tablero_cargado_2 = nueva_partida()
-    
-
-    iniciada = False
-    salir = False
-    while not salir:
-        print("---MENU PRINCIPAL---")
-        print("0 - Nueva partida\n1 - Comenzar partida\n2 - Mostrar scores")
-
-        opc = input('')
-        while (not opc.isnumeric) or (opc not in ('0','1','2') ):
-            opc = input('Por favor ingrese una opcion valida: ')
-        opc = int(opc)
-
-        if opc == 0:
-            jug_1 = input ('Ingrese nombre del jugador 1: ')
-            jug_2 = input ('Ingrese nombre del jugador 2: ')
-            tam_matriz = duracion_juego()
-            probabilidades = proba_cartas()
-            tablero_cargado_1, tablero_cargado_2 = nueva_partida(tam_matriz)
-
-            iniciada = True
-
-        elif opc == 1: 
-            if iniciada:
-                salir = True
-            else:
-                print('Debe crear una nueva partida antes de comenzarla')
-                salir = False
-        
-        else:
-            score()
-    
-    return tablero_cargado_1, tablero_cargado_2
-
-
 def mostrar_tablero():
     """
     PRE:
@@ -275,11 +234,11 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     La carta se guarda predeterminada//. Dsps damos opcion de jugar carta inmediata// o no.
     POST: devuelve si gano alguien y quien
     """
-    if turno = jug1
-        tablero = tablero_cargado_1
-    else:
-        tablero = tablero_cargado_2
-
+    # if turno = jug1
+    #     tablero = tablero_cargado_1
+    # else:
+    #     tablero = tablero_cargado_2
+    tablero = 1
     hacer_memoria(tablero)
     levantar_carta()
     guardar_carta()
@@ -299,10 +258,45 @@ def guardar_score():
 
 def main() -> None:
     """
-    GRAL: con un for in range (4) corre xa cada partida
+    GRAL: Menu principal del juego.
+     con un for in range (4) corre xa cada partida
     definir variable con numero de partida (). cuando se acaba guarda el score de dicha partida.
     """
-    menu_principal()
+    salir_del_juego = False
+    while not salir_del_juego
+    iniciada = False
+    salir_del_menu = False
+    while not salir_del_menu:
+        print("---MENU PRINCIPAL---")
+        print("0 - Nueva partida\n1 - Comenzar partida\n2 - Mostrar scores")
+
+        opc = input('')
+        while (not opc.isnumeric) or (opc not in ('0','1','2') ):
+            opc = input('Por favor ingrese una opcion valida: ')
+        opc = int(opc)
+
+        if opc == 0:
+            jug_1 = input ('Ingrese nombre del jugador 1: ')
+            jug_2 = input ('Ingrese nombre del jugador 2: ')
+            
+            tam_matriz = duracion_juego()
+            
+            probabilidades = proba_cartas()
+            
+            tablero_cargado_1, tablero_cargado_2 = nueva_partida(tam_matriz)
+
+            iniciada = True
+
+        elif opc == 1: 
+            if iniciada:
+                salir_del_menu = True
+            else:
+                print('Debe crear una nueva partida antes de comenzarla')
+                salir_del_menu = False
+        
+        else:
+            score()
+
     jugando()
     guardar_score()
 
