@@ -33,8 +33,8 @@ def proba_cartas():
 
 def crear_tablero(tam_matriz: int) -> list:
     """
-    PRE: duarcion es un entero pedido en la funcion duracion()
-    POST: devuelve 2 listas de listas con tableros
+    PRE: tam_matriz es un entero pedido en la funcion 'duracion_juego()'
+    POST: devuelve la lista de listas 'tablero' con el tablero creado
     """
     tablero=[]
     for fila in range(tam_matriz):
@@ -45,10 +45,11 @@ def crear_tablero(tam_matriz: int) -> list:
     return tablero
 
 
-def cargar_tablero(tablero,tam_matriz) -> list:
+def preparar_carga_tablero(tam_matriz: int) -> list:
     """
-    PRE: No recibe argumentos
-    RETURNS: devuelve 2 listas de listas con los tableros cargados
+    PRE: tam_matrix es el tamaño de la matriz
+    RETURNS: devuelve la lista 'elementos_xa_tablero' con los elementos a cargar en los 
+    tableros (ambos tableros tienen los mismos elementos)
     """
     elementos =['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 
     'S', 'Cl', 'Cl', 'Ar', 'K', 'Ca', 'Sc', 'Ti', 'V','Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 
@@ -68,6 +69,15 @@ def cargar_tablero(tablero,tam_matriz) -> list:
     shuffle(elementos_xa_tablero)
     print(elementos_xa_tablero)
 
+    return elementos_xa_tablero
+
+def cargar_tablero(tam_matriz, tablero, elementos_xa_tablero) -> list:
+    """
+    PRE: 'tam_matriz' es el tamaño de la matriz, 'tablero' es el tablero creado pero vacio, 
+    'elementos_xa_tablero' son los elemntos que se cargaran en el tablero
+    RETURNS: devuelve la lista de listas 'tablero' con el tablero ya cargado
+    """
+    
     indice = 0
     for fila in range(tam_matriz):
         for columna in range(tam_matriz):
@@ -77,7 +87,7 @@ def cargar_tablero(tablero,tam_matriz) -> list:
     return tablero
 
 
-def mostrar_tablero_temporal(tablero, tam_matriz):
+def mostrar_tablero_temporal(tablero, tam_matriz) -> None:
     for i in range(tam_matriz):
         for j in range(tam_matriz):
             print(tablero[i][j].ljust(2), end ='  ')
@@ -95,21 +105,21 @@ def nueva_partida() -> tuple:
     tam_matriz = duracion_juego()
     
     proba_cartas()
-    #me parecio mas facil usar 2 veces cada funcion xa los tableros que una sola que 
-    #devolviese los 2 tableros
 
     tablero_1 = crear_tablero(tam_matriz)  
     tablero_2 = crear_tablero(tam_matriz)  
 
-    print('OK  cargados')
+    print('OK  creados')
     
-    print('tab 1\n')
+    print('tablero 1\n')
     mostrar_tablero_temporal(tablero_1, tam_matriz)
-    print('tab 2\n')
+    print('tablero 2\n')
     mostrar_tablero_temporal(tablero_2, tam_matriz)
 
-    tablero_cargado_1 = cargar_tablero(tablero_1, tam_matriz)
-    tablero_cargado_2 = cargar_tablero(tablero_2, tam_matriz)
+    elementos_xa_tablero = preparar_carga_tablero(tam_matriz)
+
+    tablero_cargado_1 = cargar_tablero(tam_matriz, tablero_1, elementos_xa_tablero)
+    tablero_cargado_2 = cargar_tablero(tam_matriz, tablero_2, elementos_xa_tablero)
 
     print('OK  cargados')
 
