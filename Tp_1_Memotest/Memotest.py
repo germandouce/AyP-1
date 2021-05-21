@@ -92,10 +92,10 @@ def cargar_tablero(tablero:list, elementos_xa_tablero:list) -> list:
 
     indice = 0
     for fila in range(len(tablero)):
-        for columna in range(len(tablero)):
-            tablero[fila][columna] = elementos_xa_tablero[indice]
-            indice += 1 
-    
+        for columna in range(len(tablero)): #en la pos i,j meto una lista con 2 elementos, el 1ero,
+            tablero[fila][columna] = [elementos_xa_tablero[indice],'*']  #la ficha el 2do un 
+            indice += 1     #indicador de si fue adivinada o no
+                            #  *   signfica NO ADIVINADA; ' ' significa YA ADIVINADA
     return tablero
 
 
@@ -248,10 +248,10 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     La carta se guarda predeterminada//. Dsps damos opcion de jugar carta inmediata// o no.
     POST: devuelve si gano alguien y quien
     """
-    gano = False
-    while not gano:
+    no_gano = False
+    while  no_gano:
         turno = 0
-        while turno !=2 and not gano:
+        while turno !=2 and no_gano:
             print(turno)
             if turno == 0:
                 print('trablero 1')
@@ -259,11 +259,10 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
             else:
                 print('tablero 2')
                 tablero = tablero_cargado_2
-            hacer_memoria(tablero)
+            no_gano = hacer_memoria(tablero)
             levantar_carta()
             guardar_carta()
             jugar_carta()
-            gano = gano_alguien()
             turno += 1
 
 
