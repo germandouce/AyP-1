@@ -1,5 +1,16 @@
 from random import randint, choice, shuffle 
 
+def validar_opcion(opc_minimas: int, opc_maximas: int) -> str:
+    '''
+    PRE:Recibe dos números enteros que simbolizan la cantidad de opciones posibles.
+    Post: Retorna un número entero dentro del rango de opciones.
+    '''
+    opc = input("Ingrese una opción: ")
+    while not opc.isnumeric() or int(opc) > opc_maximas or int(opc) < opc_minimas:
+        opc = input("Por favor, ingrese una opcion valida: ")
+    return opc
+
+
 def duracion_juego() -> int:
     """
     PRE: no recibe argumentos
@@ -263,41 +274,55 @@ def main() -> None:
     definir variable con numero de partida (). cuando se acaba guarda el score de dicha partida.
     """
     salir_del_juego = False
-    while not salir_del_juego
-    iniciada = False
-    salir_del_menu = False
-    while not salir_del_menu:
-        print("---MENU PRINCIPAL---")
-        print("0 - Nueva partida\n1 - Comenzar partida\n2 - Mostrar scores")
+    while not salir_del_juego:
+        iniciada = False
+        salir_del_menu_principal = False
+        while not salir_del_menu_principal:
+            print("---MENU PRINCIPAL---")
+            print("0 - Nueva partida\n1 - Comenzar partida\n2 - Mostrar scores\n3 - Salir del juego")
 
-        opc = input('')
-        while (not opc.isnumeric) or (opc not in ('0','1','2') ):
-            opc = input('Por favor ingrese una opcion valida: ')
-        opc = int(opc)
+            opc = validar_opcion(0,3)
 
-        if opc == 0:
-            jug_1 = input ('Ingrese nombre del jugador 1: ')
-            jug_2 = input ('Ingrese nombre del jugador 2: ')
+            if opc == 0:
+                jug_1 = input ('Ingrese nombre del jugador 1: ')
+                jug_2 = input ('Ingrese nombre del jugador 2: ')
+                
+                tam_matriz = duracion_juego()
+                
+                probabilidades = proba_cartas()
+                
+                tablero_cargado_1, tablero_cargado_2 = nueva_partida(tam_matriz)
+
+                iniciada = True
+
+            elif opc == 1: 
+                if iniciada:
+                    salir_del_menu_principal = True
+                else:
+                    print('Debe crear una nueva partida antes de comenzarla')
+                    salir_del_menu_principal = False
             
-            tam_matriz = duracion_juego()
+            elif opc == 2:
+                score()
             
-            probabilidades = proba_cartas()
-            
-            tablero_cargado_1, tablero_cargado_2 = nueva_partida(tam_matriz)
-
-            iniciada = True
-
-        elif opc == 1: 
-            if iniciada:
-                salir_del_menu = True
             else:
-                print('Debe crear una nueva partida antes de comenzarla')
-                salir_del_menu = False
-        
-        else:
-            score()
+                salir_del_menu_principal = True
 
-    jugando()
-    guardar_score()
+        jugando(tablero_cargado_1, tablero_cargado_2)
+        guardar_score()
+        
+        print('0 - Volver al menu principal\n1 - Salir del juego')
+        opc = input('')
+        while (not opc.isnumeric) or (opc not in ('0','1') ):
+            opc = input('Por favor ingrese una opcion valida: ')
+        if opc == 1:
+            print('Esta seguro que desea salir del juego? Se perderan los scores')
+            si_quiero_salir = input('1-Si\notro - No')
+            if si_quiero_salir == 1:
+                salir_del_juego = True
+            else:
+                salir_del_juego = False
+        else:
+            salir_del_juego = True
 
 main()
