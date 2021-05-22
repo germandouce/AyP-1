@@ -146,7 +146,6 @@ def ingreso_coordenadas(tablero) -> tuple:
 
     print('Ingrese fila')
     fila = int (validar_opcion (1,len(tablero) )) -1    #resto 1 puesto que en las listas de lisats
-    print()
     print('Ingrese columna')
     columna =  int (validar_opcion (1,len(tablero) )) -1 #del tablero estas empiezan con indice "0"
 
@@ -185,16 +184,18 @@ def elegir_ficha(tablero:list) -> tuple:
     ficha_1 = ingreso_coordenadas(tablero)
     mostrar_tablero_parcial(tablero, ficha_1) 
     
+    print()
+    
     print('ingrese coordendas ficha 2')
     ficha_2 = ingreso_coordenadas(tablero) 
-    mostrar_tablero_parcial(tablero, ficha_2)
     
     while ficha_1 == ficha_2:  #no quiero q ingrese 2 veces las mismas coordenadas xq me las destapa                               
+        print()
         print('Por favor, ingresá un ficha distinta a la primera') #xa siempre (con mi algoritmo) 
-        
         ficha_2 = ingreso_coordenadas(tablero)
-        mostrar_tablero_parcial(tablero, ficha_2)
     
+    mostrar_tablero_parcial(tablero, ficha_2)
+
     return ficha_1, ficha_2
 
 
