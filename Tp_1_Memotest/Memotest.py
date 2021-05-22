@@ -19,9 +19,7 @@ def duracion_juego() -> int:
     """
     print("\nDefini duracion del juego")
     print('0 - corto\n1 - Medio\n2 - Largo')
-    opc = input('')
-    while (not opc.isnumeric) or (opc not in ('0','1','2') ):
-        opc = input('Por favor ingrese una opcion valida: ')
+    opc = validar_opcion(0,2)
     opc = int(opc)
 
     if opc ==0:
