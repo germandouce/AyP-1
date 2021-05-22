@@ -326,14 +326,14 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
 
     """
     no_gano = True
-    while no_gano:
-        turno = 1 #1 corresponde a jug 1
-        while turno < 3 and no_gano:
+    turno = 1
+    while no_gano :        
             print(tablero_cargado_1)
             print(tablero_cargado_2)
 
             print(turno)
-            if turno == 1:
+
+            if turno %2 != 0:
                 print('Turno jugador 1\nTablero 1')
                 tablero = tablero_cargado_1
                 ganador = 1
@@ -345,13 +345,13 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
             levantar_carta()
             guardar_carta()
             jugar_carta()
-
+            
             no_gano = no_gano_el_juego (tablero)
 
-            cambio = input('cambio de turno? 1 - si')
-            if cambio != 'holasa':
-                turno += 1
-
+            print('CAMBIO DE TURNO\npresione cualquier tecla para jugar')
+            input()
+            turno += 1
+        
     return ganador
 
 def guardar_score():
