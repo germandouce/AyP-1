@@ -138,22 +138,52 @@ def mostrar_tablero(tablero:list) -> None:
                 print()
 
 
-def pareja_encontrada(tablero: list):
+def chequeo_pareja( ficha_1: tuple, ficha_2: tuple, tablero: list,) -> bool:
     """
-    PRE: fichas del jugador
-    POST: devuelve un bool si encontro o no la pareja
+    POST: devuelve el bool perdio, (por si o por no). si no
+    perdio, además desbloquea esa ficha del tablero
     """
-    pass
+
+    perdio = True
+    print(carta_1[0] +1, carta_1[1] +1)
+    print(carta_2[0] +1, carta_2[1] +1)
+    if ( tablero_1[ carta_1[0] ][ carta_1[1] ] ) == ( tablero_1 [ carta_2[0] ][ carta_2[1] ] ) :
+        
+        tablero_1 [ carta_1[0] ][ carta_1[1] ] [1] = ' '   #si adivino, cambio * por espacio ' '
+        tablero_1 [ carta_2[0] ][ carta_2[1] ] [1] = ' '
+        perdio = False
+        print('Adivino!, puede jugar de nuevo')
+    
+    return perdio
 
 
-def elegir_ficha(tablero:list):
+def ingreso_coordendas(tablero) -> tuple:
     """
-    PRE:
-    POS: Eleccion de fichas xa ver si coinciden. De aca se deduciran otras funciones xa corrborar
-    si fue correcta la eleccion o no y xa la consiguiente modificacion del tablero.
+    POST: devuelve una tupla con las coordenadas correspondientes a la lista de listas
+    escritas como enteros correspondientes
     """
-    pareja_encontrada(tablero)
-    pass
+    input('Ingrese fila: ')
+    fila = int (validar_opcion (1,len(tablero) )) -1    #resto 1 puesto que en las listas de lisats 
+    
+    input('Ingrese columna: ')
+    columna =  int (validar_opcion (1,len(tablero) )) -1 #del tablero estas empiezan con indice "0"
+    
+    return fila, columna
+
+
+def elegir_fichas(tablero:list) -> tuple:
+    """
+    PRE: El tablero, para conocer su tamaño
+    POS: devuelve una tupla con las 2 fichas elegidas, cada una contiene 2 coordenadas
+    """
+    print('ingrese coordendas carta 1')
+    
+    input('Ingrese fila: ')
+    fila = int (validar_opcion (1,len(tablero) )) -1    #resto 1 puesto que en las listas de lisats
+    
+    input('Ingrese columna: ')
+    columna =  int (validar_opcion (1,len(tablero) )) -1 #del tablero estas empiezan con indice "0"
+    return ficha
 
 
 def hacer_memoria(tablero:list):
@@ -164,7 +194,19 @@ def hacer_memoria(tablero:list):
     POST: devuelve el tablero nuevo segun lo q adivinado
     """
     mostrar_tablero(tablero)
-    elegir_ficha(tablero)
+    ficha_1, ficha_2 = elegir_ficha(tablero)
+    ficha_2 = elegir_ficha(tablero)
+
+    while ficha_1 == ficha_2:           #no quiero q ingrese 2 veces las mismas
+        print('Por ingrese coordenadas distintas')   #coordenadas xq me 
+                                                        #destapa la carta. Tambien lo obligo a dar 
+        ficha_1 = elegir_ficha(tablero)                                            # vuelta ambas cartas  "a la vez"      
+        
+        print('ingrese coordendas carta 2')
+        ficha_1 = elegir_ficha(tablero)
+
+    chequeo_pareja(tablero, ficha_1, ficha_2)
+    
     pass
 
 
@@ -251,23 +293,22 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     La carta se guarda predeterminada//. Dsps damos opcion de jugar carta inmediata// o no.
     POST: devuelve si gano alguien y quien
     """
-    no_gano = False
-    while  no_gano:
+    no_gano = True
+    while no_gano:
         turno = 0
         while turno !=2 and no_gano:
             print(turno)
             if turno == 0:
-                print('trablero 1')
+                print('Tablero 1')
                 tablero = tablero_cargado_1
             else:
-                print('tablero 2')
+                print('Tablero 2')
                 tablero = tablero_cargado_2
             no_gano = hacer_memoria(tablero)
             levantar_carta()
             guardar_carta()
             jugar_carta()
             turno += 1
-
 
 def guardar_score():
     """
