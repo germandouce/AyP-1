@@ -161,18 +161,20 @@ def mostrar_tablero_parcial(tablero:list, ficha: tuple) -> None:
     POST: Muestra el tablero con las fichas adivinadas hasta el momento ya dadas vuelta junto con
     la ficha que se acaba de elegir en el turno
     """
+    print()
     for i in range(len(tablero)):
-                for j in range(len(tablero)):
+        for j in range(len(tablero)):
+            if i == ficha[0] and j == ficha[1] : 
+                print(tablero[i][j][0].ljust(2), end ='  ')
 
-                    if i == ficha[0] and j == ficha[1] : 
-                        print(tablero[i][j][0].ljust(2), end ='  ')
+            elif tablero[i][j][1] == ' ':   # en [1] está el indicador de adivinado (* o ' ')
+                print(tablero[i][j][0].ljust(2), end ='  ') # en [0] esta la ficha
 
-                    elif tablero[i][j][1] == ' ':   # en [1] está el indicador de adivinado (* o ' ')
-                        print(tablero[i][j][0].ljust(2), end ='  ') # en [0] esta la ficha
-
-                    else:
-                        print('*'.ljust(2), end = '  ')
-                print()
+            else:
+                print('*'.ljust(2), end = '  ')
+        print()
+    
+    print()
                     
 
 def elegir_ficha(tablero:list) -> tuple:
@@ -181,18 +183,15 @@ def elegir_ficha(tablero:list) -> tuple:
     POST: devuelve una tupla con las fichas elegidas, cada una de las cuales es una tupla 
     con coordenadas. Tambien muestra al usuario las fichas elegidas con mostrar_tablero_parcial()
     """
-    print('ingrese coordendas ficha 1')
+    print('INGRESE COORDENADAS FICHA 1')
     ficha_1 = ingreso_coordenadas(tablero)
     mostrar_tablero_parcial(tablero, ficha_1) 
     
-    print()
-    
-    print('ingrese coordendas ficha 2')
+    print('INGRESE COORDENADAS FICHA 2')
     ficha_2 = ingreso_coordenadas(tablero) 
-    
-    while ficha_1 == ficha_2:  #no quiero q ingrese 2 veces las mismas coordenadas xq me las destapa                               
-        print()
-        print('Por favor, ingresá un ficha distinta a la primera') #xa siempre (con mi algoritmo) 
+
+    while ficha_1 == ficha_2:  #no quiero q ingrese 2 veces las mismas coordenadas xq me las destapa
+        print('\nPor favor, ingresá un ficha distinta a la primera') #xa siempre (con mi algoritmo) 
         ficha_2 = ingreso_coordenadas(tablero)
     
     mostrar_tablero_parcial(tablero, ficha_2)
@@ -255,8 +254,9 @@ def hacer_memoria(tablero:list) -> bool:
     while (not perdio) and (not gano_juego):   #debe cumplirse que no perdio y que no gano
 
         
-        print(tablero,'\nSOLO XA TESTEO!!') #Solo para facilitar testeo del juego. Muestra la lista de listas del tablero 
-                            #(copiarse xa hacer ganar a un jugador mas rápido)
+        print('\nTablero (SOLO XA TESTEO!!)',tablero) #Solo para facilitar testeo del juego. 
+                             #Muestra la lista de listas del tablero 
+                           #(copiarse xa hacer ganar a un jugador mas rápido)
         mostrar_tablero(tablero)
         
         ficha_1, ficha_2 = elegir_ficha(tablero)
@@ -340,14 +340,14 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
     turno = 1
     while not gano_juego :
 
-            print(turno)    #para facilitar testeo (turnos impares -> jug 1, turnos pares -> jug 2)
+            #print(turno)    #para facilitar testeo (turnos impares -> jug 1, turnos pares -> jug 2)
 
             if turno %2 != 0:
-                print('Turno de {}\nTablero 1\n'.format(jug_1.upper() ) )
+                print('Turno de {}\nTablero 1'.format(jug_1.upper() ) )
                 tablero = tablero_cargado_1
                 ganador = jug_1
             else:
-                print('Turno de {}\nTablero 2\n'.format(jug_2.upper() ) )
+                print('Turno de {}\nTablero 2'.format(jug_2.upper() ) )
                 tablero = tablero_cargado_2
                 ganador = jug_2
 
@@ -357,8 +357,10 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
             guardar_carta()
             jugar_carta()
             
-            print('CAMBIO DE TURNO\npresione cualquier tecla para jugar')
-            input()
+            print('FIN DEL TURNO DE {}'.format(ganador.upper() ) ) 
+            print('presione cualquier tecla para seguir jugando') #mas comodidad xa jugar
+            input()                                           
+
             turno += 1
         
     return ganador
