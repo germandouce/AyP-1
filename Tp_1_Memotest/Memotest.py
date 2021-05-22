@@ -59,7 +59,7 @@ def crear_tablero(tam_matriz: int) -> list:
 
 def preparar_carga_tablero(tam_matriz: int) -> list:
     """
-    PRE: tam_matrix es el tamaño de la matriz
+    PRE: 'tam_matrix' es el tamaño del tablero
     POST: devuelve la lista 'elementos_xa_tablero' con los elementos a cargar en los 
     tableros (ambos tableros tienen los mismos elementos)
     """
@@ -77,18 +77,20 @@ def preparar_carga_tablero(tam_matriz: int) -> list:
         elementos_xa_tablero.append(elegido)
         elementos.pop(elementos.index(elegido))
     
+    print('Elementos con los que se jugará (SOLO PARA TESTEO!)')   #(Verion Beta)solo xa facilitar testeo del juego
+    print(elementos_xa_tablero)             
+
     return elementos_xa_tablero
 
 
 def cargar_tablero(tablero:list, elementos_xa_tablero:list) -> list:
     """
-    PRE: 'tam_matriz' es el tamaño de la matriz, 'tablero' es el tablero creado pero vacio, 
-    'elementos_xa_tablero' son los elemntos que se cargaran en el tablero
+    PRE: 'tablero' es el tablero ya creado pero vacio, 'elementos_xa_tablero' son los elemntos 
+    que se cargaran en el tablero
     POST: devuelve la lista de listas 'tablero' con el tablero ya cargado
     """
 
-    shuffle(elementos_xa_tablero)
-    print(elementos_xa_tablero)
+    shuffle(elementos_xa_tablero) #mezclo los elementos antes de cargarlos
 
     indice = 0
     for fila in range(len(tablero)):
@@ -101,7 +103,7 @@ def cargar_tablero(tablero:list, elementos_xa_tablero:list) -> list:
 
 def nueva_partida(tam_matriz) -> tuple:
     """
-    PRE: cuando la funcion este terminada, va a recibir el numero de partida
+    PRE: 'tam_matriz' es el tamaño del tablero
     POST: crea una nueva partida, devolviendo 2 listas con  los tableros creados y cargados
     """
     tablero_1 = crear_tablero(tam_matriz)  
@@ -127,7 +129,8 @@ def score():
 def mostrar_tablero(tablero:list) -> None:
     """
     PRE: 'tablero' es el tablero del juagador que corresponda
-    POST: No devuelve nada solo muestra el tablero
+    POST: Muestra el tablero con las fichas adivinadas hasta el momento ya dadas vuelta. Las no
+    adivinadas, aparecen como *
     """
     for i in range(len(tablero)):
                 for j in range(len(tablero)):
@@ -141,7 +144,7 @@ def mostrar_tablero(tablero:list) -> None:
 def ingreso_coordenadas(tablero) -> tuple:
     """
     PRE: recibe 'tablero', para conocer su tamaño
-    POS: devuelve una tupla con las coordenadas de la ficha elegida
+    POST: devuelve una tupla con las coordenadas de la ficha elegida
     """
     fila = int (validar_opcion (1, len(tablero),'Ingrese fila: ') ) - 1    #resto 1 puesto que en las listas de lisats
     
@@ -155,8 +158,8 @@ def ingreso_coordenadas(tablero) -> tuple:
 def mostrar_tablero_parcial(tablero:list, ficha: tuple) -> None:
     """
     PRE: 'tablero' es el tablero del juagador que corresponda
-    POST: No devuelve nada solo muestra el tablero con las fichas dadas vuelta hasta el momento y 
-    las elegidas en el turno
+    POST: Muestra el tablero con las fichas adivinadas hasta el momento ya dadas vuelta junto con
+    la ficha que se acaba de elegir en el turno
     """
     for i in range(len(tablero)):
                 for j in range(len(tablero)):
@@ -174,9 +177,9 @@ def mostrar_tablero_parcial(tablero:list, ficha: tuple) -> None:
 
 def elegir_ficha(tablero:list) -> tuple:
     """
-    PRE: 'tablero', es necesario para conocer cols y filas max
+    PRE: 'tablero', es necesario para conocer columnas y filas maximas
     POST: devuelve una tupla con las fichas elegidas, cada una de las cuales es una tupla 
-    con coordenadas. Tambien se las muestra al usuario
+    con coordenadas. Tambien muestra al usuario las fichas elegidas con mostrar_tablero_parcial()
     """
     print('ingrese coordendas ficha 1')
     ficha_1 = ingreso_coordenadas(tablero)
@@ -199,7 +202,9 @@ def elegir_ficha(tablero:list) -> tuple:
 
 def chequeo_pareja(tablero: list, ficha_1: tuple, ficha_2: tuple) -> bool:
     """
-    POST: devuelve el bool perdio, (por si o por no). si no
+    PRE: 'tablero' es el tablero de quien corresponda, 'ficha_1 / 2' son las fichas elegidas por el
+    jugador
+    POST: devuelve el bool 'perdio', (por si o por no). si no
     perdio, además desbloquea esa ficha del tablero
     """
     perdio = True
@@ -223,7 +228,7 @@ def chequeo_pareja(tablero: list, ficha_1: tuple, ficha_2: tuple) -> bool:
 def gano_el_juego(tablero):
     
     """
-    PRE: trae el tablero
+    PRE: 'tablero' es el tablero de quien corresponda
     POST: devuelve el bool gano_juego, True si gano, Falso si no gano
     """
     alguien_gano_juego = True #es decir, es verdadero que alguien gano
@@ -240,15 +245,18 @@ def gano_el_juego(tablero):
 
 def hacer_memoria(tablero:list) -> bool:
     """
-    GRAL: muestra tableros y permite jugar. si encontro correcta// (pareja_enconyrada(), corre de 
-    nuevo hasta q pierda)
-    PRE: recibe el tablero del judaor a o b
+    GRAL: muestra tableros y permite jugar. si encontro correcta// ( chequeo_pareja() ), corre de 
+    nuevo hasta q pierda o hasta ganar el juego (gano_el_juego () ) 
+    PRE: recibe el tablero del judaor 1 o 2
     POST: devuelve el tablero nuevo segun lo q adivinado
     """
     gano_juego = False
     perdio = False
     while (not perdio) and (not gano_juego):   #debe cumplirse que no perdio y que no gano
 
+        
+        print(tablero,'\nSOLO XA TESTEO!!') #Solo para facilitar testeo del juego. Muestra la lista de listas del tablero 
+                            #(copiarse xa hacer ganar a un jugador mas rápido)
         mostrar_tablero(tablero)
         
         ficha_1, ficha_2 = elegir_ficha(tablero)
@@ -322,19 +330,17 @@ def jugar_carta():
 def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2: str) -> str:
     """
     GRAL: el juego en si. Primero se inenta encontrar las cartas iguales. Dsps con otras funciones 
-    se levanta la carta ys juega.
-    PRE: recibe el numero d ejuego (puede ser util), los tableros, LAS PROBABILIDADES de cada carta
+    se levanta la carta y se juega.
+    PRE: recibe tableros cargados, LAS PROBABILIDADES de cada carta
     La carta se guarda predeterminada//. Dsps damos opcion de jugar carta inmediata// o no.
-    POST: devuelve si gano alguien y quien ganador
+    POST: devuelve el ganador del juego en la variable 'ganador'
 
     """
     gano_juego = False
     turno = 1
-    while gano_juego :        
-            print(tablero_cargado_1)
-            print(tablero_cargado_2)
+    while not gano_juego :
 
-            print(turno)
+            print(turno)    #para facilitar testeo (turnos impares -> jug 1, turnos pares -> jug 2)
 
             if turno %2 != 0:
                 print('Turno de {}\nTablero 1\n'.format(jug_1.upper() ) )
@@ -369,9 +375,7 @@ def guardar_score():
 
 def main() -> None:
     """
-    GRAL: Menu principal del juego.
-     con un for in range (4) corre xa cada partida
-    definir variable con numero de partida (). cuando se acaba guarda el score de dicha partida.
+    GRAL: Menu principal del juego. cuando se acaba cada partida guarda el score de dicha partida.
     """
     salir_del_juego = False
     while not salir_del_juego:        
@@ -410,7 +414,7 @@ def main() -> None:
                 
         ganador = jugando(tablero_cargado_1, tablero_cargado_2, jug_1, jug_2)
 
-        print(f'¡Felicidades! Haz ganado {ganador}')
+        print('¡Felicidades! Haz ganado {}'.format(ganador.upper() ) )
 
         guardar_score()
         
