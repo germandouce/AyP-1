@@ -143,20 +143,19 @@ def ingreso_coordenadas(tablero) -> tuple:
     PRE: recibe 'tablero', para conocer su tamaño
     POS: devuelve una tupla con las coordenadas de la ficha elegida
     """
-    print('ingrese coordendas carta 1')
-    
+
     print('Ingrese fila')
     fila = int (validar_opcion (1,len(tablero) )) -1    #resto 1 puesto que en las listas de lisats
     print()
     print('Ingrese columna')
     columna =  int (validar_opcion (1,len(tablero) )) -1 #del tablero estas empiezan con indice "0"
-    
+
     ficha = fila, columna
 
     return ficha
 
 
-def mostrar_tablero_parcial(tablero:list, ficha_1: tuple, ficha_2: tuple) -> None:
+def mostrar_tablero_parcial(tablero:list, ficha: tuple) -> None:
     """
     PRE: 'tablero' es el tablero del juagador que corresponda
     POST: No devuelve nada solo muestra el tablero con las fichas dadas vuelta hasta el momento y 
@@ -164,11 +163,13 @@ def mostrar_tablero_parcial(tablero:list, ficha_1: tuple, ficha_2: tuple) -> Non
     """
     for i in range(len(tablero)):
                 for j in range(len(tablero)):
-                    if tablero[i][j][1] == tablero [ ficha_1[0] ] [ ficha_1[1] ] [1] or tablero[i][j][1] == tablero [ ficha_2[0] ] [ ficha_2[1] ] [1] :
+
+                    if i == ficha[0] and j == ficha[1] : 
                         print(tablero[i][j][0].ljust(2), end ='  ')
 
                     elif tablero[i][j][1] == ' ':   # en [1] está el indicador de adivinado (* o ' ')
                         print(tablero[i][j][0].ljust(2), end ='  ') # en [0] esta la ficha
+
                     else:
                         print('*'.ljust(2), end = '  ')
                 print()
@@ -180,18 +181,19 @@ def elegir_ficha(tablero:list) -> tuple:
     POST: devuelve una tupla con las fichas elegidas, cada una de las cuales es una tupla 
     con coordenadas. Tambien se las muestra al usuario
     """
-    
+    print('ingrese coordendas ficha 1')
     ficha_1 = ingreso_coordenadas(tablero)
-    mostrar_tablero_parcial(tablero, ficha_1, ficha_1) #mando 2 veces ficha_1 xa emparchar
+    mostrar_tablero_parcial(tablero, ficha_1) 
     
-    ficha_2 = ingreso_coordenadas(tablero)  #aqui la modifico de nuevo
-    mostrar_tablero_parcial(tablero, ficha_1, ficha_2)
+    print('ingrese coordendas ficha 2')
+    ficha_2 = ingreso_coordenadas(tablero) 
+    mostrar_tablero_parcial(tablero, ficha_2)
     
     while ficha_1 == ficha_2:  #no quiero q ingrese 2 veces las mismas coordenadas xq me las destapa                               
         print('Por favor, ingresá un ficha distinta a la primera') #xa siempre (con mi algoritmo) 
         
         ficha_2 = ingreso_coordenadas(tablero)
-        mostrar_tablero_parcial(tablero, ficha_1, ficha_2)
+        mostrar_tablero_parcial(tablero, ficha_2)
     
     return ficha_1, ficha_2
 
@@ -244,6 +246,7 @@ def hacer_memoria(tablero:list):
     PRE: recibe el tablero del judaor a o b
     POST: devuelve el tablero nuevo segun lo q adivinado
     """
+    perdio = False
     while not perdio:
 
         mostrar_tablero(tablero)
@@ -313,47 +316,40 @@ def jugar_carta():
     pass
 
 
-def gano_alguien() -> bool:
-    """
-    GRAL: Chequea si el jugador gano o no, xa ver si arranco de nuevo el loop cambiando de turno
-    OJO VER COMO CHEQUEO ESO...
-    RETURN: un bool si gano o no
-    # """
-    gano = False
-    print('gano? 1\n1 - si\n2 - no')
-    lo_hizo = int(validar_opcion(1,2))
-
-    if lo_hizo == 1:
-        gano = True
-    
-    return gano      
-
 def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     """
     GRAL: el juego en si. Primero se inenta encontrar las cartas iguales. Dsps con otras funciones 
     se levanta la carta ys juega.
     PRE: recibe el numero d ejuego (puede ser util), los tableros, LAS PROBABILIDADES de cada carta
     La carta se guarda predeterminada//. Dsps damos opcion de jugar carta inmediata// o no.
-    POST: devuelve si gano alguien y quien
+    POST: devuelve si gano alguien y quien ganador
+
     """
     no_gano = True
     while no_gano:
-        turno = 0
-        while turno !=2 and no_gano:
+        turno = 1 #1 corresponde a jug 1
+        while turno !=3 or no_gano:
             print(turno)
             if turno == 0:
                 print('Turno jugador 1\n Tablero 1')
                 tablero = tablero_cargado_1
+                ganador = 1
             else:
                 print('Turno jugador 2 1\n Tablero 2')
                 tablero = tablero_cargado_2
+                ganador = 2
             hacer_memoria(tablero)
             levantar_carta()
             guardar_carta()
             jugar_carta()
-            no_gano = no_gano_el_juego (tablero)
-            turno += 1
 
+            no_gano = no_gano_el_juego (tablero)
+
+            cambio = input('cambio de turno? 1 - si')
+            if cambio != 'holasa':
+                turno += 1
+
+    return ganador
 
 def guardar_score():
     """
@@ -406,7 +402,15 @@ def main() -> None:
             else:
                 salir_del_menu_principal = True
                 
-        jugando(tablero_cargado_1, tablero_cargado_2)
+        ganador = jugando(tablero_cargado_1, tablero_cargado_2)
+
+        if ganador == 1:
+            ganador = jug_1
+        else: 
+            ganador = jug_2
+
+        print(f'¡Felicidades! Haz ganado {ganador}')
+        
         guardar_score()
         
         print('0 - Volver al menu principal\n1 - Salir del juego')
