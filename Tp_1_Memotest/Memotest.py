@@ -147,7 +147,7 @@ def ingreso_coordenadas(tablero) -> tuple:
     
     print('Ingrese fila')
     fila = int (validar_opcion (1,len(tablero) )) -1    #resto 1 puesto que en las listas de lisats
-    
+    print()
     print('Ingrese columna')
     columna =  int (validar_opcion (1,len(tablero) )) -1 #del tablero estas empiezan con indice "0"
     
@@ -155,6 +155,24 @@ def ingreso_coordenadas(tablero) -> tuple:
 
     return ficha
 
+
+def mostrar_tablero_parcial(tablero:list, ficha_1, ficha_2) -> None:
+    """
+    PRE: 'tablero' es el tablero del juagador que corresponda
+    POST: No devuelve nada solo muestra el tablero con las fichas dadas vuelta hasta el momento y 
+    las elegidas en el turno
+    """
+    for i in range(len(tablero)):
+                for j in range(len(tablero)):
+                    if tablero[i][j][1] == tablero [ ficha_1[0] ] [ ficha_1[1] ] [0] or tablero[i][j][1] == tablero [ ficha_2[0] ] [ ficha_2[1] ] [0] :
+                        print(tablero[i][j][0].ljust(2), end ='  ')
+
+                    elif tablero[i][j][1] == ' ':   # en [1] está el indicador de adivinado (* o ' ')
+                        print(tablero[i][j][0].ljust(2), end ='  ') # en [0] esta la ficha
+                    else:
+                        print('*'.ljust(2), end = '  ')
+                print()
+                    
 
 def elegir_ficha(tablero:list) -> tuple:
     """
@@ -164,16 +182,16 @@ def elegir_ficha(tablero:list) -> tuple:
     """
     
     ficha_1 = ingreso_coordenadas(tablero)
-    print ( tablero [ ficha_1[0] ] [ ficha_1[1] ] [0] )
-                        #fila        #columna    #elemento  
+    mostrar_tablero_parcial(tablero, ficha_1)
+    
     ficha_2 = ingreso_coordenadas(tablero)
-    print ( tablero [ ficha_2[0] ] [ ficha_2[1] ] [0] )
+    mostrar_tablero_parcial(tablero, ficha_1, ficha_2)
     
     while ficha_1 == ficha_2:  #no quiero q ingrese 2 veces las mismas coordenadas xq me las destapa                               
         print('Por favor, ingresá un ficha distinta a la primera') #xa siempre (con mi algoritmo) 
         
         ficha_2 = ingreso_coordenadas(tablero)
-        print ( tablero [ ficha_2[0] ] [ ficha_2[1] ] [0] )
+        mostrar_tablero_parcial(tablero, ficha_1, ficha_2)
     
     return ficha_1, ficha_2
 
@@ -304,10 +322,10 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
         while turno !=2 and no_gano:
             print(turno)
             if turno == 0:
-                print('Tablero 1')
+                print('Turno jugador 1\n Tablero 1')
                 tablero = tablero_cargado_1
             else:
-                print('Tablero 2')
+                print('Turno jugador 2 1\n Tablero 2')
                 tablero = tablero_cargado_2
             no_gano = hacer_memoria(tablero)
             levantar_carta()
