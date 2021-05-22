@@ -164,10 +164,10 @@ def elegir_ficha(tablero:list) -> tuple:
     """
     
     ficha_1 = ingreso_coordenadas(tablero)
-    print ( tablero [ ficha_1[0] ] [ ficha_1[1] ] ) #recordar que ficha [indice] son las coordenadas
-    
+    print ( tablero [ ficha_1[0] ] [ ficha_1[1] ] [0] )
+                        #fila        #columna    #elemento  
     ficha_2 = ingreso_coordenadas(tablero)
-    print ( tablero [ ficha_2[0] ] [ ficha_2[1] ] )
+    print ( tablero [ ficha_2[0] ] [ ficha_2[1] ] [0] )
     
     while ficha_1 == ficha_2:  #no quiero q ingrese 2 veces las mismas coordenadas xq me las destapa                               
         print('Por favor, ingresá un ficha distinta a la primera') #xa siempre (con mi algoritmo) 
@@ -178,18 +178,20 @@ def elegir_ficha(tablero:list) -> tuple:
     return ficha_1, ficha_2
 
 
-def chequeo_pareja( ficha_1: tuple, ficha_2: tuple, tablero: list,) -> bool:
+def chequeo_pareja(tablero: list, ficha_1: tuple, ficha_2: tuple) -> bool:
     """
     POST: devuelve el bool perdio, (por si o por no). si no
     perdio, además desbloquea esa ficha del tablero
     """
     perdio = True
-
-    if ( tablero_1[ carta_1[0] ][ carta_1[1] ] ) == ( tablero_1 [ carta_2[0] ][ carta_2[1] ] ) :
+    
+    if ( tablero[ ficha_1[0] ][ ficha_1[1] ] ) == ( tablero [ficha_2[0] ][ ficha_2[1] ] ) :
         
-        tablero_1 [ carta_1[0] ][ carta_1[1] ] [1] = ' '   #si adivino, cambio * por espacio ' '
-        tablero_1 [ carta_2[0] ][ carta_2[1] ] [1] = ' '
+        tablero [ ficha_1[0] ][ ficha_1[1] ] [1] = ' '   #si adivino, cambio * por espacio ' '
+        ficha_1 [ ficha_2[0] ][ ficha_2[1] ] [1] = ' '
+        
         perdio = False
+        
         print('Adivino!, puede jugar de nuevo')
     
     return perdio
@@ -203,10 +205,12 @@ def hacer_memoria(tablero:list):
     POST: devuelve el tablero nuevo segun lo q adivinado
     """
     mostrar_tablero(tablero)
-    ficha_1, ficha_2 = elegir_ficha(tablero)
-    chequeo_pareja(tablero, ficha_1, ficha_2)
     
-    pass
+    ficha_1, ficha_2 = elegir_ficha(tablero)
+    
+    perdio = chequeo_pareja(tablero, ficha_1, ficha_2)
+    
+    return perdio
 
 
 def levantar_carta():
