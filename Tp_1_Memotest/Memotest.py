@@ -203,7 +203,7 @@ def chequeo_pareja(tablero: list, ficha_1: tuple, ficha_2: tuple) -> bool:
     """
     perdio = True
     
-    if ( tablero[ ficha_1[0] ][ ficha_1[1] ] ) == ( tablero [ficha_2[0] ][ ficha_2[1] ] ) :
+    if ( tablero[ ficha_1[0] ][ ficha_1[1] ] [0] ) == ( tablero [ficha_2[0] ][ ficha_2[1] ] [0] ) :
         
         tablero [ ficha_1[0] ][ ficha_1[1] ] [1] = ' '   #si adivino, cambio * por espacio ' '
         tablero [ ficha_2[0] ][ ficha_2[1] ] [1] = ' '
@@ -214,7 +214,27 @@ def chequeo_pareja(tablero: list, ficha_1: tuple, ficha_2: tuple) -> bool:
     
     else:
         print('No eran iguales!')
+
     return perdio
+
+
+def no_gano_el_juego(tablero):
+    
+    """
+    PRE: trae el tablero
+    POST: devuelve el bool no_gano_juego, True si no gano, Falso si gano
+    """
+    #hago algunos comentarios xa mejor comprension
+    no_gano_juego = False
+    #es decir, es verdadero que alguien gano
+    for i in range(len(tablero)):
+            for j in range(len(tablero)):   
+                if tablero[i][j][1] == '*': #si llego a encontrar un *, es decir, un NO ADIVINADO
+                    #entonces, es falso que alguien gano. En ese caso, 
+                    no_gano_juego = True    #es valido decir q no gano nadie                   
+
+    return no_gano_juego
+
 
 
 def hacer_memoria(tablero:list):
@@ -224,14 +244,14 @@ def hacer_memoria(tablero:list):
     PRE: recibe el tablero del judaor a o b
     POST: devuelve el tablero nuevo segun lo q adivinado
     """
-    mostrar_tablero(tablero)
-    
-    ficha_1, ficha_2 = elegir_ficha(tablero)
-    
-    perdio = chequeo_pareja(tablero, ficha_1, ficha_2)
-    
-    return perdio
+    while not perdio:
 
+        mostrar_tablero(tablero)
+        
+        ficha_1, ficha_2 = elegir_ficha(tablero)
+        
+        perdio = chequeo_pareja(tablero, ficha_1, ficha_2)
+        
 
 def levantar_carta():
     """
@@ -327,11 +347,13 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
             else:
                 print('Turno jugador 2 1\n Tablero 2')
                 tablero = tablero_cargado_2
-            no_gano = hacer_memoria(tablero)
+            hacer_memoria(tablero)
             levantar_carta()
             guardar_carta()
             jugar_carta()
+            no_gano = no_gano_el_juego (tablero)
             turno += 1
+
 
 def guardar_score():
     """
