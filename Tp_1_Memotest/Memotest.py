@@ -1,11 +1,11 @@
 from random import randint, choice, shuffle 
 
-def validar_opcion(opc_minimas: int, opc_maximas: int) -> str:
+def validar_opcion(opc_minimas: int, opc_maximas: int, texto: str = '') -> str:
     '''
     PRE:Recibe dos números enteros que simbolizan la cantidad de opciones posibles.
-    Post: Retorna un número entero dentro del rango de opciones.
+    Post: Retorna un número entero dentro del rango de opciones
     '''
-    opc = input("Ingreso: ")
+    opc = input("{}".format(texto))
     while not opc.isnumeric() or int(opc) > opc_maximas or int(opc) < opc_minimas:
         opc = input("Por favor, ingrese una opcion valida: ")
     
@@ -17,7 +17,7 @@ def duracion_juego() -> int:
     PRE: no recibe argumentos
     POST: devuelve una entero con el tamaño de la matriz (correspondiente a la duracion)
     """
-    print("Defini duracion del juego")
+    print("\nDefini duracion del juego")
     print('0 - corto\n1 - Medio\n2 - Largo')
     opc = input('')
     while (not opc.isnumeric) or (opc not in ('0','1','2') ):
@@ -143,11 +143,9 @@ def ingreso_coordenadas(tablero) -> tuple:
     PRE: recibe 'tablero', para conocer su tamaño
     POS: devuelve una tupla con las coordenadas de la ficha elegida
     """
-
-    print('Ingrese fila')
-    fila = int (validar_opcion (1,len(tablero) )) -1    #resto 1 puesto que en las listas de lisats
-    print('Ingrese columna')
-    columna =  int (validar_opcion (1,len(tablero) )) -1 #del tablero estas empiezan con indice "0"
+    fila = int (validar_opcion (1, len(tablero),'Ingrese fila: ') ) - 1    #resto 1 puesto que en las listas de lisats
+    
+    columna =  int (validar_opcion (1, len(tablero), 'Ingrese columna: ' )) -1 #del tablero estas empiezan con indice "0"
 
     ficha = fila, columna
 
@@ -213,42 +211,43 @@ def chequeo_pareja(tablero: list, ficha_1: tuple, ficha_2: tuple) -> bool:
         
         perdio = False
         
-        print('Muy bien!, puede elegir de nuevo')
+        print('Muy bien!, puede elegir de nuevo\n')
+
     
     else:
-        print('No eran iguales!')
+        print('No eran iguales!\n')
 
     return perdio
 
 
-def no_gano_el_juego(tablero):
+def gano_el_juego(tablero):
     
     """
     PRE: trae el tablero
-    POST: devuelve el bool no_gano_juego, True si no gano, Falso si gano
+    POST: devuelve el bool gano_juego, True si gano, Falso si no gano
     """
-    #hago algunos comentarios xa mejor comprension
-    no_gano_juego = False
-    #es decir, es verdadero que alguien gano
+    alguien_gano_juego = True #es decir, es verdadero que alguien gano
+
     for i in range(len(tablero)):
             for j in range(len(tablero)):   
-                if tablero[i][j][1] == '*': #si llego a encontrar un *, es decir, un NO ADIVINADO
+                if tablero[i][j][1] == '*': #si llego a encontrar un * , es decir, un NO ADIVINADO
                     #entonces, es falso que alguien gano. En ese caso, 
-                    no_gano_juego = True    #es valido decir q no gano nadie                   
+                    alguien_gano_juego = False                  
 
-    return no_gano_juego
+    return alguien_gano_juego
 
 
 
-def hacer_memoria(tablero:list):
+def hacer_memoria(tablero:list) -> bool:
     """
     GRAL: muestra tableros y permite jugar. si encontro correcta// (pareja_enconyrada(), corre de 
     nuevo hasta q pierda)
     PRE: recibe el tablero del judaor a o b
     POST: devuelve el tablero nuevo segun lo q adivinado
     """
+    gano_juego = False
     perdio = False
-    while not perdio:
+    while (not perdio) and (not gano_juego):   #debe cumplirse que no perdio y que no gano
 
         mostrar_tablero(tablero)
         
@@ -256,6 +255,9 @@ def hacer_memoria(tablero:list):
         
         perdio = chequeo_pareja(tablero, ficha_1, ficha_2)
         
+        gano_juego = gano_el_juego(tablero)
+    
+    return gano_juego
 
 def levantar_carta():
     """
@@ -317,7 +319,7 @@ def jugar_carta():
     pass
 
 
-def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
+def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2: str) -> str:
     """
     GRAL: el juego en si. Primero se inenta encontrar las cartas iguales. Dsps con otras funciones 
     se levanta la carta ys juega.
@@ -326,29 +328,29 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     POST: devuelve si gano alguien y quien ganador
 
     """
-    no_gano = True
+    gano_juego = False
     turno = 1
-    while no_gano :        
+    while gano_juego :        
             print(tablero_cargado_1)
             print(tablero_cargado_2)
 
             print(turno)
 
             if turno %2 != 0:
-                print('Turno jugador 1\nTablero 1')
+                print('Turno de {}\nTablero 1\n'.format(jug_1.upper() ) )
                 tablero = tablero_cargado_1
-                ganador = 1
+                ganador = jug_1
             else:
-                print('Turno jugador 2\n Tablero 2')
+                print('Turno de {}\nTablero 2\n'.format(jug_2.upper() ) )
                 tablero = tablero_cargado_2
-                ganador = 2
-            hacer_memoria(tablero)
+                ganador = jug_2
+
+            gano_juego = hacer_memoria(tablero)
+
             levantar_carta()
             guardar_carta()
             jugar_carta()
             
-            no_gano = no_gano_el_juego (tablero)
-
             print('CAMBIO DE TURNO\npresione cualquier tecla para jugar')
             input()
             turno += 1
@@ -382,7 +384,7 @@ def main() -> None:
             opc = int(validar_opcion(0,2))
 
             if opc == 0:
-                jug_1 = input ('Ingrese nombre del jugador 1: ')
+                jug_1 = input ('\nIngrese nombre del jugador 1: ')
                 jug_2 = input ('Ingrese nombre del jugador 2: ')
                 
                 tam_matriz = duracion_juego()
@@ -406,12 +408,7 @@ def main() -> None:
             else:
                 salir_del_menu_principal = True
                 
-        ganador = jugando(tablero_cargado_1, tablero_cargado_2)
-
-        if ganador == 1:
-            ganador = jug_1
-        else: 
-            ganador = jug_2
+        ganador = jugando(tablero_cargado_1, tablero_cargado_2, jug_1, jug_2)
 
         print(f'¡Felicidades! Haz ganado {ganador}')
 
