@@ -328,14 +328,17 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list):
     no_gano = True
     while no_gano:
         turno = 1 #1 corresponde a jug 1
-        while turno !=3 or no_gano:
+        while turno < 3 and no_gano:
+            print(tablero_cargado_1)
+            print(tablero_cargado_2)
+
             print(turno)
-            if turno == 0:
-                print('Turno jugador 1\n Tablero 1')
+            if turno == 1:
+                print('Turno jugador 1\nTablero 1')
                 tablero = tablero_cargado_1
                 ganador = 1
             else:
-                print('Turno jugador 2 1\n Tablero 2')
+                print('Turno jugador 2\n Tablero 2')
                 tablero = tablero_cargado_2
                 ganador = 2
             hacer_memoria(tablero)
@@ -410,7 +413,7 @@ def main() -> None:
             ganador = jug_2
 
         print(f'¡Felicidades! Haz ganado {ganador}')
-        
+
         guardar_score()
         
         print('0 - Volver al menu principal\n1 - Salir del juego')
