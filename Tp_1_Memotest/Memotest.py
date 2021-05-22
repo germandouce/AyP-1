@@ -141,7 +141,7 @@ def mostrar_tablero(tablero:list) -> None:
 def ingreso_coordenadas(tablero) -> tuple:
     """
     PRE: recibe 'tablero', para conocer su tamaño
-    POS: devuelve una tupla con las coordenadas  de la ficha elegida
+    POS: devuelve una tupla con las coordenadas de la ficha elegida
     """
     print('ingrese coordendas carta 1')
     
@@ -156,7 +156,7 @@ def ingreso_coordenadas(tablero) -> tuple:
     return ficha
 
 
-def mostrar_tablero_parcial(tablero:list, ficha_1, ficha_2) -> None:
+def mostrar_tablero_parcial(tablero:list, ficha_1: tuple, ficha_2: tuple) -> None:
     """
     PRE: 'tablero' es el tablero del juagador que corresponda
     POST: No devuelve nada solo muestra el tablero con las fichas dadas vuelta hasta el momento y 
@@ -164,7 +164,7 @@ def mostrar_tablero_parcial(tablero:list, ficha_1, ficha_2) -> None:
     """
     for i in range(len(tablero)):
                 for j in range(len(tablero)):
-                    if tablero[i][j][1] == tablero [ ficha_1[0] ] [ ficha_1[1] ] [0] or tablero[i][j][1] == tablero [ ficha_2[0] ] [ ficha_2[1] ] [0] :
+                    if tablero[i][j][1] == tablero [ ficha_1[0] ] [ ficha_1[1] ] [1] or tablero[i][j][1] == tablero [ ficha_2[0] ] [ ficha_2[1] ] [1] :
                         print(tablero[i][j][0].ljust(2), end ='  ')
 
                     elif tablero[i][j][1] == ' ':   # en [1] está el indicador de adivinado (* o ' ')
@@ -182,9 +182,9 @@ def elegir_ficha(tablero:list) -> tuple:
     """
     
     ficha_1 = ingreso_coordenadas(tablero)
-    mostrar_tablero_parcial(tablero, ficha_1)
+    mostrar_tablero_parcial(tablero, ficha_1, ficha_1) #mando 2 veces ficha_1 xa emparchar
     
-    ficha_2 = ingreso_coordenadas(tablero)
+    ficha_2 = ingreso_coordenadas(tablero)  #aqui la modifico de nuevo
     mostrar_tablero_parcial(tablero, ficha_1, ficha_2)
     
     while ficha_1 == ficha_2:  #no quiero q ingrese 2 veces las mismas coordenadas xq me las destapa                               
