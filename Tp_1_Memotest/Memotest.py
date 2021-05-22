@@ -5,7 +5,7 @@ def validar_opcion(opc_minimas: int, opc_maximas: int) -> str:
     PRE:Recibe dos números enteros que simbolizan la cantidad de opciones posibles.
     Post: Retorna un número entero dentro del rango de opciones.
     '''
-    opc = input("Ingrese una opción: ")
+    opc = input("Ingreso: ")
     while not opc.isnumeric() or int(opc) > opc_maximas or int(opc) < opc_minimas:
         opc = input("Por favor, ingrese una opcion valida: ")
     
@@ -145,10 +145,10 @@ def ingreso_coordenadas(tablero) -> tuple:
     """
     print('ingrese coordendas carta 1')
     
-    input('Ingrese fila: ')
+    print('Ingrese fila')
     fila = int (validar_opcion (1,len(tablero) )) -1    #resto 1 puesto que en las listas de lisats
     
-    input('Ingrese columna: ')
+    print('Ingrese columna')
     columna =  int (validar_opcion (1,len(tablero) )) -1 #del tablero estas empiezan con indice "0"
     
     ficha = fila, columna
@@ -173,7 +173,7 @@ def elegir_ficha(tablero:list) -> tuple:
         print('Por favor, ingresá un ficha distinta a la primera') #xa siempre (con mi algoritmo) 
         
         ficha_2 = ingreso_coordenadas(tablero)
-        print ( tablero [ ficha_2[0] ] [ ficha_2[1] ] )
+        print ( tablero [ ficha_2[0] ] [ ficha_2[1] ] [0] )
     
     return ficha_1, ficha_2
 
@@ -188,12 +188,14 @@ def chequeo_pareja(tablero: list, ficha_1: tuple, ficha_2: tuple) -> bool:
     if ( tablero[ ficha_1[0] ][ ficha_1[1] ] ) == ( tablero [ficha_2[0] ][ ficha_2[1] ] ) :
         
         tablero [ ficha_1[0] ][ ficha_1[1] ] [1] = ' '   #si adivino, cambio * por espacio ' '
-        ficha_1 [ ficha_2[0] ][ ficha_2[1] ] [1] = ' '
+        tablero [ ficha_2[0] ][ ficha_2[1] ] [1] = ' '
         
         perdio = False
         
-        print('Adivino!, puede jugar de nuevo')
+        print('Muy bien!, puede elegir de nuevo')
     
+    else:
+        print('No eran iguales!')
     return perdio
 
 
