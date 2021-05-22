@@ -138,43 +138,10 @@ def mostrar_tablero(tablero:list) -> None:
                 print()
 
 
-def chequeo_pareja( ficha_1: tuple, ficha_2: tuple, tablero: list,) -> bool:
+def ingreso_coordenadas(tablero) -> tuple:
     """
-    POST: devuelve el bool perdio, (por si o por no). si no
-    perdio, además desbloquea esa ficha del tablero
-    """
-
-    perdio = True
-    print(carta_1[0] +1, carta_1[1] +1)
-    print(carta_2[0] +1, carta_2[1] +1)
-    if ( tablero_1[ carta_1[0] ][ carta_1[1] ] ) == ( tablero_1 [ carta_2[0] ][ carta_2[1] ] ) :
-        
-        tablero_1 [ carta_1[0] ][ carta_1[1] ] [1] = ' '   #si adivino, cambio * por espacio ' '
-        tablero_1 [ carta_2[0] ][ carta_2[1] ] [1] = ' '
-        perdio = False
-        print('Adivino!, puede jugar de nuevo')
-    
-    return perdio
-
-
-def ingreso_coordendas(tablero) -> tuple:
-    """
-    POST: devuelve una tupla con las coordenadas correspondientes a la lista de listas
-    escritas como enteros correspondientes
-    """
-    input('Ingrese fila: ')
-    fila = int (validar_opcion (1,len(tablero) )) -1    #resto 1 puesto que en las listas de lisats 
-    
-    input('Ingrese columna: ')
-    columna =  int (validar_opcion (1,len(tablero) )) -1 #del tablero estas empiezan con indice "0"
-    
-    return fila, columna
-
-
-def elegir_fichas(tablero:list) -> tuple:
-    """
-    PRE: El tablero, para conocer su tamaño
-    POS: devuelve una tupla con las 2 fichas elegidas, cada una contiene 2 coordenadas
+    PRE: recibe 'tablero', para conocer su tamaño
+    POS: devuelve una tupla con las coordenadas  de la ficha elegida
     """
     print('ingrese coordendas carta 1')
     
@@ -183,7 +150,49 @@ def elegir_fichas(tablero:list) -> tuple:
     
     input('Ingrese columna: ')
     columna =  int (validar_opcion (1,len(tablero) )) -1 #del tablero estas empiezan con indice "0"
+    
+    ficha = fila, columna
+
     return ficha
+
+
+def elegir_ficha(tablero:list) -> tuple:
+    """
+    PRE: 'tablero', es necesario para conocer cols y filas max
+    POST: devuelve una tupla con las fichas elegidas, cada una de las cuales es una tupla 
+    con coordenadas. Tambien se las muestra al usuario
+    """
+    
+    ficha_1 = ingreso_coordenadas(tablero)
+    print ( tablero [ ficha_1[0] ] [ ficha_1[1] ] ) #recordar que ficha [indice] son las coordenadas
+    
+    ficha_2 = ingreso_coordenadas(tablero)
+    print ( tablero [ ficha_2[0] ] [ ficha_2[1] ] )
+    
+    while ficha_1 == ficha_2:  #no quiero q ingrese 2 veces las mismas coordenadas xq me las destapa                               
+        print('Por favor, ingresá un ficha distinta a la primera') #xa siempre (con mi algoritmo) 
+        
+        ficha_2 = ingreso_coordenadas(tablero)
+        print ( tablero [ ficha_2[0] ] [ ficha_2[1] ] )
+    
+    return ficha_1, ficha_2
+
+
+def chequeo_pareja( ficha_1: tuple, ficha_2: tuple, tablero: list,) -> bool:
+    """
+    POST: devuelve el bool perdio, (por si o por no). si no
+    perdio, además desbloquea esa ficha del tablero
+    """
+    perdio = True
+
+    if ( tablero_1[ carta_1[0] ][ carta_1[1] ] ) == ( tablero_1 [ carta_2[0] ][ carta_2[1] ] ) :
+        
+        tablero_1 [ carta_1[0] ][ carta_1[1] ] [1] = ' '   #si adivino, cambio * por espacio ' '
+        tablero_1 [ carta_2[0] ][ carta_2[1] ] [1] = ' '
+        perdio = False
+        print('Adivino!, puede jugar de nuevo')
+    
+    return perdio
 
 
 def hacer_memoria(tablero:list):
@@ -195,16 +204,6 @@ def hacer_memoria(tablero:list):
     """
     mostrar_tablero(tablero)
     ficha_1, ficha_2 = elegir_ficha(tablero)
-    ficha_2 = elegir_ficha(tablero)
-
-    while ficha_1 == ficha_2:           #no quiero q ingrese 2 veces las mismas
-        print('Por ingrese coordenadas distintas')   #coordenadas xq me 
-                                                        #destapa la carta. Tambien lo obligo a dar 
-        ficha_1 = elegir_ficha(tablero)                                            # vuelta ambas cartas  "a la vez"      
-        
-        print('ingrese coordendas carta 2')
-        ficha_1 = elegir_ficha(tablero)
-
     chequeo_pareja(tablero, ficha_1, ficha_2)
     
     pass
