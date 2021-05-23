@@ -19,8 +19,7 @@ def duracion_juego() -> int:
     """
     print("\nDefini duracion del juego")
     print('0 - corto\n1 - Medio\n2 - Largo')
-    opc = validar_opcion(0,2)
-    opc = int(opc)
+    opc = int( validar_opcion(0,2) )
 
     if opc ==0:
         tam_matriz = 4
@@ -46,7 +45,8 @@ def crear_tablero(tam_matriz: int) -> list:
     PRE: tam_matriz es un entero pedido en la funcion 'duracion_juego()'
     POST: devuelve la lista de listas 'tablero' con el tablero creado
     """
-    tablero=[]
+    tablero = []
+
     for fila in range(tam_matriz):
         tablero.append([])
         for columna in range(tam_matriz):
