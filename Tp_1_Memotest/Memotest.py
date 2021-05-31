@@ -31,11 +31,11 @@ def duracion_juego() -> int:
     return tam_matriz
 
 
-def proba_cartas():
+def proba_cartas() -> list:
     """
     PRE: No recibe argumentos
-    POST: Defino proba de cada carta. solo va a devolver 4 valores  de probabilidad
-    n una lista, 1 xa cada carta
+    POST: Defino proba de cada carta. solo va a devolver 5 valores que representan la probabilidad
+    n una lista.
     """
     print("\nDefini la probabilidad de salida de las cartas especiales")
     print('0 - Tradcional\n1 - Piknte\n2 - Muy piknte')
@@ -45,17 +45,20 @@ def proba_cartas():
     opc = int( validar_opcion(0,3) )
 
     if opc ==0:
-        lista_probas = [0, 0, 0, 0]
+        lista_probas = [0, 0, 0, 0, 0, 100] #0/10 turnos con carta
     elif opc == 1:
-        lista_probas = [0.3, 0.1, 0.2, 0.2]
+        lista_probas = [0, 10, 20, 30, 40, 100] #4/10 turnos con carta
     else:
-        lista_probas = [0.4, 0.2, 0.3, 0.3]
+        lista_probas = [0, 20, 40, 60, 80, 100] #8/10 turnos con carta
+    
+    #Esto se lee, 0 a 10 sale Replay, 10 a 20 sale Layout, 40 a 60 sale Toti, 60 a 80 sale Fatality, 80 a 100 
+    #no sale ninguna carta. Asi, xa este caso en 8/10 turnos sale carta 
     
     print('\nUsted eligio las siguientes probabilidades para sus cartas:')
     for i in range ( len(cartas) ) :
-        print(f'{ cartas[i] }: { int( lista_probas[i] * 100 ) } %' )
+        print(f'{ cartas[i] }: { int(lista_probas[i+1] - lista_probas[i]) } %' )
 
-    #"boton"acepetar
+    #"boton"acepetar  
 
     return lista_probas
 
@@ -285,22 +288,35 @@ def hacer_memoria(tablero:list) -> bool:
     
     return gano_juego
 
-def levantar_carta():
+def levantar_carta(lista_probas: list) -> str:
     """
     GRAL: ahora q termino el turno xq perdio, se levanta carta. Aca se calcula efectivamente q carta
     toca segun las probas definidas en funcion proba_carta()
     PRE:  IMPORTANTE, probabilidades de cada carta xa q aqui se haga efectivamente el calculo con 
     random
-    POST: devuelve la carta o no carta q haya tocado
+    POST: devuelve el entero carta_levantada, correspondiente a la carta
     """
-    pass
+    cartas =  'Replay', 'Layout', 'Toti', 'Fatality' 
+    #NOTA IMPORTANTE: para facilitar manejo se las usara como enteros siendos estos,
+    #0 REPLAY, 1 layout , 2 toti, 3 fatality OJO A CAMBIAR!!!
+
+    #lista_probas = [0, 10, 20, 30, 40, 100] #4/10 turnos con carta
+    
+    rango_carta = randint(1,100)
+    
+    for i in range ( len (cartas) ):
+        if lista_probas[i] < rango_carta < lista_probas[i+1] :
+            print(f'Te toco la carta {cartas[i]}')
+            carta_levantada = cartas[0]
+    
+    return carta_levantada
 
 
-def guardar_carta():
+def guardar_carta(cartas_guardadas: list, carta_levantada: int) -> list:
     """
-    PRE: recibe la carta
-    GRAL: hacemos listas xa q cada jugador guarde sus cartas
-    POST: no devuelve nada. solo guarda la carta
+    PRE: recibe la ultima carta levantada y la lista de cartas q se hayan guardado y todavia no
+    jugado
+    POST: Devuelve la lista de cartas guardadas con la ultim carta agregada 
     """
     pass
 
@@ -329,15 +345,25 @@ def carta_fatality():
     pass
 
 
-def jugar_carta():
+def jugar_carta(cartas_guardadas: list, tablero: list) -> list:
     """
-    si el jugador así lo deseó
     GRAL: incluir posibilidad de jugar mas de una carta e las q se guardaron en guardar carta.
     Las funciones se ejecutan segun la carta q se juegue
     PRE: cartas guardadas de guardar carta y el tablero
     POST: en principio, si no entendi mal, no devuelve nada. xq el tablero se modifica x 
     referencia.
     """
+    print('\nEste es su mazo de cartas')
+
+    for i in range ( len(cartas_guardadas) ):
+        print(f'{i}-{cartas_guardadas[i]}')
+    print()
+    
+    carta = cartas_guardadas [ int (validar_opcion (1, len(cartas_guardadas),'¿Que carta desea jugar?: ') ) - 1 ]  
+    #resto 1 xq en cartas guardadas la lista arranca en 0
+    
+    print(carta)
+    
     carta_replay()
     carta_layout()
     carta_toti()
@@ -345,7 +371,7 @@ def jugar_carta():
     pass
 
 
-def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2: str) -> str:
+def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2: str, lista_probas: list) -> str:
     """
     GRAL: el juego en si. Primero se inenta encontrar las cartas iguales. Dsps con otras funciones 
     se levanta la carta y se juega.
@@ -356,6 +382,10 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
     """
     gano_juego = False
     turno = 1
+
+    cartas_guardadas_jug_1 = [] #Me parecio mas util crear estas 2 listas aqui puesto q no es necesario 
+    cartas_guardadas_jug_2 = [] #devolverlas al menu ya q se borran cuando se acaba la partida
+    
     while not gano_juego :
 
             #print(turno)    #para facilitar testeo (turnos impares -> jug 1, turnos pares -> jug 2)
@@ -363,17 +393,24 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
             if turno %2 != 0:
                 print('Turno de {}\nTablero 1'.format(jug_1.upper() ) )
                 tablero = tablero_cargado_1
+                cartas_guardadas = cartas_guardadas_jug_1
                 ganador = jug_1
+
             else:
                 print('Turno de {}\nTablero 2'.format(jug_2.upper() ) )
                 tablero = tablero_cargado_2
+                cartas_guardadas = cartas_guardadas_jug_2
                 ganador = jug_2
 
             gano_juego = hacer_memoria(tablero)
 
-            levantar_carta()
-            guardar_carta()
-            jugar_carta()
+            carta_levantada = levantar_carta (lista_probas)
+            
+            cartas_guardadas.append(carta_levantada)
+
+            #cartas_guardadas = guardar_carta(cartas_guardadas, carta_levantada)
+            
+            jugar_carta(cartas_guardadas, tablero)
             
             print('FIN DEL TURNO DE {}'.format(ganador.upper() ) ) 
             print('presione cualquier tecla para seguir jugando') #mas comodidad xa jugar
@@ -413,7 +450,7 @@ def main() -> None:
                 
                 tam_matriz = duracion_juego()
                 
-                probabilidades = proba_cartas()
+                lista_probas = proba_cartas()
                 
                 tablero_cargado_1, tablero_cargado_2 = nueva_partida(tam_matriz)
 
@@ -432,7 +469,7 @@ def main() -> None:
             else:
                 salir_del_menu_principal = True
                 
-        ganador = jugando(tablero_cargado_1, tablero_cargado_2, jug_1, jug_2)
+        ganador = jugando(tablero_cargado_1, tablero_cargado_2, jug_1, jug_2, lista_probas)
 
         print('¡Felicidades! Haz ganado {}'.format(ganador.upper() ) )
 
