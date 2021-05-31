@@ -40,7 +40,7 @@ def proba_cartas() -> list:
     print("\nDefini la probabilidad de salida de las cartas especiales")
     print('0 - Tradcional\n1 - Piknte\n2 - Muy piknte')
     print()
-    cartas = 'Replay', 'Layout', 'Toti', 'Fatality' 
+    cartas = 'Replay', 'Layout', 'Toti', 'Fatality', 'No salga ninguna' 
 
     opc = int( validar_opcion(0,3) )
 
@@ -54,10 +54,11 @@ def proba_cartas() -> list:
     #Esto se lee, 0 a 10 sale Replay, 10 a 20 sale Layout, 40 a 60 sale Toti, 60 a 80 sale Fatality, 80 a 100 
     #no sale ninguna carta. Asi, xa este caso en 8/10 turnos sale carta 
     
-    print('\nUsted eligio las siguientes probabilidades para sus cartas:')
+    print('\nLas cartas tendran la siguiente probabilidad de salir:')
     for i in range ( len(cartas) ) :
         print(f'{ cartas[i] }: { int(lista_probas[i+1] - lista_probas[i]) } %' )
-
+    
+    print()
     #"boton"acepetar  
 
     return lista_probas
@@ -268,7 +269,7 @@ def hacer_memoria(tablero:list) -> bool:
     GRAL: muestra tableros y permite jugar. si encontro correcta// ( chequeo_pareja() ), corre de 
     nuevo hasta q pierda o hasta ganar el juego (gano_el_juego () ) 
     PRE: recibe el tablero del judaor 1 o 2
-    POST: devuelve el tablero nuevo segun lo q adivinado
+    POST: devuelve el bool gano_juego y modifica el tablero segun lo q adivinado
     """
     gano_juego = False
     perdio = False
@@ -310,25 +311,19 @@ def levantar_carta(lista_probas: list) -> str:
     print('rango carta:',rango_carta)
 
     if rango_carta >=  lista_probas[4]:
-        print('No levanta carta')
+        print('Ups! No levantas carta')
         carta_levantada = 'n'     #si no toca carta pongo 'n'
     else:
         for i in range ( len (lista_probas) -2 ): # len (6 - 2) = len( 4)
                         #i puede valer 0, 1, 2, 3
-            print(i)
-            print('proba',lista_probas[i])
+            #print(i)
+            #print('proba',lista_probas[i])
             
             if lista_probas[i] < rango_carta <= lista_probas[i+1] :
                 print(f'Te toco la carta {cartas[i]}')
                 carta_levantada = cartas[i]
     
     return carta_levantada
-
-
-def carta_replay():
-    """
-    """
-    pass
 
 
 def carta_layout():
@@ -351,31 +346,25 @@ def carta_fatality():
 
 def jugar_carta(cartas_guardadas: list, tablero: list) -> list:
     """
-    GRAL: incluir posibilidad de jugar mas de una carta e las q se guardaron en guardar carta.
-    Las funciones se ejecutan segun la carta q se juegue
     PRE: cartas guardadas de guardar carta y el tablero
-    POST: en principio, si no entendi mal, no devuelve nada. xq el tablero se modifica x 
-    referencia.
+    POST: Devuelve la carta elegida
     """
-    if len(cartas_guardadas) > 0:
-        print('\nEste es su mazo de cartas')
-        for i in range ( len(cartas_guardadas) ):
-            print(f'{i+1}-{cartas_guardadas[i]}')
-        print()
-    
-        carta = cartas_guardadas [ int (validar_opcion (1, len(cartas_guardadas),'¿Que carta desea jugar?: ') ) - 1 ]  
+    print('\nEste es su mazo de cartas:')
+    for i in range ( len(cartas_guardadas) ):
+        print(f'{i+1}-{cartas_guardadas[i]}')
+    print()
+
+    opc = int(validar_opcion(0, 1, 'Queres jugar alguna carta 0-Si 1-No?: '))
+    if opc == 0:
+        carta = cartas_guardadas [ int (validar_opcion (1, len(cartas_guardadas),
+        '¿Que carta queres jugar?: ') ) - 1 ]  
         #resto 1 xq en cartas guardadas la lista arranca en 0
-        print('Jugaste: ',carta)
-
-        carta_replay()
-        carta_layout()
-        carta_toti()
-        carta_fatality()
     else:
-        print('\nSu maso esta vacio')
-        print()
-    pass
+        carta ='n'
+    
+    #print('Jugaste: ',carta)
 
+    return carta
 
 def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2: str, lista_probas: list) -> str:
     """
@@ -412,11 +401,24 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
      
             carta_levantada = levantar_carta(lista_probas)
 
-            if  ( carta_levantada  != 'n' ):
+            if  carta_levantada  != 'n' :
                 print('Guardamos', carta_levantada)
                 cartas_guardadas.append(carta_levantada)
-
-            jugar_carta(cartas_guardadas, tablero)
+                    
+            if len (cartas_guardadas)>0:
+                carta = jugar_carta(cartas_guardadas, tablero)
+                
+                if carta == 'Replay':
+                    gano_juego = hacer_memoria(tablero)
+                
+                elif carta == 'Layout':
+                    carta_layout()
+                
+                elif carta == 'Toti':
+                    carta_toti()
+                
+                elif carta == 'Fatality':
+                    carta_fatality()
             
             print('FIN DEL TURNO DE {}'.format(ganador.upper() ) ) 
             print('presione cualquier tecla para seguir jugando') #mas comodidad xa jugar

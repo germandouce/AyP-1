@@ -32,10 +32,14 @@ Argumento: Lo q lleva la funcion  en su definición
 metodo: lleva un punto antes,
 la funcion no
 
-En python los strings son inmutables, si lo modifico hay q guardarlo en una var
+En python los strings son inmutables, si lo modifico hay q guardarlo en 
+una var
 
 En matrices, si se adopta una convension con las filas y columnas,
 hay q mantenerlo todo el programa
+
+Las claves de un diccionario tienen q ser datos de tipo inmutable
+
 
 
 
