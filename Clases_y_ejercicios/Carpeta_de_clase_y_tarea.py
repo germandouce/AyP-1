@@ -538,3 +538,19 @@ for i in range (len(m1)):
 for i in range (len(matriz_suma)):
     print (matr[i])
 '''
+
+#CLASE 12 -  Dict, Set DUDAS TP
+
+#Hubo martes feriado => martes pares jueves impares
+
+#CLASE 13 - Sets, Sort, search + funciones especiales (map, filter, lambda) 
+'''
+a= set()
+a.add(1)
+
+b={1,2}
+
+print(a.intersection(b))
+'''
+
+#CLASE 14 -

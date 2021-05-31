@@ -1,4 +1,20 @@
-	APUNTES TP_1 - MEMOTEST 
+			APUNTES TP_1 - MEMOTEST
+
+*Ver si esta bueno q no se avise si se tira una fatality o algo asi
+
+*Aclarar q se pueden acumular mas de una carta por turno
+
+*Posibilidad de 0% chance.
+
+*cada carta tiene su config, con probs entre 1 y 100
+
+*cartas, imaginar como dos instancias
+
+*Primero decidir cual es la carta q tiene posibilidad de salir,
+Segundo ver si mi sorteo cae dentro de las probas de esa carta.
+
+*ej: carta tiene 30% de chance de salir, si el numero q sale esta
+entre 0 y 30 sale esa carta, si sale 31, no sale. 
 
 *8 de junio hasta 21 HRS, con un (doc) con lineamientos basicos e hipotesis
 asumidas. puede estar en el cuerpo del mail. Tp nivelador, 
