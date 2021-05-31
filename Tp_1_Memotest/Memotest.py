@@ -294,31 +294,35 @@ def levantar_carta(lista_probas: list) -> str:
     toca segun las probas definidas en funcion proba_carta()
     PRE:  IMPORTANTE, probabilidades de cada carta xa q aqui se haga efectivamente el calculo con 
     random
-    POST: devuelve el entero carta_levantada, correspondiente a la carta
+    POST: devuelve el str carta_levantada
     """
-    cartas =  'Replay', 'Layout', 'Toti', 'Fatality' 
-    #NOTA IMPORTANTE: para facilitar manejo se las usara como enteros siendos estos,
-    #0 REPLAY, 1 layout , 2 toti, 3 fatality OJO A CAMBIAR!!!
-
-    #lista_probas = [0, 10, 20, 30, 40, 100] #4/10 turnos con carta
+    cartas =  ['Replay', 'Layout', 'Toti', 'Fatality' ]
+    
+    #0 REPLAY, 1 layout , 2 toti, 3 fatality 
+    #     
+    #lista_probas = [0, 10, 20, 30, 40, 100] #4/10 turnos con carta (TRADICIONAL)
+    #lista_probas = [0, 0, 0, 0, 0, 100] #0/10 turnos con carta     (P)
+    
+    #lista_probas = [0, 20, 40, 60, 80, 100] #8/10 turnos con carta (MP)
+    #0 - 10 Replay, 10 - 20 Layout, 40 - 60 sale Toti, 60 - 80 sale Fatality, 80 a 100 'n'
     
     rango_carta = randint(1,100)
-    
-    for i in range ( len (cartas) ):
-        if lista_probas[i] < rango_carta < lista_probas[i+1] :
-            print(f'Te toco la carta {cartas[i]}')
-            carta_levantada = cartas[0]
+    print('rango carta:',rango_carta)
+
+    if rango_carta >=  lista_probas[4]:
+        print('No levanta carta')
+        carta_levantada = 'n'     #si no toca carta pongo 'n'
+    else:
+        for i in range ( len (lista_probas) -2 ): # len (6 - 2) = len( 4)
+                        #i puede valer 0, 1, 2, 3
+            print(i)
+            print('proba',lista_probas[i])
+            
+            if lista_probas[i] < rango_carta <= lista_probas[i+1] :
+                print(f'Te toco la carta {cartas[i]}')
+                carta_levantada = cartas[i]
     
     return carta_levantada
-
-
-def guardar_carta(cartas_guardadas: list, carta_levantada: int) -> list:
-    """
-    PRE: recibe la ultima carta levantada y la lista de cartas q se hayan guardado y todavia no
-    jugado
-    POST: Devuelve la lista de cartas guardadas con la ultim carta agregada 
-    """
-    pass
 
 
 def carta_replay():
@@ -353,21 +357,23 @@ def jugar_carta(cartas_guardadas: list, tablero: list) -> list:
     POST: en principio, si no entendi mal, no devuelve nada. xq el tablero se modifica x 
     referencia.
     """
-    print('\nEste es su mazo de cartas')
+    if len(cartas_guardadas) > 0:
+        print('\nEste es su mazo de cartas')
+        for i in range ( len(cartas_guardadas) ):
+            print(f'{i+1}-{cartas_guardadas[i]}')
+        print()
+    
+        carta = cartas_guardadas [ int (validar_opcion (1, len(cartas_guardadas),'¿Que carta desea jugar?: ') ) - 1 ]  
+        #resto 1 xq en cartas guardadas la lista arranca en 0
+        print('Jugaste: ',carta)
 
-    for i in range ( len(cartas_guardadas) ):
-        print(f'{i}-{cartas_guardadas[i]}')
-    print()
-    
-    carta = cartas_guardadas [ int (validar_opcion (1, len(cartas_guardadas),'¿Que carta desea jugar?: ') ) - 1 ]  
-    #resto 1 xq en cartas guardadas la lista arranca en 0
-    
-    print(carta)
-    
-    carta_replay()
-    carta_layout()
-    carta_toti()
-    carta_fatality()
+        carta_replay()
+        carta_layout()
+        carta_toti()
+        carta_fatality()
+    else:
+        print('\nSu maso esta vacio')
+        print()
     pass
 
 
@@ -403,13 +409,13 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
                 ganador = jug_2
 
             gano_juego = hacer_memoria(tablero)
+     
+            carta_levantada = levantar_carta(lista_probas)
 
-            carta_levantada = levantar_carta (lista_probas)
-            
-            cartas_guardadas.append(carta_levantada)
+            if  ( carta_levantada  != 'n' ):
+                print('Guardamos', carta_levantada)
+                cartas_guardadas.append(carta_levantada)
 
-            #cartas_guardadas = guardar_carta(cartas_guardadas, carta_levantada)
-            
             jugar_carta(cartas_guardadas, tablero)
             
             print('FIN DEL TURNO DE {}'.format(ganador.upper() ) ) 
