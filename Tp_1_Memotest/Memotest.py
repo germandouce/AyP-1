@@ -2,8 +2,8 @@ from random import randint, choice, shuffle
 
 def validar_opcion(opc_minimas: int, opc_maximas: int, texto: str = '') -> str:
     '''
-    PRE:Recibe dos números enteros que simbolizan la cantidad de opciones posibles.
-    Post: Retorna un número entero dentro del rango de opciones
+    PRE: Recibe dos números enteros que simbolizan la cantidad de opciones posibles.
+    Post: Retorna un número entero en formato str dentro del rango de opciones
     '''
     opc = input("{}".format(texto))
     while not opc.isnumeric() or int(opc) > opc_maximas or int(opc) < opc_minimas:
@@ -37,7 +37,27 @@ def proba_cartas():
     POST: Defino proba de cada carta. solo va a devolver 4 valores  de probabilidad
     n una lista, 1 xa cada carta
     """
-    pass
+    print("\nDefini la probabilidad de salida de las cartas especiales")
+    print('0 - Tradcional\n1 - Piknte\n2 - Muy piknte')
+    print()
+    cartas = 'Replay', 'Layout', 'Toti', 'Fatality' 
+
+    opc = int( validar_opcion(0,3) )
+
+    if opc ==0:
+        lista_probas = [0, 0, 0, 0]
+    elif opc == 1:
+        lista_probas = [0.3, 0.1, 0.2, 0.2]
+    else:
+        lista_probas = [0.4, 0.2, 0.3, 0.3]
+    
+    print('\nUsted eligio las siguientes probabilidades para sus cartas:')
+    for i in range ( len(cartas) ) :
+        print(f'{ cartas[i] }: { int( lista_probas[i] * 100 ) } %' )
+
+    #"boton"acepetar
+
+    return lista_probas
 
 
 def crear_tablero(tam_matriz: int) -> list:
