@@ -323,13 +323,40 @@ def levantar_carta(lista_probas: list) -> str:
                 print(f'Te toco la carta {cartas[i]}')
                 carta_levantada = cartas[i]
     
+    print('carta hardcodeada')
+    carta_levantada ='Layout'
+    
     return carta_levantada
 
 
-def carta_layout():
+def carta_layout(tablero_a_molestar: list):
     """
+    PRE: tablero_a_molestar es el tablero del oponente q busco modificar para hacerle mas dificil el juego
+    POST: No devuelve nada, solo modifica el tablero indicado por referencia
     """
-    pass
+    print(tablero_a_molestar)
+    mostrar_tablero (tablero_a_molestar)
+    print()
+    elementos_xa_tablero_a_molestar = []
+    
+    for fila in range ( len(tablero_a_molestar) ):
+        for columna in  range (len(tablero_a_molestar) ):
+            elementos_xa_tablero_a_molestar.append(tablero_a_molestar[fila][columna])
+    
+    shuffle(elementos_xa_tablero_a_molestar)
+    
+    indice = 0
+    for fila in range(len(tablero_a_molestar)):
+        for columna in range(len(tablero_a_molestar)): #en la pos i,j meto una lista con 2 elementos, el 1ero,
+            tablero_a_molestar[fila][columna] = elementos_xa_tablero_a_molestar[indice] #la ficha el 2do un 
+            indice += 1     #indicador de si fue adivinada o no
+                            #  *   signfica NO ADIVINADA; ' ' significa YA ADIVINADA
+                            
+    print(tablero_a_molestar)
+    mostrar_tablero(tablero_a_molestar)
+
+    return tablero_a_molestar
+
 
 
 def carta_toti():
@@ -361,7 +388,7 @@ def jugar_carta(cartas_guardadas: list, tablero: list) -> list:
         #resto 1 xq en cartas guardadas la lista arranca en 0
     else:
         carta ='n'
-    
+
     #print('Jugaste: ',carta)
 
     return carta
@@ -373,8 +400,11 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
     PRE: recibe tableros cargados, LAS PROBABILIDADES de cada carta
     La carta se guarda predeterminada//. Dsps damos opcion de jugar carta inmediata// o no.
     POST: devuelve el ganador del juego en la variable 'ganador'
-
     """
+    #ACLARACION IMPORTANTE: Xa mejor comprension asumo q yo trato de adivinar MI tablero (tablero_a_adivinar)
+    #q por supuesto no lo veo, y aplico cartas (salvo replay) para molestar al tablero del
+    #oponente (tablero_a_molestar), q tampoco ve el suyo)
+
     gano_juego = False
     turno = 1
 
@@ -388,12 +418,14 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
             if turno %2 != 0:
                 print('Turno de {}\nTablero 1'.format(jug_1.upper() ) )
                 tablero = tablero_cargado_1
+                tablero_a_molestar = tablero_cargado_2
                 cartas_guardadas = cartas_guardadas_jug_1
                 ganador = jug_1
 
             else:
                 print('Turno de {}\nTablero 2'.format(jug_2.upper() ) )
                 tablero = tablero_cargado_2
+                tablero_a_molestar = tablero_cargado_1
                 cartas_guardadas = cartas_guardadas_jug_2
                 ganador = jug_2
 
@@ -407,18 +439,18 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
                     
             if len (cartas_guardadas)>0:
                 carta = jugar_carta(cartas_guardadas, tablero)
-                
+
                 if carta == 'Replay':
                     gano_juego = hacer_memoria(tablero)
                 
                 elif carta == 'Layout':
-                    carta_layout()
+                    carta_layout(tablero_a_molestar)
                 
                 elif carta == 'Toti':
-                    carta_toti()
+                    carta_toti(tablero_a_molestar)
                 
                 elif carta == 'Fatality':
-                    carta_fatality()
+                    carta_fatality(tablero_a_molestar)
             
             print('FIN DEL TURNO DE {}'.format(ganador.upper() ) ) 
             print('presione cualquier tecla para seguir jugando') #mas comodidad xa jugar
