@@ -355,12 +355,6 @@ def carta_toti(tablero_a_molestar):
                 tablero_a_molestar [fila] = filas_aux [len(tablero_a_molestar)-1 - fila]
                 #las q me quedan (dsps de la mitad, pasan a valer lo q valian respectiva// las 1eras n filas )
         
-        #xa testear
-        print('tablero ya espejado verticalmente\n')
-        for i in range( len(tablero_a_molestar) ):
-            for j in range( len(tablero_a_molestar) ):
-                print( tablero_a_molestar [i][j], end ='  ')
-            print()
         
     else:
          #ESPEJADO HORIZONTAL: "espejo colocado vertical//" (lo de la izq pasa a la der y viceversa)
@@ -394,6 +388,8 @@ def carta_toti(tablero_a_molestar):
 
 def carta_fatality():
     """
+    PRE: tablero_a_molestar es el tablero del oponente q busco modificar para hacerle mas dificil el juego
+    POST: No devuelve nada, ESPEJA el tablero indicado por referencia, horizontal o verticalmente
     """
     pass
 
@@ -457,8 +453,8 @@ def levantar_carta(lista_probas: list) -> str:
                 carta_levantada = cartas[i]
     
     #xa testear
-    print('carta hardcodeada: Toti')
-    carta_levantada ='Toti'              #xa testear
+    print('carta hardcodeada: Fatality')
+    carta_levantada ='Fatality'              #xa testear
     
     return carta_levantada
 
@@ -515,9 +511,22 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
                 
                 elif carta == 'Layout':
                     carta_layout(tablero_a_molestar)
-                
+                    
+                    #xa testear
+                    print('tablero ya mezclado FUERA DE FUNCION\n')
+                    for i in range( len(tablero_a_molestar) ):
+                        for j in range( len(tablero_a_molestar) ):
+                            print( tablero_a_molestar [i][j], end ='  ')
+                        print()
+
                 elif carta == 'Toti':
                     carta_toti(tablero_a_molestar)
+                    #xa testear
+                    print('tablero ya espejado FUERA DE FUNCION\n')
+                    for i in range( len(tablero_a_molestar) ):
+                        for j in range( len(tablero_a_molestar) ):
+                            print( tablero_a_molestar [i][j], end ='  ')
+                        print()
                 
                 elif carta == 'Fatality':
                     carta_fatality(tablero_a_molestar)
