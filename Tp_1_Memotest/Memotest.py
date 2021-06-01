@@ -323,8 +323,9 @@ def levantar_carta(lista_probas: list) -> str:
                 print(f'Te toco la carta {cartas[i]}')
                 carta_levantada = cartas[i]
     
+    #xa testear
     print('carta hardcodeada: Toti')
-    carta_levantada ='Toti'
+    carta_levantada ='Toti' #idem
     
     return carta_levantada
 
@@ -334,9 +335,11 @@ def carta_layout(tablero_a_molestar: list):
     PRE: tablero_a_molestar es el tablero del oponente q busco modificar para hacerle mas dificil el juego
     POST: No devuelve nada, solo modifica el tablero indicado por referencia
     """
-    # print(tablero_a_molestar)
-    # mostrar_tablero (tablero_a_molestar)
-    # print()
+    #xa testear
+    print('antes de mezclar')
+    print(tablero_a_molestar)
+    mostrar_tablero (tablero_a_molestar)
+    print()
 
     elementos_xa_tablero_a_molestar = []
     
@@ -351,9 +354,11 @@ def carta_layout(tablero_a_molestar: list):
         for columna in range(len(tablero_a_molestar)): 
             tablero_a_molestar[fila][columna] = elementos_xa_tablero_a_molestar[indice] #y lo vulevo a cargar 
             indice += 1     
-
-    # print(tablero_a_molestar)
-    # mostrar_tablero(tablero_a_molestar)
+    
+    #xa testear
+    print('dsps de mezclar')
+    print(tablero_a_molestar)
+    mostrar_tablero(tablero_a_molestar)
 
     return tablero_a_molestar
 
@@ -366,17 +371,17 @@ def carta_toti(tablero_a_molestar):
     sentido = randint(1,2)
 
     if sentido == 1:
-        #ESPEJADO HORIZONTAL:
+        #ESPEJADO VERTICAL: "espejo colocado horizontal//" (lo de arriba pasa abajo y viceversa)
 
         #xa testear
-        print('tablero antes de espejar horizontalmente\n')
+        print('tablero antes de espejar verticalmente\n')
         for i in range( len(tablero_a_molestar) ):
             for j in range( len(tablero_a_molestar) ):
                 print( tablero_a_molestar [i][j], end ='  ')
             print()
         
         
-        filas_aux = [] # contendra las primeras n/2 filas (matriz de nxn)
+        filas_aux = [] # contendra las primeras n/2 filas (matriz de n x n)
 
         for fila in range( len(tablero_a_molestar)): # fila: 0, 1, 2, 3, 4, 5, 6, 7
             if fila < (len(tablero_a_molestar) / 2): #si la fila es de las primeras; hasta n/2
@@ -398,7 +403,7 @@ def carta_toti(tablero_a_molestar):
             print()
         
     else:
-        #ESPEJADO VERTICAL:
+         #ESPEJADO HORIZONTAL: "espejo colocado vertical//" (lo de la izq pasa a la der y viceversa)
 
         # xa testear
         print('tablero antes de espejar verticalmente \n')
@@ -447,6 +452,7 @@ def jugar_carta(cartas_guardadas: list, tablero: list) -> list:
     if opc == 0:
         carta = cartas_guardadas [ int (validar_opcion (1, len(cartas_guardadas),
         '¿Que carta queres jugar?: ') ) - 1 ]  
+        
         #resto 1 xq en cartas guardadas la lista arranca en 0
     else:
         carta ='n'
