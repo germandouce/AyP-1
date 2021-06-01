@@ -323,8 +323,8 @@ def levantar_carta(lista_probas: list) -> str:
                 print(f'Te toco la carta {cartas[i]}')
                 carta_levantada = cartas[i]
     
-    print('carta hardcodeada')
-    carta_levantada ='Layout'
+    print('carta hardcodeada: Toti')
+    carta_levantada ='Toti'
     
     return carta_levantada
 
@@ -334,35 +334,80 @@ def carta_layout(tablero_a_molestar: list):
     PRE: tablero_a_molestar es el tablero del oponente q busco modificar para hacerle mas dificil el juego
     POST: No devuelve nada, solo modifica el tablero indicado por referencia
     """
-    print(tablero_a_molestar)
-    mostrar_tablero (tablero_a_molestar)
-    print()
+    # print(tablero_a_molestar)
+    # mostrar_tablero (tablero_a_molestar)
+    # print()
+
     elementos_xa_tablero_a_molestar = []
     
     for fila in range ( len(tablero_a_molestar) ):
         for columna in  range (len(tablero_a_molestar) ):
-            elementos_xa_tablero_a_molestar.append(tablero_a_molestar[fila][columna])
+            elementos_xa_tablero_a_molestar.append(tablero_a_molestar[fila][columna]) #cargo los elementos
     
-    shuffle(elementos_xa_tablero_a_molestar)
+    shuffle(elementos_xa_tablero_a_molestar) #los mezclo
     
     indice = 0
     for fila in range(len(tablero_a_molestar)):
-        for columna in range(len(tablero_a_molestar)): #en la pos i,j meto una lista con 2 elementos, el 1ero,
-            tablero_a_molestar[fila][columna] = elementos_xa_tablero_a_molestar[indice] #la ficha el 2do un 
-            indice += 1     #indicador de si fue adivinada o no
-                            #  *   signfica NO ADIVINADA; ' ' significa YA ADIVINADA
-                            
-    print(tablero_a_molestar)
-    mostrar_tablero(tablero_a_molestar)
+        for columna in range(len(tablero_a_molestar)): 
+            tablero_a_molestar[fila][columna] = elementos_xa_tablero_a_molestar[indice] #y lo vulevo a cargar 
+            indice += 1     
+
+    # print(tablero_a_molestar)
+    # mostrar_tablero(tablero_a_molestar)
 
     return tablero_a_molestar
 
 
+def carta_toti(tablero_a_molestar):
+    """
+    PRE: tablero_a_molestar es el tablero del oponente q busco modificar para hacerle mas dificil el juego
+    POST: No devuelve nada, ESPEJA el tablero indicado por referencia, horizontal o verticalmente
+    """
+    sentido = randint(1,2)
 
-def carta_toti():
-    """
-    """
-    pass
+    if sentido == 1:
+        #ESPEJADO HORIZONTAL:
+        
+        filas_aux = [] # contendra las primeras n/2 filas (matriz de nxn)
+
+        for fila in range( len(tablero_a_molestar)): # fila: 0, 1, 2, 3, 4, 5, 6, 7
+            if fila < (len(tablero_a_molestar) / 2): #si la fila es de las primeras; hasta n/2
+                
+                filas_aux.append(tablero_a_molestar [fila]) #guardo la fila
+                
+                tablero_a_molestar[fila] = tablero_a_molestar [ len(tablero_a_molestar)-1 - fila ] 
+                #y esa misma fila pasa a valer "la complementaria"
+                #print(tablero_1[fila])                  
+        else:
+            tablero_a_molestar [fila] = filas_aux [len(tablero_a_molestar)-1 - fila]
+            #las q me quedan (dsps de la mitad, pasan a valer lo q valian respectiva// las 1eras n filas )
+        
+        print('tablero espejado\n')
+        for i in range( len(tablero_a_molestar) ):
+            for j in range( len(tablero_a_molestar) ):
+                print( tablero_a_molestar [i][j], end ='  ')
+            print()
+        
+    else:
+        #ESPEJADO VERTICAL:
+        
+        for fila in range( len(tablero_a_molestar) ): # fila: 0, 1, 2, 3, 4, 5, 6, 7
+        
+            columnas_aux = []
+        
+        for columna in range ( len(tablero_a_molestar) ):    #columna: 0, 1, 2, 3, 4, 5, 6, 7
+            if columna < (len(tablero_a_molestar) / 2):
+                columnas_aux.append (tablero_a_molestar [fila][columna] )    
+                tablero_a_molestar [fila][columna] = tablero_a_molestar [fila][ len(tablero_a_molestar) - 1 - columna]
+            
+            else:
+                tablero_a_molestar [fila][columna] = columnas_aux [ len(tablero_a_molestar) - 1 - columna ]
+
+            print('tablero espejado\n')
+            for i in range( len(tablero_a_molestar) ):
+                    for j in range( len(tablero_a_molestar) ):
+                        print(tablero_a_molestar[i][j], end ='  ')
+                    print()  
 
 
 def carta_fatality():
