@@ -289,46 +289,6 @@ def hacer_memoria(tablero:list) -> bool:
     
     return gano_juego
 
-def levantar_carta(lista_probas: list) -> str:
-    """
-    GRAL: ahora q termino el turno xq perdio, se levanta carta. Aca se calcula efectivamente q carta
-    toca segun las probas definidas en funcion proba_carta()
-    PRE:  IMPORTANTE, probabilidades de cada carta xa q aqui se haga efectivamente el calculo con 
-    random
-    POST: devuelve el str carta_levantada
-    """
-    cartas =  ['Replay', 'Layout', 'Toti', 'Fatality' ]
-    
-    #0 REPLAY, 1 layout , 2 toti, 3 fatality 
-    #     
-    #lista_probas = [0, 10, 20, 30, 40, 100] #4/10 turnos con carta (TRADICIONAL)
-    #lista_probas = [0, 0, 0, 0, 0, 100] #0/10 turnos con carta     (P)
-    
-    #lista_probas = [0, 20, 40, 60, 80, 100] #8/10 turnos con carta (MP)
-    #0 - 10 Replay, 10 - 20 Layout, 40 - 60 sale Toti, 60 - 80 sale Fatality, 80 a 100 'n'
-    
-    rango_carta = randint(1,100)
-    print('rango carta:',rango_carta)
-
-    if rango_carta >=  lista_probas[4]:
-        print('Ups! No levantas carta')
-        carta_levantada = 'n'     #si no toca carta pongo 'n'
-    else:
-        for i in range ( len (lista_probas) -2 ): # len (6 - 2) = len( 4)
-                        #i puede valer 0, 1, 2, 3
-            #print(i)
-            #print('proba',lista_probas[i])
-            
-            if lista_probas[i] < rango_carta <= lista_probas[i+1] :
-                print(f'Te toco la carta {cartas[i]}')
-                carta_levantada = cartas[i]
-    
-    #xa testear
-    print('carta hardcodeada: Toti')
-    carta_levantada ='Toti' #idem
-    
-    return carta_levantada
-
 
 def carta_layout(tablero_a_molestar: list):
     """
@@ -396,7 +356,7 @@ def carta_toti(tablero_a_molestar):
                 #las q me quedan (dsps de la mitad, pasan a valer lo q valian respectiva// las 1eras n filas )
         
         #xa testear
-        print('tablero ya espejado horizontalmente\n')
+        print('tablero ya espejado verticalmente\n')
         for i in range( len(tablero_a_molestar) ):
             for j in range( len(tablero_a_molestar) ):
                 print( tablero_a_molestar [i][j], end ='  ')
@@ -406,7 +366,7 @@ def carta_toti(tablero_a_molestar):
          #ESPEJADO HORIZONTAL: "espejo colocado vertical//" (lo de la izq pasa a la der y viceversa)
 
         # xa testear
-        print('tablero antes de espejar verticalmente \n')
+        print('tablero antes de espejar horizontalmente \n')
         for i in range( len(tablero_a_molestar) ):
             for j in range( len(tablero_a_molestar) ):
                 print(tablero_a_molestar[i][j], end ='  ')
@@ -425,7 +385,7 @@ def carta_toti(tablero_a_molestar):
                     tablero_a_molestar [fila][columna] = columnas_aux [ len(tablero_a_molestar) - 1 - columna ]
         
         # xa testear
-        print('tablero espejado verticalmente \n')
+        print('tablero ya espejado horizontalmente \n')
         for i in range( len(tablero_a_molestar) ):
             for j in range( len(tablero_a_molestar) ):
                 print(tablero_a_molestar[i][j], end ='  ')
@@ -448,7 +408,7 @@ def jugar_carta(cartas_guardadas: list, tablero: list) -> list:
         print(f'{i+1}-{cartas_guardadas[i]}')
     print()
 
-    opc = int(validar_opcion(0, 1, 'Queres jugar alguna carta 0-Si 1-No?: '))
+    opc = int(validar_opcion(0, 1, 'Desea jugar alguna carta 1-Si 0-No?: '))
     if opc == 0:
         carta = cartas_guardadas [ int (validar_opcion (1, len(cartas_guardadas),
         '¿Que carta queres jugar?: ') ) - 1 ]  
@@ -460,6 +420,48 @@ def jugar_carta(cartas_guardadas: list, tablero: list) -> list:
     #print('Jugaste: ',carta)
 
     return carta
+
+
+def levantar_carta(lista_probas: list) -> str:
+    """
+    GRAL: ahora q termino el turno xq perdio, se levanta carta. Aca se calcula efectivamente q carta
+    toca segun las probas definidas en funcion proba_carta()
+    PRE:  IMPORTANTE, probabilidades de cada carta xa q aqui se haga efectivamente el calculo con 
+    random
+    POST: devuelve el str carta_levantada, 'n', si no se levanta, el nombre de la carta en caso de que si
+    """
+    cartas =  ['Replay', 'Layout', 'Toti', 'Fatality' ]
+    
+    #0 REPLAY, 1 layout , 2 toti, 3 fatality 
+    #     
+    #lista_probas = [0, 10, 20, 30, 40, 100] #4/10 turnos con carta (TRADICIONAL)
+    #lista_probas = [0, 0, 0, 0, 0, 100] #0/10 turnos con carta     (P)
+    
+    #lista_probas = [0, 20, 40, 60, 80, 100] #8/10 turnos con carta (MP)
+    #0 - 10 Replay, 10 - 20 Layout, 40 - 60 sale Toti, 60 - 80 sale Fatality, 80 a 100 'n'
+    
+    rango_carta = randint(1,100)
+    print('rango carta:',rango_carta)
+
+    if rango_carta >=  lista_probas[4]:
+        print('Ups! No levantas carta')
+        carta_levantada = 'n'     #si no toca carta pongo 'n'
+    else:
+        for i in range ( len (lista_probas) -2 ): # len (6 - 2) = len( 4)
+                        #i puede valer 0, 1, 2, 3
+            #print(i)
+            #print('proba',lista_probas[i])
+            
+            if lista_probas[i] < rango_carta <= lista_probas[i+1] :
+                print(f'Te toco la carta {cartas[i]}')
+                carta_levantada = cartas[i]
+    
+    #xa testear
+    print('carta hardcodeada: Toti')
+    carta_levantada ='Toti'              #xa testear
+    
+    return carta_levantada
+
 
 def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2: str, lista_probas: list) -> str:
     """
@@ -501,8 +503,8 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
      
             carta_levantada = levantar_carta(lista_probas)
 
-            if  carta_levantada  != 'n' :
-                print('Guardamos', carta_levantada)
+            if  carta_levantada  != 'n' : #a menos que no se levante carta (n), la carta se guarda automatica//
+                print('Guardamos', carta_levantada)     #xa testear
                 cartas_guardadas.append(carta_levantada)
                     
             if len (cartas_guardadas)>0:
