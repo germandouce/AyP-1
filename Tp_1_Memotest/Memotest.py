@@ -367,6 +367,14 @@ def carta_toti(tablero_a_molestar):
 
     if sentido == 1:
         #ESPEJADO HORIZONTAL:
+
+        #xa testear
+        print('tablero antes de espejar horizontalmente\n')
+        for i in range( len(tablero_a_molestar) ):
+            for j in range( len(tablero_a_molestar) ):
+                print( tablero_a_molestar [i][j], end ='  ')
+            print()
+        
         
         filas_aux = [] # contendra las primeras n/2 filas (matriz de nxn)
 
@@ -378,11 +386,12 @@ def carta_toti(tablero_a_molestar):
                 tablero_a_molestar[fila] = tablero_a_molestar [ len(tablero_a_molestar)-1 - fila ] 
                 #y esa misma fila pasa a valer "la complementaria"
                 #print(tablero_1[fila])                  
-        else:
-            tablero_a_molestar [fila] = filas_aux [len(tablero_a_molestar)-1 - fila]
-            #las q me quedan (dsps de la mitad, pasan a valer lo q valian respectiva// las 1eras n filas )
+            else:
+                tablero_a_molestar [fila] = filas_aux [len(tablero_a_molestar)-1 - fila]
+                #las q me quedan (dsps de la mitad, pasan a valer lo q valian respectiva// las 1eras n filas )
         
-        print('tablero espejado\n')
+        #xa testear
+        print('tablero ya espejado horizontalmente\n')
         for i in range( len(tablero_a_molestar) ):
             for j in range( len(tablero_a_molestar) ):
                 print( tablero_a_molestar [i][j], end ='  ')
@@ -390,24 +399,32 @@ def carta_toti(tablero_a_molestar):
         
     else:
         #ESPEJADO VERTICAL:
-        
+
+        # xa testear
+        print('tablero antes de espejar verticalmente \n')
+        for i in range( len(tablero_a_molestar) ):
+            for j in range( len(tablero_a_molestar) ):
+                print(tablero_a_molestar[i][j], end ='  ')
+            print()  
+
         for fila in range( len(tablero_a_molestar) ): # fila: 0, 1, 2, 3, 4, 5, 6, 7
         
             columnas_aux = []
         
-        for columna in range ( len(tablero_a_molestar) ):    #columna: 0, 1, 2, 3, 4, 5, 6, 7
-            if columna < (len(tablero_a_molestar) / 2):
-                columnas_aux.append (tablero_a_molestar [fila][columna] )    
-                tablero_a_molestar [fila][columna] = tablero_a_molestar [fila][ len(tablero_a_molestar) - 1 - columna]
+            for columna in range ( len(tablero_a_molestar) ):    #columna: 0, 1, 2, 3, 4, 5, 6, 7
+                if columna < (len(tablero_a_molestar) / 2):
+                    columnas_aux.append (tablero_a_molestar [fila][columna] )    
+                    tablero_a_molestar [fila][columna] = tablero_a_molestar [fila][ len(tablero_a_molestar) - 1 - columna]
             
-            else:
-                tablero_a_molestar [fila][columna] = columnas_aux [ len(tablero_a_molestar) - 1 - columna ]
-
-            print('tablero espejado\n')
-            for i in range( len(tablero_a_molestar) ):
-                    for j in range( len(tablero_a_molestar) ):
-                        print(tablero_a_molestar[i][j], end ='  ')
-                    print()  
+                else:
+                    tablero_a_molestar [fila][columna] = columnas_aux [ len(tablero_a_molestar) - 1 - columna ]
+        
+        # xa testear
+        print('tablero espejado verticalmente \n')
+        for i in range( len(tablero_a_molestar) ):
+            for j in range( len(tablero_a_molestar) ):
+                print(tablero_a_molestar[i][j], end ='  ')
+            print()  
 
 
 def carta_fatality():
