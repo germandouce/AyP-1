@@ -197,7 +197,14 @@ def mostrar_tablero_parcial(tablero:list, ficha: tuple) -> None:
         print()
     
     print()
-                    
+
+#XA TESTEO!!!
+def mostrar_tablero_xa_testeo(tablero):
+       for i in range( len(tablero) ):
+                        for j in range( len(tablero) ):
+                            print( tablero [i][j], end ='  ')
+                        print()                    
+
 
 def elegir_ficha(tablero:list) -> tuple:
     """
@@ -309,16 +316,13 @@ def carta_layout(tablero_a_molestar: list):
     
     shuffle(elementos_xa_tablero_a_molestar) #los mezclo
     
+    #vuelvo a cargar el tablero original con los elementos mezclados
     indice = 0
     for fila in range(len(tablero_a_molestar)):
         for columna in range(len(tablero_a_molestar)): 
             tablero_a_molestar[fila][columna] = elementos_xa_tablero_a_molestar[indice] #y lo vulevo a cargar 
             indice += 1     
-    
-    #xa testear
-    print('dsps de mezclar')
-    print(tablero_a_molestar)
-    mostrar_tablero(tablero_a_molestar)
+   
 
     return tablero_a_molestar
 
@@ -361,10 +365,7 @@ def carta_toti(tablero_a_molestar: list):
 
         # xa testear
         print('tablero antes de espejar horizontalmente \n')
-        for i in range( len(tablero_a_molestar) ):
-            for j in range( len(tablero_a_molestar) ):
-                print(tablero_a_molestar[i][j], end ='  ')
-            print()  
+        mostrar_tablero_xa_testeo(tablero_a_molestar) 
 
         for fila in range( len(tablero_a_molestar) ): # fila: 0, 1, 2, 3, 4, 5, 6, 7
         
@@ -378,13 +379,6 @@ def carta_toti(tablero_a_molestar: list):
                 else:
                     tablero_a_molestar [fila][columna] = columnas_aux [ len(tablero_a_molestar) - 1 - columna ]
         
-        # xa testear
-        print('tablero ya espejado horizontalmente \n')
-        for i in range( len(tablero_a_molestar) ):
-            for j in range( len(tablero_a_molestar) ):
-                print(tablero_a_molestar[i][j], end ='  ')
-            print()  
-
 
 def carta_fatality(tablero_a_molestar: list) -> list:
     """
@@ -392,11 +386,9 @@ def carta_fatality(tablero_a_molestar: list) -> list:
     POST: OJO! Esta si devuelve el tablero nuevo traspuesto en la variable "tablero traspuesto"
     ya que use una lista auxiliar para hacerlo ysi no lo devilviese nada no podria guardar los cambios
     """
+    #xa testear
     print('tablero antes de trasponer\n')
-    for i in range( len(tablero_a_molestar) ):
-                        for j in range( len(tablero_a_molestar) ):
-                            print(tablero_a_molestar[i][j], end ='  ' )
-                        print()  
+    mostrar_tablero_xa_testeo(tablero_a_molestar) 
 
     #creo un tablero aux de nuevo. Intente usar el metodo .copy() pero me tocaba el 
     #tablero original
@@ -430,7 +422,7 @@ def carta_fatality(tablero_a_molestar: list) -> list:
 def jugar_carta(cartas_guardadas: list, tablero: list) -> list:
     """
     PRE: cartas guardadas de guardar carta y el tablero
-    POST: Devuelve la carta elegida
+    POST: Devuelve la carta elegida o 'n' si no se eleigio ninguna carta para jugar
     """
     print('\nEste es su mazo de cartas:')
     for i in range ( len(cartas_guardadas) ):
@@ -487,7 +479,7 @@ def levantar_carta(lista_probas: list) -> str:
     
     #xa testear
     print('carta hardcodeada: Fatality')
-    carta_levantada ='Fatality'              #xa testear
+    carta_levantada ='Fatality'  #xa testear            
     
     return carta_levantada
 
@@ -536,7 +528,7 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
                 print('Guardamos', carta_levantada)     #xa testear
                 cartas_guardadas.append(carta_levantada)
                     
-            if len (cartas_guardadas)>0:
+            if len (cartas_guardadas) >0 :
                 carta = jugar_carta(cartas_guardadas, tablero)
 
                 if carta == 'Replay':
@@ -544,30 +536,24 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
                 
                 elif carta == 'Layout':
                     carta_layout(tablero_a_molestar)
+                    #xa testear
+                    print('tablero ya mezclado al azar FUERA DE FUNCION')
+                    mostrar_tablero_xa_testeo(tablero_a_molestar) 
                     
                     #xa testear
                     print('tablero ya mezclado FUERA DE FUNCION\n')
-                    for i in range( len(tablero_a_molestar) ):
-                        for j in range( len(tablero_a_molestar) ):
-                            print( tablero_a_molestar [i][j], end ='  ')
-                        print()
+                    mostrar_tablero_xa_testeo(tablero_a_molestar) 
 
                 elif carta == 'Toti':
                     carta_toti(tablero_a_molestar)
                     #xa testear
                     print('tablero ya espejado FUERA DE FUNCION\n')
-                    for i in range( len(tablero_a_molestar) ):
-                        for j in range( len(tablero_a_molestar) ):
-                            print( tablero_a_molestar [i][j], end ='  ')
-                        print()
+                    mostrar_tablero_xa_testeo(tablero_a_molestar) 
                 
                 elif carta == 'Fatality':
                     carta_fatality(tablero_a_molestar)
                     print('tablero ya tarspuesto FUERRA DE TRASPONGO')
-                    for i in range( len(tablero_a_molestar) ):
-                        for j in range( len(tablero_a_molestar) ):
-                            print(tablero_a_molestar[i][j], end ='  ' )
-                        print()   
+                    mostrar_tablero_xa_testeo(tablero_a_molestar) 
 
             print('FIN DEL TURNO DE {}'.format(ganador.upper() ) ) 
             print('presione cualquier tecla para seguir jugando') #mas comodidad xa jugar
