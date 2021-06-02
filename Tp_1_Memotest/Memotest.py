@@ -455,9 +455,12 @@ def levantar_carta(lista_probas: list) -> str:
     #0 REPLAY, layout , toti, fatality     
 
     #TRADICIONAL: lista_probas = [0, 0, 0, 0, 0, 100] #0/10 turnos con carta 
-    #PIKNTE: lista_probas = [0, 10, 20, 30, 40, 100] #4/10 turnos con carta
-    #TRADICIONAL: lista_probas = [0, 20, 40, 60, 80, 100] #8/10 turnos con carta 
+    
 
+    #PIKNTE: lista_probas = [0, 10, 20, 30, 40, 100] #4/10 turnos con carta]
+
+
+    #MUY PIKNTE: lista_probas = [0, 20, 40, 60, 80, 100] #8/10 turnos con carta 
     #0 - 10 Replay, 10 - 20 Layout, 40 - 60 sale Toti, 60 - 80 sale Fatality, 80 a 100 'n'
     
     rango_carta = randint(1,100)
@@ -618,8 +621,8 @@ def main() -> None:
         print('0 - Volver al menu principal\n1 - Salir del juego')
         opc = int(validar_opcion(0,1))
         if opc == 1:
-            print('Esta seguro que desea salir del juego? Se perderan los scores')
-            print('1-Si\n2 - No')
+            print('\nEsta seguro que desea salir del juego? Se perderan los scores')
+            print('1 - Si\n2 - No')
             si_quiero_salir = int(validar_opcion(1,2))
 
             if si_quiero_salir == 1:
