@@ -466,8 +466,10 @@ def levantar_carta(lista_probas: list) -> str:
     #0 - 10 Replay, 10 - 20 Layout, 40 - 60 sale Toti, 60 - 80 sale Fatality, 80 a 100 'n'
     
     rango_carta = randint(1,100)
-    print('rango carta:',rango_carta)
-
+    
+    print('rango carta:',rango_carta) #xa testeo
+    print()
+    
     if rango_carta >=  lista_probas[4]:
         print('Ups! No levantas carta')
         carta_levantada = 'n'     #si no toca carta pongo 'n'
