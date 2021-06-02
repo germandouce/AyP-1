@@ -139,13 +139,14 @@ def nueva_partida(tam_matriz) -> tuple:
     return tablero_cargado_1, tablero_cargado_2
 
 
-def score():
+def mostrar_scores(scores):
     """
     PRE: por ahora nada...
     POST: no devuelve nada. solo printea que no se jugaron partidas si es la primera, 
     sino muestra ultimos 4 scores
     """
-    pass
+    scores.sort(key=lambda:)
+    for ganador in scores[]
 
 
 def mostrar_tablero(tablero:list) -> None:
@@ -265,7 +266,7 @@ def gano_el_juego(tablero):
             for j in range(len(tablero)):   
                 if tablero[i][j][1] == '*': #si llego a encontrar un * , es decir, un NO ADIVINADO
                     #entonces, es falso que alguien gano. En ese caso, 
-                    alguien_gano_juego = False                  
+                    alguien_gano_juego = True  #OJO MODIFICADO PARA PUNTAJES!!                  
 
     return alguien_gano_juego
 
@@ -563,14 +564,21 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
         
     return ganador
 
-def guardar_score():
+def guardar_score(scores:list,ganador:str):
     """
     GRAL: cuando alguien gano, se guarda su score. va a haber 4 scores en total. Aqui tengo q crear la
     lista con los scores xa consultar dsps.
     PRE: datos jugador
-    POST: nada. solo guarda scores
+    POST: Creo q no devuelve nada. solo guarda scores
     """
-    pass
+    esta = False
+    for i in range ( len(scores) ): #len = numero de jugadores
+        if scores[i][0] == ganador.lower():
+            scores[i][1] = scores[i][1] + 1
+            esta = True
+    
+    if not esta:
+        scores.append([ganador,1])
 
 
 def main() -> None:
@@ -578,6 +586,13 @@ def main() -> None:
     GRAL: Menu principal del juego. cuando se acaba cada partida guarda el score de dicha partida.
     """
     salir_del_juego = False
+    scores = []
+
+    #scores es una lista de listas, con 2 "columnas" (jugadores | puntaje) y tantas filas como jugadores.
+    #Basado en el codigo escrito en el menu, esto tiene la ventaja de q pueden jugar taantos jugadores 
+    # distintos como quiera pero como inconveniente si alguno de ellos ingresa su nombre escrito en forma
+    #distinta, los puntajes iran a dos personas distintas. EJ: Juan: 1, Juansito:1, Juansote: 1.
+
     while not salir_del_juego:        
         salir_del_menu_principal = False
         iniciada = False
@@ -607,7 +622,7 @@ def main() -> None:
                     salir_del_menu_principal = False
             
             elif opc == 2:
-                score()
+                mostrar_scores(scores)
 
             else:
                 salir_del_menu_principal = True
@@ -616,7 +631,8 @@ def main() -> None:
 
         print('¡Felicidades! Haz ganado {}'.format(ganador.upper() ) )
 
-        guardar_score()
+        
+        guardar_score(scores,ganador)
         
         print('0 - Volver al menu principal\n1 - Salir del juego')
         opc = int(validar_opcion(0,1))
