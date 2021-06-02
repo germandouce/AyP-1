@@ -392,6 +392,12 @@ def carta_fatality(tablero_a_molestar: list) -> list:
     POST: OJO! Esta si devuelve el tablero nuevo traspuesto en la variable "tablero traspuesto"
     ya que use una lista auxiliar para hacerlo ysi no lo devilviese nada no podria guardar los cambios
     """
+    print('tablero antes de trasponer\n')
+    for i in range( len(tablero_a_molestar) ):
+                        for j in range( len(tablero_a_molestar) ):
+                            print(tablero_a_molestar[i][j], end ='  ' )
+                        print()  
+
     #creo un tablero aux de nuevo. Intente usar el metodo .copy() pero me tocaba el 
     #tablero original
 
@@ -400,14 +406,25 @@ def carta_fatality(tablero_a_molestar: list) -> list:
         tablero_traspuesto.append([])                    #y columnas
         for columna in range( len (tablero_a_molestar) ): 
             tablero_traspuesto[fila].append('AUX')
-
+    
+    #Cargo el tablero aux YA TRASPONIENDO los elementos
     for fila in range( len(tablero_traspuesto) ):
             for columna in range( len(tablero_traspuesto) ):
-                
+
                 tablero_traspuesto[fila][columna] = tablero_a_molestar[columna][fila]
                 #la columna de la traspuesta, es la fila de la original y viceversa
+    
+    #vuelvo a cargar el tablero original (a molestar) con los elementos del tablero YA TRASPUESTO. Esto lo hago 
+    # ya que es la mejor manera que encontre de modificarlo por "referencia" y asi no tener que returnear uno 
+    # modificado. De hecho, si devolviese un tablero nuevo, con el algoritmo q yo plantie en el "jugando", no 
+    # estaria guardando los cambios realizados en el tablero del oponente q quiero molestar xq utilizo una 
+    # unica varaible tablero_a_molestar xa molestar a los 2 tableros y lo unico q voy haciendo es cambiar a 
+    # donde apunta la flecha en la direc de memoria, modificando por referencia los tableros cargados 1 o 2.
 
-    return tablero_traspuesto
+    for fila in range( len(tablero_a_molestar) ):
+        for columna in range( len(tablero_a_molestar) ):
+            
+            tablero_a_molestar[fila][columna] = tablero_traspuesto[fila][columna]
 
 
 def jugar_carta(cartas_guardadas: list, tablero: list) -> list:
@@ -421,7 +438,7 @@ def jugar_carta(cartas_guardadas: list, tablero: list) -> list:
     print()
 
     opc = int(validar_opcion(0, 1, 'Desea jugar alguna carta 1-Si 0-No?: '))
-    if opc == 0:
+    if opc == 1:
         carta = cartas_guardadas [ int (validar_opcion (1, len(cartas_guardadas),
         '¿Que carta queres jugar?: ') ) - 1 ]  
         
@@ -545,10 +562,10 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
                         print()
                 
                 elif carta == 'Fatality':
-                    tablero_a_molestar = carta_fatality(tablero_a_molestar)
-                    print('tablero_1 dsps de trasponer FUERRA DE TRASPONGO')
-                    for i in range( len(tablero_a_molestar)-1 ):
-                        for j in range( len(tablero_a_molestar)-1 ):
+                    carta_fatality(tablero_a_molestar)
+                    print('tablero ya tarspuesto FUERRA DE TRASPONGO')
+                    for i in range( len(tablero_a_molestar) ):
+                        for j in range( len(tablero_a_molestar) ):
                             print(tablero_a_molestar[i][j], end ='  ' )
                         print()   
 
