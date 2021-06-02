@@ -144,9 +144,10 @@ def mostrar_scores(scores):
     PRE: por ahora nada...
     POST: no devuelve nada. solo printea que no se jugaron partidas si es la primera, 
     sino muestra ultimos 4 scores
-    """
-    scores.sort(key=lambda:)
-    for ganador in scores[]
+    """                           #Ordeno la lista "scores", mandandole con "key" las filas de la tabla,
+    scores.sort(reverse = True, key = lambda jugador : jugador[1] )  #es decir los jugadores "jugador". Ordeno segun el puntaje
+    for i in range( len(scores) ):                #de cada jugador ("jugador [1]")
+        print(scores[i][0].ljust(10),scores[i][1])
 
 
 def mostrar_tablero(tablero:list) -> None:
@@ -266,7 +267,7 @@ def gano_el_juego(tablero):
             for j in range(len(tablero)):   
                 if tablero[i][j][1] == '*': #si llego a encontrar un * , es decir, un NO ADIVINADO
                     #entonces, es falso que alguien gano. En ese caso, 
-                    alguien_gano_juego = True  #OJO MODIFICADO PARA PUNTAJES!!                  
+                    alguien_gano_juego = False    #Modificar xa testear guardado y printeo de puntajes                  
 
     return alguien_gano_juego
 
@@ -573,12 +574,12 @@ def guardar_score(scores:list,ganador:str):
     """
     esta = False
     for i in range ( len(scores) ): #len = numero de jugadores
-        if scores[i][0] == ganador.lower():
+        if scores[i][0] == ganador.upper():
             scores[i][1] = scores[i][1] + 1
             esta = True
     
     if not esta:
-        scores.append([ganador,1])
+        scores.append([ganador.upper(),1])
 
 
 def main() -> None:
@@ -634,9 +635,9 @@ def main() -> None:
         
         guardar_score(scores,ganador)
         
-        print('0 - Volver al menu principal\n1 - Salir del juego')
+        print('1 - Volver al menu principal\n0 - Salir del juego')
         opc = int(validar_opcion(0,1))
-        if opc == 1:
+        if opc == 0:
             print('\nEsta seguro que desea salir del juego? Se perderan los scores')
             print('1 - Si\n2 - No')
             si_quiero_salir = int(validar_opcion(1,2))
