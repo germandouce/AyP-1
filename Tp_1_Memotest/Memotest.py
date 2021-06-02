@@ -282,10 +282,9 @@ def hacer_memoria(tablero:list) -> bool:
     perdio = False
     while (not perdio) and (not gano_juego):   #debe cumplirse que no perdio y que no gano
 
-        
-        print('\nTablero (SOLO XA TESTEO!!)',tablero) #Solo para facilitar testeo del juego. 
-                             #Muestra la lista de listas del tablero 
-                           #(copiarse xa hacer ganar a un jugador mas rápido)
+        #xa testeo
+        print('\nTablero (SOLO XA TESTEO!!)' )
+        mostrar_tablero_xa_testeo( tablero)
         mostrar_tablero(tablero)
         
         ficha_1, ficha_2 = elegir_ficha(tablero)
@@ -303,9 +302,9 @@ def carta_layout(tablero_a_molestar: list):
     POST: No devuelve nada, solo MEZCLA el tablero indicado por referencia
     """
     #xa testear
-    print('antes de mezclar')
-    print(tablero_a_molestar)
-    mostrar_tablero (tablero_a_molestar)
+    print('tablero antes de mezclar')
+    mostrar_tablero_xa_testeo(tablero_a_molestar)
+    
     print()
 
     elementos_xa_tablero_a_molestar = []
@@ -478,8 +477,8 @@ def levantar_carta(lista_probas: list) -> str:
                 carta_levantada = cartas[i]
     
     #xa testear
-    print('carta hardcodeada: Fatality')
-    carta_levantada ='Fatality'  #xa testear            
+    #print('carta hardcodeada: Fatality')
+    #carta_levantada ='Fatality' #xa testear
     
     return carta_levantada
 
@@ -530,30 +529,28 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
                     
             if len (cartas_guardadas) >0 :
                 carta = jugar_carta(cartas_guardadas, tablero)
+                if carta != 'n':
+                    cartas_guardadas.remove(carta)
 
-                if carta == 'Replay':
-                    gano_juego = hacer_memoria(tablero)
-                
-                elif carta == 'Layout':
-                    carta_layout(tablero_a_molestar)
-                    #xa testear
-                    print('tablero ya mezclado al azar FUERA DE FUNCION')
-                    mostrar_tablero_xa_testeo(tablero_a_molestar) 
+                    if carta == 'Replay':
+                        gano_juego = hacer_memoria(tablero)
                     
-                    #xa testear
-                    print('tablero ya mezclado FUERA DE FUNCION\n')
-                    mostrar_tablero_xa_testeo(tablero_a_molestar) 
+                    elif carta == 'Layout':
+                        carta_layout(tablero_a_molestar)
+                        #xa testear
+                        print('tablero ya mezclado al azar FUERA DE FUNCION')
+                        mostrar_tablero_xa_testeo(tablero_a_molestar) 
 
-                elif carta == 'Toti':
-                    carta_toti(tablero_a_molestar)
-                    #xa testear
-                    print('tablero ya espejado FUERA DE FUNCION\n')
-                    mostrar_tablero_xa_testeo(tablero_a_molestar) 
-                
-                elif carta == 'Fatality':
-                    carta_fatality(tablero_a_molestar)
-                    print('tablero ya tarspuesto FUERRA DE TRASPONGO')
-                    mostrar_tablero_xa_testeo(tablero_a_molestar) 
+                    elif carta == 'Toti':
+                        carta_toti(tablero_a_molestar)
+                        #xa testear
+                        print('tablero ya espejado FUERA DE FUNCION\n')
+                        mostrar_tablero_xa_testeo(tablero_a_molestar) 
+                    
+                    else:
+                        carta_fatality(tablero_a_molestar)
+                        print('tablero ya tarspuesto FUERRA DE TRASPONGO')
+                        mostrar_tablero_xa_testeo(tablero_a_molestar) 
 
             print('FIN DEL TURNO DE {}'.format(ganador.upper() ) ) 
             print('presione cualquier tecla para seguir jugando') #mas comodidad xa jugar
