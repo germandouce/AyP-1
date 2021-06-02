@@ -293,7 +293,7 @@ def hacer_memoria(tablero:list) -> bool:
 def carta_layout(tablero_a_molestar: list):
     """
     PRE: tablero_a_molestar es el tablero del oponente q busco modificar para hacerle mas dificil el juego
-    POST: No devuelve nada, solo modifica el tablero indicado por referencia
+    POST: No devuelve nada, solo MEZCLA el tablero indicado por referencia
     """
     #xa testear
     print('antes de mezclar')
@@ -323,7 +323,7 @@ def carta_layout(tablero_a_molestar: list):
     return tablero_a_molestar
 
 
-def carta_toti(tablero_a_molestar):
+def carta_toti(tablero_a_molestar: list):
     """
     PRE: tablero_a_molestar es el tablero del oponente q busco modificar para hacerle mas dificil el juego
     POST: No devuelve nada, ESPEJA el tablero indicado por referencia, horizontal o verticalmente
@@ -386,12 +386,28 @@ def carta_toti(tablero_a_molestar):
             print()  
 
 
-def carta_fatality():
+def carta_fatality(tablero_a_molestar: list) -> list:
     """
-    PRE: tablero_a_molestar es el tablero del oponente q busco modificar para hacerle mas dificil el juego
-    POST: No devuelve nada, ESPEJA el tablero indicado por referencia, horizontal o verticalmente
+    PRE: tablero_a_molestar es el tablero del oponente q voy a trasponer
+    POST: OJO! Esta si devuelve el tablero nuevo traspuesto en la variable "tablero traspuesto"
+    ya que use una lista auxiliar para hacerlo ysi no lo devilviese nada no podria guardar los cambios
     """
-    pass
+    #creo un tablero aux de nuevo. Intente usar el metodo .copy() pero me tocaba el 
+    #tablero original
+
+    tablero_traspuesto = []  
+    for fila in range(len (tablero_a_molestar) ):    #resto 1 xq len es 1 unidad mas grande q la cant de fil 
+        tablero_traspuesto.append([])                    #y columnas
+        for columna in range( len (tablero_a_molestar) ): 
+            tablero_traspuesto[fila].append('AUX')
+
+    for fila in range( len(tablero_traspuesto) ):
+            for columna in range( len(tablero_traspuesto) ):
+                
+                tablero_traspuesto[fila][columna] = tablero_a_molestar[columna][fila]
+                #la columna de la traspuesta, es la fila de la original y viceversa
+
+    return tablero_traspuesto
 
 
 def jugar_carta(cartas_guardadas: list, tablero: list) -> list:
@@ -529,8 +545,13 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
                         print()
                 
                 elif carta == 'Fatality':
-                    carta_fatality(tablero_a_molestar)
-            
+                    tablero_a_molestar = carta_fatality(tablero_a_molestar)
+                    print('tablero_1 dsps de trasponer FUERRA DE TRASPONGO')
+                    for i in range( len(tablero_a_molestar)-1 ):
+                        for j in range( len(tablero_a_molestar)-1 ):
+                            print(tablero_a_molestar[i][j], end ='  ' )
+                        print()   
+
             print('FIN DEL TURNO DE {}'.format(ganador.upper() ) ) 
             print('presione cualquier tecla para seguir jugando') #mas comodidad xa jugar
             input()                                           
