@@ -1,10 +1,4 @@
 #OJOOOOOOOO
-*crear funcion xa validar opciones (!!al finall!!!!!)
-
-*invertir filas y columnas!! (no esta la funcion todavi, ver la de 
-short algor...)
-
-*posibilidad de usar un indice xa llenar la matriz
 
 *no globales
 *no break
@@ -25,7 +19,7 @@ mostrar las cartas, luego ver de lograr jugar dos jugadores y para lo último im
 especiales
 
 APARTADO XA DUDAS
-*carta si o carta no. y por otro lado probabilidad de cartas
+*carta si o carta no. y por otro lado probabilidad de cartas. listo!
 
 Primero voy a listar todas las funciones, (lo mas modularizado posible) que vaya a usar en 
 el TP. 

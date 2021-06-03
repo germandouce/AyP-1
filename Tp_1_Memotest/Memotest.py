@@ -164,7 +164,7 @@ def mostrar_scores(scores:list) -> None:
 
 def mostrar_tablero(tablero:list) -> None:
     """
-    PRE: La lista de listas "tablero" es el tablero del juagador que corresponda.
+        PRE: La lista de listas "tablero" es el tablero del juagador que corresponda.
     POST: No devuelve nada. Muestra el tablero con las fichas adivinadas hasta el momento ya dadas vuelta. 
     Las no adivinadas, aparecen como *.
     """
@@ -382,7 +382,7 @@ def carta_toti(tablero_a_molestar: list):
         
         
     else:
-         #ESPEJADO HORIZONTAL: "espejo colocado vertical//" (lo de la izq pasa a la der y viceversa)
+        #ESPEJADO HORIZONTAL: "espejo colocado vertical//" (lo de la izq pasa a la der y viceversa)
 
         # print('tablero antes de espejar horizontalmente \n') #xa testear
         # mostrar_tablero_xa_testeo(tablero_a_molestar)   #xa testear
@@ -642,6 +642,7 @@ def main() -> None:
             elif opc == 1:
                 if iniciada:
                     salir_del_menu_principal = True
+                
                 else:
                     print('\nDebe crear una nueva partida antes de comenzarla\n')
                     salir_del_menu_principal = False

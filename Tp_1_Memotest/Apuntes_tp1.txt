@@ -2,9 +2,7 @@
 
 *Ver si esta bueno q no se avise si se tira una fatality o algo asi
 
-*Aclarar q se pueden acumular mas de una carta por turno
-
-*Posibilidad de 0% chance.
+*Posibilidad de 0% chance. OK
 
 *cada carta tiene su config, con probs entre 1 y 100
 
