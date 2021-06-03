@@ -18,7 +18,7 @@ def duracion_juego() -> int:
     POST: Devuelve el entero "tam_matriz" con el tamaño de la matriz (correspondiente a la duracion).
     """
     print("\nDefini duracion del juego")
-    print('0 - corto\n1 - Medio\n2 - Largo')
+    print('0 - corto (Agua) \n1 - Medio (Glucosa) \n2 - Largo (Dipalmitoilfosfatidilcolina) ')
     opc = int( validar_opcion(0,2) )
 
     if opc ==0:
@@ -46,11 +46,14 @@ def proba_cartas() -> list:
 
     if opc ==0:
         lista_probas = [0, 0, 0, 0, 0, 100] #0/10 turnos con carta
-    elif opc == 1:
+          #0 REPLAY, 0 layout , 0 toti, 0 fatality
+    elif opc == 1: 
         lista_probas = [0, 10, 20, 30, 40, 100] #4/10 turnos con carta
+        #0 - 10 Replay, 10 - 20 Layout, 20 - 30 Toti, 30 - 40 Fatality, 40 - 100 'n'
     else:
         lista_probas = [0, 20, 40, 60, 80, 100] #8/10 turnos con carta
-    
+        #0 - 10 Replay, 10 - 20 Layout, 40 - 60 Toti, 60 - 80 Fatality, 80 - 100 'n'
+
     #Esto se lee, 0 a 20 sale Replay, 20 a 40 sale Layout, 40 a 60 sale Toti, 60 a 80 sale Fatality, 80 a 100 
     #no sale ninguna carta. Asi, xa este caso, en 8/10 turnos sale carta 
     
@@ -141,7 +144,7 @@ def nueva_partida(tam_matriz) -> tuple:
 
 def mostrar_scores(scores:list) -> None:
     """
-    PRE: la lista de listas "scores" contiene los nombres de lo ganadores con la cantidad de partidas ganadas
+    PRE: la lista "scores" contiene los nombres de lo ganadores con la cantidad de partidas ganadas
     por cada uno.
     POST: No devuelve nada. Muestra en orden descendiente segun el puntaje, los nombres de los ganadores con
     la cantidad de partidas ganadas. Si no se han jugado partidas, se lo informa al usuario.
@@ -298,9 +301,9 @@ def hacer_memoria(tablero:list) -> bool:
     perdio = False
     while (not perdio) and (not gano_juego):   #debe cumplirse que no perdio y que no gano
 
-        #xa testear
-        print('\nTablero (SOLO XA TESTEAR!!)' )
-        mostrar_tablero_xa_testeo( tablero)
+        
+        # print('\nTablero (SOLO XA TESTEAR!!)' ) # #xa testear
+        # mostrar_tablero_xa_testeo( tablero) #xa testear
         mostrar_tablero(tablero)
         
         ficha_1, ficha_2 = elegir_ficha(tablero)
@@ -319,8 +322,8 @@ def carta_layout(tablero_a_molestar: list):
     POST: No devuelve nada, MEZCLA ALEATORIAMENTE el tablero del oponente, "por referencia".
     """
 
-    print('tablero antes de mezclar') #xa testear
-    mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
+    # print('tablero antes de mezclar') #xa testear
+    # mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
     
     print()
 
@@ -354,8 +357,8 @@ def carta_toti(tablero_a_molestar: list):
     if sentido == 1:
         #ESPEJADO VERTICAL: "espejo colocado horizontal//" (lo de arriba pasa abajo y viceversa)
 
-        print('tablero antes de espejar verticalmente\n')      #xa testear
-        mostrar_tablero_xa_testeo(tablero_a_molestar)          #xa testear        
+        # print('tablero antes de espejar verticalmente\n')      #xa testear
+        # mostrar_tablero_xa_testeo(tablero_a_molestar)          #xa testear        
         
         filas_aux = [] # contendra las primeras n/2 filas (matriz de n x n)
 
@@ -375,8 +378,8 @@ def carta_toti(tablero_a_molestar: list):
     else:
          #ESPEJADO HORIZONTAL: "espejo colocado vertical//" (lo de la izq pasa a la der y viceversa)
 
-        print('tablero antes de espejar horizontalmente \n') #xa testear
-        mostrar_tablero_xa_testeo(tablero_a_molestar)   #xa testear
+        # print('tablero antes de espejar horizontalmente \n') #xa testear
+        # mostrar_tablero_xa_testeo(tablero_a_molestar)   #xa testear
 
         for fila in range( len(tablero_a_molestar) ): # fila: 0, 1, 2, 3, 4, 5, 6, 7
         
@@ -398,8 +401,8 @@ def carta_fatality(tablero_a_molestar: list) -> list:
     a cargar el original "por referencia".
     """
 
-    print('tablero antes de trasponer\n') #xa testear
-    mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
+    # print('tablero antes de trasponer\n') #xa testear
+    # mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
 
     #creo un tablero aux vacio. Intenté usar el metodo .copy() pero me tocaba el 
     #tablero original
@@ -553,18 +556,18 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
                     
                     elif carta == 'Layout':
                         carta_layout(tablero_a_molestar)
-                        print('tablero ya mezclado al azar FUERA DE FUNCION') #xa testear
-                        mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
+                        # print('tablero ya mezclado al azar FUERA DE FUNCION') #xa testear
+                        # mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
 
                     elif carta == 'Toti':
                         carta_toti(tablero_a_molestar)
-                        print('tablero ya espejado FUERA DE FUNCION\n') #xa testear
-                        mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
+                        # print('tablero ya espejado FUERA DE FUNCION\n') #xa testear
+                        # mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
                     
                     else:
                         carta_fatality(tablero_a_molestar)
-                        print('tablero ya tarspuesto FUERRA DE TRASPONGO') #xa testear
-                        mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
+                        # print('tablero ya tarspuesto FUERRA DE TRASPONGO') #xa testear
+                        # mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
 
             print('FIN DEL TURNO DE {}'.format(ganador.upper() ) ) 
             print('presione cualquier tecla para seguir jugando') #más comodidad xa jugar
@@ -576,7 +579,7 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
 
 def guardar_score(scores:list,ganador:str) -> None:
     """
-    PRE: La lista de listas "scores" contiene los nombres de los ganadores y la cantidad de partidas que gano
+    PRE: La lista "scores" contiene los nombres de los ganadores y la cantidad de partidas que gano
     cada uno.
     POST: No devuelve nada. Guarda el nombre de los jugadores y la cantidad de partidas que gano en "scores".
     """
