@@ -101,8 +101,8 @@ def preparar_carga_tablero(tam_matriz: int) -> list:
         elementos_xa_tablero.append(elegido)
         elementos.pop(elementos.index(elegido))
     
-    print('Elementos con los que se jugará (SOLO PARA TESTEO!)') #xa testear
-    print(elementos_xa_tablero)     #xa testear         
+    #print('Elementos con los que se jugará (SOLO PARA TESTEO!)') #xa testear
+    #print(elementos_xa_tablero)     #xa testear         
 
     return elementos_xa_tablero
 
@@ -481,7 +481,7 @@ def levantar_carta(lista_probas: list) -> str:
     
     rango_carta = randint(1,100)
     
-    print('rango carta:',rango_carta) #xa testear
+    #print('rango carta:',rango_carta) #xa testear
     print()
     
     if rango_carta >=  lista_probas[4]:
@@ -543,7 +543,7 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
             carta_levantada = levantar_carta(lista_probas)
 
             if  carta_levantada  != 'n' : #a menos que no se levante carta ('n'), se guarda automatica//
-                print('Guardamos', carta_levantada)     #xa testear
+                #print('Guardamos', carta_levantada)     #xa testear
                 cartas_guardadas.append(carta_levantada)
                     
             if len (cartas_guardadas) >0 :  #siempre y cunado tenga cartas en el mazo...
