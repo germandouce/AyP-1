@@ -553,4 +553,54 @@ b={1,2}
 print(a.intersection(b))
 '''
 
-#CLASE 14 -
+#CLASE 14 - Recurrencia basico.
+#Discos de Hanoi
+'''
+paso = 1
+def hanoi(discos, origen, destino, aux):
+    if discos == 0: return
+    hanoi(discos-1, origen, aux, destino)
+    global paso #Perdon bruno
+    print(paso, "- Mover disco de palo", origen, "hacia", destino)
+    paso += 1
+    hanoi(discos-1, aux, destino, origen)
+
+hanoi(5,1,3,2) #Mover 5 discos del palo 1 al palo 3, usando el palo 2 como auxiliar y siguiendo las reglas de las Torres de Hanoi 
+'''
+#Un par de algos mas...
+'''
+#Factorial recursivo!
+
+def factorial(n):
+    if n == 0: 
+        return 1
+    else: 
+        return ( n * factorial(n-1) )
+
+#Fibonacai recursivo!
+
+def fibonacci(n):
+    if n <= 1: return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+
+#MCD (maximo comun divisor) recursivo!
+
+def gcd(x, y):
+    if x == 0: return y
+    return gcd(y%x, x)
+
+#Demo
+print("0!","3!","5!")
+print(factorial(0), factorial(3), factorial(5))
+print("\nPrimeros diez numeros de fibonacci:")
+for i in range(10):
+    print(fibonacci(i), end = " ")
+print("\n\nDivisor comun mas grande de 25 y 15")
+print(gcd(25, 15))
+print("Divisor comun mas grande de 25 y 17")
+print(gcd(25, 17))
+'''
+
+#CLASE: 15: 
+#Jueves 1/6/2021        A partir de aca empiezo a poner fechas...
