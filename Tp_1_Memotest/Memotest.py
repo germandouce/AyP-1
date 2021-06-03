@@ -270,7 +270,7 @@ def gano_el_juego(tablero):
             for j in range(len(tablero)):   
                 if tablero[i][j][1] == '*': #si llego a encontrar un * , es decir, un NO ADIVINADO
                     #entonces, es falso que alguien gano. En ese caso, 
-                    alguien_gano_juego = False    #Modificar xa testear guardado y muestra de puntajes                  
+                    alguien_gano_juego = False    #Modificar xa probar guardado y muestra de puntajes                  
 
     return alguien_gano_juego
 
@@ -304,6 +304,7 @@ def hacer_memoria(tablero:list) -> bool:
         
         # print('\nTablero (SOLO XA TESTEAR!!)' ) # #xa testear
         # mostrar_tablero_xa_testeo( tablero) #xa testear
+        
         mostrar_tablero(tablero)
         
         ficha_1, ficha_2 = elegir_ficha(tablero)
@@ -466,7 +467,7 @@ def levantar_carta(lista_probas: list) -> str:
     levante carta.
     """
     cartas =  ['Replay', 'Layout', 'Toti', 'Fatality' ]
-    #Xa testear
+
     #0 REPLAY, layout , toti, fatality     
 
     #TRADICIONAL: lista_probas = [0, 0, 0, 0, 0, 100] #0/10 turnos con carta 
