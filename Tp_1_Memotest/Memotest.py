@@ -258,7 +258,7 @@ def chequeo_pareja(tablero: list, ficha_1: tuple, ficha_2: tuple) -> bool:
 
     
     else:
-        print('No eran iguales!\n')
+        print('No eran iguales!')
 
     return perdio
 
@@ -533,7 +533,7 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
             #print(turno)    #para facilitar testeo (turnos impares -> jug 1, turnos pares -> jug 2)
 
             if turno %2 != 0:
-                print('Turno de {}\nTablero 1'.format(jug_1.upper() ) )
+                print('\nTurno de {}\nTablero 1'.format(jug_1.upper() ) )
                 tablero = tablero_cargado_1
                 tablero_a_molestar = tablero_cargado_2
                 cartas_guardadas = cartas_guardadas_jug_1
@@ -578,8 +578,8 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
                         # print('tablero ya tarspuesto FUERRA DE TRASPONGO') #xa testear
                         # mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
 
-            print('FIN DEL TURNO DE {}'.format(ganador.upper() ) ) 
-            print('presione cualquier tecla para seguir jugando') #más comodidad xa jugar
+            print('\nFIN DEL TURNO DE {}'.format(ganador.upper() ) ) 
+            print('presione Enter tecla para seguir jugando') #más comodidad xa jugar
             input()                                           
 
             turno += 1
