@@ -97,9 +97,12 @@ def preparar_carga_tablero(tam_matriz: int) -> list:
     elementos_xa_tablero =[]
 
     for i in range(int((tam_matriz**2)/2)):
+        
         elegido = choice(elementos)
+
         elementos_xa_tablero.append(elegido)
         elementos_xa_tablero.append(elegido)
+        
         elementos.pop(elementos.index(elegido))
     
     #print('Elementos con los que se jugará (SOLO PARA TESTEO!)') #xa testear
@@ -169,6 +172,7 @@ def mostrar_tablero(tablero:list) -> None:
                 for j in range(len(tablero)):
                     if tablero[i][j][1] == ' ':   # en [1] está el indicador de adivinado (* o ' ')
                         print(tablero[i][j][0].ljust(2), end ='  ') # en [0] esta la ficha
+                    
                     else:
                         print('*'.ljust(2), end = '  ')
                 print()
