@@ -71,13 +71,14 @@ def crear_tablero(tam_matriz: int) -> list:
     PRE: El entero "tam_matriz" representa el tamaño del tablero.
     POST: Devuelve la lista de listas "tablero" con el tablero creado.
     """
-    tablero = []
+    tablero = list()
 
-    for fila in range(tam_matriz):
-        tablero.append([])
+    for fila in range(tam_matriz): 
+        fila_nueva = list()
         for columna in range(tam_matriz):
-            tablero[fila].append('')
-    
+            fila_nueva.append('')
+        tablero.append(fila_nueva)
+
     return tablero
 
 
@@ -125,7 +126,7 @@ def cargar_tablero(tablero:list, elementos_xa_tablero:list) -> list:
     return tablero
 
 
-def nueva_partida(tam_matriz) -> tuple:
+def nueva_partida(tam_matriz: int) -> tuple:
     """
     PRE: el entero "tam_matriz" es el tamaño del tablero.
     POST: Crea una nueva partida, devolviendo las listas de listas "tablero_cargado_1" y "tablero_cargado_2"
@@ -395,25 +396,28 @@ def carta_toti(tablero_a_molestar: list):
                     tablero_a_molestar [fila][columna] = columnas_aux [ len(tablero_a_molestar) - 1 - columna ]
         
 
-def carta_fatality(tablero_a_molestar: list) -> list:
+def carta_fatality(tablero_a_molestar: list):
     """
     PRE: la lista de listas "tablero_a_molestar" es el tablero del oponente q voy a modificar.
     POST: No devuelve nada. TRASPONE el tablero que busco molestar. Uso un tablero auxiliar y despues vuelvo 
     a cargar el original "por referencia".
     """
 
-    # print('tablero antes de trasponer\n') #xa testear
-    # mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
+    #print('tablero antes de trasponer\n') #xa testear
+    #mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
 
     #creo un tablero aux vacio. Intenté usar el metodo .copy() pero me tocaba el 
     #tablero original
 
-    tablero_traspuesto = []  
-    for fila in range(len (tablero_a_molestar) ):     
-        tablero_traspuesto.append([])          
-        for columna in range( len (tablero_a_molestar) ): 
-            tablero_traspuesto[fila].append('AUX')
-    
+    tablero_traspuesto = list()  
+
+    for fila in range( len(tablero_a_molestar) ): 
+        fila_nueva = list()
+        for columna in range( len(tablero_a_molestar) ):
+            fila_nueva.append('AUX')
+        tablero_traspuesto.append(fila_nueva)
+
+
     #Cargo el tablero aux YA TRASPONIENDO los elementos
     for fila in range( len(tablero_traspuesto) ):
             for columna in range( len(tablero_traspuesto) ):
@@ -454,7 +458,7 @@ def jugar_carta(cartas_guardadas: list) -> list:
     else:
         carta ='n'
 
-    print('Jugaste: ',carta) #xa testeo
+    #print('Jugaste: ',carta) #xa testeo
 
     return carta
 
@@ -517,8 +521,8 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
     gano_juego = False
     turno = 1
 
-    cartas_guardadas_jug_1 = [] #Me parecio mas util crear estas 2 listas aqui puesto q no es necesario 
-    cartas_guardadas_jug_2 = [] #devolverlas al menu ya q se borran cuando se acaba la partida
+    cartas_guardadas_jug_1: list = list() # Me parecio mas util crear estas 2 listas aqui puesto q no es necesario  
+    cartas_guardadas_jug_2: list = list() # devolverlas al menu ya q se borran cuando se acaba la partida
     
     while not gano_juego :
 
@@ -547,7 +551,7 @@ def jugando(tablero_cargado_1: list, tablero_cargado_2: list, jug_1: str, jug_2:
                 cartas_guardadas.append(carta_levantada)
                     
             if len (cartas_guardadas) >0 :  #siempre y cunado tenga cartas en el mazo...
-                carta = jugar_carta(cartas_guardadas, tablero)
+                carta = jugar_carta(cartas_guardadas)
 
                 if carta != 'n':    #si el jugador eligio carta...
                     cartas_guardadas.remove(carta)
@@ -602,7 +606,7 @@ def main() -> None:
     ganadores. 
     """
     salir_del_juego = False
-    scores = []
+    scores: list = list()
 
     #scores es una lista de listas, con 2 "columnas" (jugadores | puntaje) y tantas filas como jugadores.
     #Esta da la ventaja de q pueden jugar tantos jugadores distintos como quiera pero como inconveniente si 
@@ -649,7 +653,7 @@ def main() -> None:
         print('¡Felicidades! Haz ganado {}'.format(ganador.upper() ) )
 
         
-        guardar_score(scores,ganador)
+        guardar_score(scores, ganador)
         
         print('1 - Volver al menu principal\n0 - Salir del juego')
         opc = int(validar_opcion(0,1))
