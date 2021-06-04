@@ -602,5 +602,195 @@ print("Divisor comun mas grande de 25 y 17")
 print(gcd(25, 17))
 '''
 
-#CLASE: 15: 
+#CLASE: 15: ejs varios
 #Jueves 1/6/2021        A partir de aca empiezo a poner fechas...
+
+#EJ 1
+
+'''
+Cree un programa que permita al usuario elegir entre las siguientes opciones:
+1 - Agregar un alumno: debe solicitarse nombre, padrón y nota.
+2 - Consultar aprobados: debe mostrar los alumnos con nota mayor a 4.
+3 - Cantidad de alumnos totales y promedio general.
+4 - Quitar a un  alumno.
+5 - Salir
+'''
+#notas o metodo x estos ejs tipicos de parcial tipo abm
+
+#*1ero, menu, print (ctrl copy enunciado)
+#una funcion xa agrgegar alumno, estructura xa cargar alumnos
+#ej litsa_de_alumnos
+#aprobados --> recorrrer la estructura y ver si aprobo o no
+
+#PUNTOS 1 Y 2 
+'''
+def consultar_nota(alumnos: list) -> None:
+    for i in range ( len (alumnos) ):
+        if alumnos[i][2] >= 4:
+            print(alumnos[i])
+
+
+def agregar_alumno() -> list:
+    """
+    """
+    alumnos = list()
+    basta = False
+    while not basta:
+        nombre = input('Ingrese Nombre del alumno: ')    
+        padron = input(f'Ingrese padron de {nombre}: ')
+        nota = int( input(f'Ingrese nota de {nombre}: ') )   
+        
+        alumnos.append( (nombre, padron, nota) )
+        
+        opc = int(input('desea ingresar otro alumno? 1- si 0- No: '))
+        
+        if opc == 0:
+            basta = True
+    
+    return alumnos
+
+def main():
+    salir = False
+    while not salir:
+        print('1 - Agregar un alumno: debe solicitarse nombre, padrón y nota')
+        print('2 - Consultar aprobados: debe mostrar los alumnos con nota mayor a 4.')
+        print('3 - Cantidad de alumnos totales y promedio general.')
+        print('4 - Quitar a un  alumno.')
+        print('5 - Salir ')
+        
+        opc = int(input(''))
+        if opc == 1:
+            alumnos = agregar_alumno()
+            print('Alumnos ingresados')
+            print(alumnos)
+        
+        if opc ==2:
+            consultar_nota(alumnos)
+        
+        opc = int(input('Desea salir del menu? 0 - no 1 - si: '))
+        
+        if opc ==1:
+            salir = True
+main()
+'''
+#COMPLETO
+#Constantes que servirán de índices más adelante.
+'''
+PADRON = 0
+NOTA = 1
+def agregar_alumno(alumnos : dict) -> None:
+    """
+    Agrega el alumno al diccionario alumnos
+    """
+    nombre = input("Nombre del alumno: ")
+    padron = int(input("Padron del alumno: "))
+    nota = float(input("Nota del alumno: "))
+    alumnos[padron] = [nombre, nota]
+def mostrar_aprobados(alumnos):
+    """
+    Recibe un diccionario con los alumnos. Muestra en pantalla todos los alumnos con nota > 4
+    """
+    print("Los alumnos aprobados son: ")
+    for padron, datos in alumnos.items():
+        if datos[NOTA] > 4:
+            print(f"{alumnos[padron][0]}, nota: {datos[1]}") 
+def quitar_alumno(alumnos : dict, padron : int) -> None:
+    """
+    Elmina el alumno del diccionario alumnos
+    """
+    del alumnos[padron]
+def calcular_promedio(alumnos: dict) -> float:
+    """
+    Calcular el promedio general
+    """
+    cant_alumnos = 0
+    suma_notas = 0
+    for alumno in alumnos:
+        cant_alumnos += 1
+        suma_notas += alumnos[alumno][NOTA]
+    return suma_notas / cant_alumnos
+def main():
+    alumnos = {}
+    print("""
+        1 - Agregar un alumno: debe solicitarse nombre, padrón y nota.
+        2 - Consultar aprobados: debe mostrar los alumnos con nota mayor a 4.
+        3 - Cantidad de alumnos totales y promedio general.
+        4 - Quitar a un  alumno.
+        5 - Salir
+        """)
+    opcion = int(input("Elige una opcion: "))
+    while opcion != 5:
+        if opcion == 1:
+            #Pido al usuario los datos del alumno
+            agregar_alumno(alumnos)
+            print("Alumno agregado con exito")
+        if opcion == 2:
+            mostrar_aprobados(alumnos)
+        if opcion == 3:
+            suma_notas = 0
+            for _, nota in alumnos.values():
+                suma_notas += nota
+            print(f"Alumnos totales: {len(alumnos)}, promedio general: {suma_notas/len(alumnos)}")
+        if opcion == 4:
+            padron = int(input("Ingrese el padron del alumno que desea eliminar: "))
+            quitar_alumno(alumnos, padron)
+            print("Alumno quitado con éxito")
+        opcion = int(input("Vuelva a ingresar una opcion: "))
+    print("Saliendo...")
+main()
+'''
+#EJERCICIO 2: 
+#19:13 - 
+#a) 
+'''
+Se solicita crear una función en la cual reciba un texto(string) como parámetro,
+y que devuelva un diccionario con las palabras como clave y como valor la cantidad de veces que 
+se repite dicha palabra, a modo de ejemplo, dado el siguiente texto:
+    Auto Casa Avion Auto casa casa
+la función deberá devolver el siguiente diccionario:
+    {"Auto":2, "Casa":1, "Avion":1, "casa":2}
+'''
+#b)
+'''
+def palabras_repes(texto: str) -> dict:
+    plbrs_repes = {}
+    texto = texto.split(' ')
+    for palabra in texto:
+        if palabra not in plbrs_repes.keys():
+            plbrs_repes[palabra] = 1
+        else:
+            plbrs_repes[palabra] +=1
+
+    return plbrs_repes
+
+#texto =  input('Ingrese un texto: ')
+#print( palabras_repes(texto))
+'''
+'''
+Una vez se haya implementado la función, se solicita crear otra función que en vez de contar 
+cada palabra, cuente cada letra, es decir que del texto anterior debe salir el sig. diccionario:
+    {'A': 3, 'u': 2, 't': 2, 'o': 3, 'C': 1, 'a': 6, 's': 3, 'v': 1, 'i': 1, 'n': 1, 'c': 2}
+'''
+'''
+def letras_repes(texto: str) -> dict:
+    letras_repes = {}
+    for letra in texto:
+        if letra not in letras_repes.keys():
+            letras_repes[letra] = 1
+        else:
+            letras_repes[letra] +=1
+
+    return letras_repes
+
+texto =  input('Ingrese un texto: ')
+print( letras_repes(texto))
+'''
+#ej de parcial
+#ejemplo de modelacion
+
+#numero de articulo, descripcion, color cantidad, precio
+#Articulos = {'id'}: [desc, color, cant, precio]}
+#clientes = {'id': razon_social}
+
+#Nro de cuenta, Razon Social, Articulos, color, cantidades pedidas
+#pedidos = {'id': [id_articulo, id_cliente, cantidad, color]}
