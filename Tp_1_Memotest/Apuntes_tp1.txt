@@ -1,4 +1,4 @@
-			APUNTES TP_1 - MEMOTEST
+					APUNTES TP_1 - MEMOTEST
 
 *Ver si esta bueno q no se avise si se tira una fatality o algo asi
 
@@ -42,13 +42,21 @@ CONTRARIO DEBE ADIVINAR !!!!
 
 *las fichas estaria bueno q t muestre donde tenes huecos
 
-*Aylen y ari(adna) son las mas exigentes
-
-*No le tengan miedo a google, animense a googlear.. (lo dijo xa random no xa copiarse)
+*No le tengan miedo a google, animense a googlear.. (lo dijo xa random 
+no xa copiarse)
 
 *Ranking con las ultimas 4 partidas
 
 *Todo lo q sea del TP, preguntarlo en el canal TP
 
-*No copiarse xd motor de comparacion (Moss) de Stanford. Mas importante
-hacer solución individual y 1/2 chota q copiada
+*No copiarse xd motor de comparacion (Moss) de Stanford
+
+
+#OJOOOOOOOO
+
+*no globales
+*no break
+*ojo con ciclos definidos y no definidos
+*ojo q las funciones no hagan varias cosas
+*documentar funciones
+*
