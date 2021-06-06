@@ -787,10 +787,16 @@ print( letras_repes(texto))
 '''
 #ej de parcial
 #ejemplo de modelacion
-
+'''
 #numero de articulo, descripcion, color cantidad, precio
 #Articulos = {'id'}: [desc, color, cant, precio]}
 #clientes = {'id': razon_social}
 
 #Nro de cuenta, Razon Social, Articulos, color, cantidades pedidas
 #pedidos = {'id': [id_articulo, id_cliente, cantidad, color]}
+'''
+
+#CLASE: 16: ejs varios
+#Martes 8/6/2021
+
+   
