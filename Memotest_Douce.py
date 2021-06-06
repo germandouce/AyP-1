@@ -342,9 +342,6 @@ def carta_layout(tablero_a_molestar: list) -> None:
     POST: No devuelve nada, MEZCLA ALEATORIAMENTE el tablero del oponente,
     "por referencia".
     """
-
-    # print('tablero antes de mezclar') #xa testear
-    # mostrar_tablero_xa_testeo(tablero_a_molestar) #xa testear
     
     print()
 
