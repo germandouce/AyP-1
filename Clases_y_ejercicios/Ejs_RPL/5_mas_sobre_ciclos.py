@@ -137,3 +137,86 @@ descomposicion_factores_primos(k)
 
 # main()
 '''
+#ej 5.3
+# a) - Contrsaseña inventada
+'''Escribir un programa que contenga una contraseña inventada, que le pregunte al usuario la 
+contraseña, y no le permita continuar hasta que la haya ingresado correctamente.'''
+'''
+def main():
+    """
+    Pide al usuario contrasenias hasta que se ingresa la correcta.
+    """
+    contrasenia = '333' # no modificar (pruebas automáticas)
+    # Tu codigo
+    contra = input ('Ingrese la contrasenia: ')
+    while contra != contrasenia:
+        contra = input ('Contrasenia incorrecta. Intentelo nuevamente: ')
+    print('Contrasenia correcta.')
+
+main()
+'''
+#ej 5.4 
+#b) - Contraseña con intentos limitados
+'''
+Escribir un programa que contenga una contraseña inventada, que le pregunte al usuario la 
+contraseña, y no le permita continuar hasta que la haya ingresado correctamente, dandole como
+máximo 3 intentos.
+'''
+'''
+def main():
+    """
+    Pide al usuario contrasenias hasta que se ingresa la correcta o hasta que gaste 
+    los 3 intentos
+    """
+    contrasenia = '333' # no modificar (pruebas automáticas)
+    # Tu codigo
+    contra = input ('Ingrese la contrasenia: ')
+
+    intentos = 1 
+    while contra != contrasenia and intentos <3:
+        contra = input (f'Contrasenia incorrecta ({3-intentos} intento/s restante/s). Intentelo nuevamente: ')
+        intentos += 1
+
+    if contra == contrasenia:
+        print('Contrasenia correcta.')
+    else:
+        print(f'Contrasenia incorrecta ({3-intentos} intento/s restante/s).')
+
+main()
+'''
+#ej 5.3 - 
+# c) Funcion contraseña
+'''
+Escribir una función que reciba por parámetros una contraseña y una cantidad de intentos (N), 
+que le pregunte al usuario la contraseña, y no le permita continuar hasta que la haya ingresado 
+correctamente, dandole como máximo N intentos. La función debe retornar un booleano indicando si
+el usuario ingresó la contraseña correctamente.
+'''
+'''
+def validar(contra, intentos_max):
+    """
+    Pide al usuario contrasenias hasta que se ingresa la correcta o hasta que gaste 
+    los 3 intentos
+    """
+    correcta = False
+
+    contrasenia = '333' # no modificar (pruebas automáticas)
+    # Tu codigo
+    contra = input ('Ingrese la contrasenia: ')
+    intentos =  1
+    while contra != contrasenia and intentos < intentos_max:
+        contra = input (f'Contrasenia incorrecta ({intentos_max-intentos} intento/s restante/s). Intentelo nuevamente: ')
+        intentos += 1
+    
+    if contra == contrasenia:
+        correcta = True
+    
+    return correcta
+
+print(validar(333,3))
+'''
+#ejemplo de uso de funcion seed de random
+'''
+import random
+random.seed(4)
+'''
