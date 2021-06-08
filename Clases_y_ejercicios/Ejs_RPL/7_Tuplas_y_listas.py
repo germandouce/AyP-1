@@ -59,3 +59,167 @@ def imprimir_mensajes(nombres, p, n) -> None:
             indice += 1
 imprimir_mensajes(('juan', 'pepe','carlos', 'german', 'sherman'),0,0)
 '''
+#ej 7.3 
+#c) - Vote por mi (con más parametros)
+'''
+Modificar la función anterior para que tengan en cuenta el género del destinatario,
+para ello, deberán recibir una tupla de tuplas, conteniendo el nombre y el género 
+('Masculino' o 'Femenino').
+'''
+'''
+ejÑ >> imprimir_mensajes((('Juan', 'Masculino'), ('Pedro', 'Masculino'), ('Agus', 'Femenino')), 1, 2)
+Estimado Pedro, vote por mi.
+Estimada Agus, vote por mi.
+'''
+'''
+def imprimir_mensajes(nombres, p, n) -> None:
+    """
+    imprime lo pedido segun lo pedido we
+    """
+    if len(nombres)>0 and (p + n !=0):
+        indice = p
+        while indice <= len(nombres)-1 and indice <=n:
+            if nombres[indice][1] == "Masculino":
+                print(f'Estimado {nombres[indice][0]}, vote por mi.')
+            else:
+                print(f'Estimada {nombres[indice][0]}, vote por mi.')
+            indice += 1
+
+imprimir_mensajes((('Juan', 'Masculino'), ('Pedro', 'Masculino'), ('Agus', 'Femenino')), 1, 2)
+'''
+
+# 7.6 - Clasificando números
+'''
+Dada una lista de números enteros y un entero k, escribir una función que:
+
+a) Devuelva tres listas, una con los menores, otra con los mayores y otra con los iguales a k.
+
+>> menores, mayores, iguales = menores_mayores_iguales([1, 2, 3, 4, 5, 6], 3)
+>> menores
+[1, 2]
+>> mayores
+[4, 5, 6]
+>> iguales
+[3]
+
+b) Devuelva una lista con aquellos que son múltiplos de k.
+'''
+'''
+def menores_mayores_iguales(enteros, k):
+    """
+    Devuelve lista con men may e ='s a k
+    """
+    menores: list = list()
+    mayores: list = list()
+    iguales: list = list()
+    
+    for num in enteros:
+        if num < k:
+            menores.append(num)
+        elif num > k:
+            mayores.append(num)
+        else:
+            iguales.append(num)
+
+    return menores, mayores, iguales
+
+# menores, mayores, iguales = menores_mayores_iguales([1, 2, 3, 4, 5, 6], 3)
+# print(menores, mayores, iguales)
+
+def multiplos(enteros, k):
+    """
+    Devuelve lista con multiplos de K
+    """
+    multiplos_de_k: list = list()
+    for num in enteros:
+        if num % k == 0:
+            multiplos_de_k.append(num)
+    
+    return multiplos_de_k
+
+#print(multiplos([10, 11, 12], 2))
+'''
+
+# ej 7.7 Listas de nombres
+'''
+Escribir una función que reciba una lista de tuplas (Apellido, Nombre, Inicial_segundo_nombre) 
+y devuelva una lista de cadenas donde cada una contenga primero el nombre, luego la inicial 
+con un punto, y luego el apellido.
+Ejemplo:
+
+>>>escribir_nombres([('Turing', 'Alan', 'M'), ('Liskov', 'Barbara', 'J')])
+['Alan M. Turing', 'Barbara J. Liskov']
+'''
+'''
+def escribir_nombres(lista):
+    """
+    Devulve los nombres bien escitos
+    """
+    lista_de_cadenas: list = list()
+    for nombre in lista:
+        lista_de_cadenas.append(f'{nombre[1]} {nombre[2]}. {nombre[0]}')
+    return lista_de_cadenas
+
+print(escribir_nombres([('Turing', 'Alan', 'M'), ('Liskov', 'Barbara', 'J')]))
+'''
+
+#ej 8 a) - Invertir Lista
+
+'''
+Realizar una función que, dada una lista, devuelva una nueva lista cuyo contenido sea igual a 
+la original pero invertida.
+
+Ejemplo:
+>> invertir_lista(['Di', 'buen', 'dia', 'a', 'papa'])
+['papa', 'a', 'dia', 'buen', 'Di']
+'''
+'''
+def invertir_lista(lista):
+    """
+    Invierte la lista
+    """
+    lista = lista[::-1]
+    return lista
+print( invertir_lista(['Di', 'buen', 'dia', 'a', 'papa']) )
+'''
+#ej 7.8 
+# b) 08b - Invertir Lista In-Place
+'''
+Realizar una función que invierta una lista, pero en lugar de devolver una nueva, modifique la 
+lista dada, sin usar listas auxiliares.
+
+Ejemplo:
+'''
+'''
+def invertir_lista(lista):
+    """
+    igual q el anterior
+    """
+    #for ele in lista:
+    #    print(lista)
+    lista = lista[::-1]
+    listita = lista
+    return listita
+
+print( invertir_lista(['papa', 'a', 'dia', 'buen', 'Di']) )
+'''
+#AssertionError: Lists differ: ['papa', 'a', 'dia', 'buen', 'Di'] != ['Di', 'buen', 'dia', 'a', 'papa']
+#sin seguir consigna..
+'''
+def invertir_lista(lista):
+    """
+    igual q el anterior
+    """
+    
+    lista_aux: list = list()
+
+    for i in range (len (lista) ):
+        lista_aux.append ( lista[i] )
+    
+    for i in range ( len(lista_aux) ):
+        lista[i] = lista_aux[ len(lista_aux) -1 - i]
+    
+    return lista
+
+print( invertir_lista(['papa', 'a', 'dia', 'buen', 'Di']) )
+'''
