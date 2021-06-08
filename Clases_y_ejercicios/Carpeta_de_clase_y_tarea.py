@@ -796,7 +796,94 @@ print( letras_repes(texto))
 #pedidos = {'id': [id_articulo, id_cliente, cantidad, color]}
 '''
 
-#CLASE: 16: ejs varios
+#CLASE: 16: práctica parcial
 #Martes 8/6/2021
+#ej 3) parcial
+'''
+Se pide realizar una función que devuelva el número entero más pequeño de un listado 
+ingresado por el usuario, tal que la suma de los N números exceda un valor pasado por parámetro
+en la función.
+'''
+#cunado la smatoria supera al numero valor del usuario, hay q devolver el menor numero ingresao
+'''
+def mas_pequenio(limite: int) -> int:
+    
+    numeros: list = list()
+    sum = 0
+    
+    while sum<= limite:
+        num = int(input('Ingrese numeros: '))
+        
+        numeros.append(num)
+        sum += num
 
-   
+    menor = numeros[0]
+    for i in range (1, len(numeros) ):
+        if numeros[i] <0:
+            menor = numeros[i]
+    return menor
+
+print(mas_pequenio(12))
+'''
+#usar funcion min!!
+
+#ej 5)
+'''
+Escribir un programa que primero solicite una palabra al usuario y luego le permita al usuario 
+ingresar 5 palabras. El sistema deberá calcular cuántas y cuáles palabras de las 5 ingresadas 
+pueden escribirse exactamente con las letras de la palabra ingresada al principio (utilizando 
+todas las letras y sin repetir ninguna).
+Ej: Palabra inicial: CASO
+5 palabras: MAMA, CLASE, SACO, COSA, PEPE
+EL sistema deberá devolver 2 palabras (SACO y COSA).
+'''
+#resolucion: supongo correcta...
+'''
+def chequeo(letras_base):
+    
+    palabras: list = list()
+    posibles: list = list()
+
+    for i in range(5):
+        palabra = input('Ingrese palabra: ')
+        palabras.append(palabra)
+    
+    print(letras_base)
+    for i in range (len(palabras)):
+        for letra in letras_base:
+            vale = True
+            if palabras[i].count(letra) != 1:   
+                vale = False                    
+        if vale:
+            posibles.append(palabras[i])
+    
+    print(posibles)
+
+def palabra_inicial()-> list:
+    palabra = input('Ingrese una palabra: ')
+    letras_base:list = list()
+
+    for letra in palabra:
+        letras_base.append(letra)
+    
+    return letras_base
+
+def main():
+    letras_base = palabra_inicial()
+    chequeo(letras_base)
+main()
+'''
+'''
+Bruno Lanzillotta  19:49
+Ejercicio) “@RumboCircular” es un emprendimiento que enseña a cuidar el medioambiente. Rumbo Circular además de dictar cursos de capacitación sobre medioambiente en empresas, lanzó un conjunto de cursos para la comunidad general.
+Estos cursos son los siguientes:
+- Aprendé a hacer tu propio compost (1 día de curso). Costo $950
+- Los niños y el medioambiente (para padres e hijes) (2 días de curso). Costo $990
+- Tu huerta orgánica (4 días de curso). Costo $2500
+El gran éxito de de estos cursos hizo que RumboCircular nos consultara para que los asesoremos para la creación de un pequeño sistema que permita organizar la asistencia de los participantes.
+Los requerimientos que nos solicitan son los siguientes:
+a- ABM (Alta – Baja – Modificación) de cursos. Se podrá cargar la siguiente infomación de los cursos. Nombre, cantidad de días, costo, cantidad de vacantes, fechas de dictado.
+b- Listar todos los cursos cuyo costo sea superior a 1150 pesos.
+c- Mostrar el o los cursos cuya cantidad de vacantes se la máxima.
+d- Mostrar todos los cursos que tengan al menos 3 fechas de dictado.
+'''

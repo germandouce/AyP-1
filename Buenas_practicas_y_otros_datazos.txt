@@ -60,11 +60,48 @@ at 72 characters."
 (conclusion, xa strings no superar 72 lineas, xa resto de codigo, 79.
 Extendible a 99)
 
+RECOMENDACIONES PARCIAL
+
+1 o 2 ejs de Numeracion no mas de 15 minutos
+dsps,
+
+2 o 3 ejs de programacion
+1 Largo,
+2 cortos
+
+Condiciones de aprobacion
+ejs de numeracion BIEN!
+los ejs de programacion, algo bien hecho de los 3 ejs
+o si tengo uno mal y 2 maomenos de esos, 1 bien, y algo 
+bien del otro.
+El largo es el importante!
+
+NO AGREGAR DOCUMENTACION
+NO VALIDAR!!!
+mejores soluciones (o bastante buenas) diccionarios de 
+diccionarios
+
+ALREDEDOR DE 15 MINUTOS !!
+
+PENSAR ESTRUCTURA EN UN PAPEL
 
 
+RECOMENDACIONES XA ABM
 
 
+F1 ABM
+	ALTA
+	BAJA
+	MODIF
 
+F2 OPCIONES DE MUESTRAS
+	mostrar cursos
+	mostrar tal otro curso
+
+
+MAIN MENU
+	ABM
+	
 
 
 
