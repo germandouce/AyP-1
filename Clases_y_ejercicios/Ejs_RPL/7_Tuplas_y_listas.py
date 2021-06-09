@@ -223,3 +223,69 @@ def invertir_lista(lista):
 
 print( invertir_lista(['papa', 'a', 'dia', 'buen', 'Di']) )
 '''
+# ej 7.9 - Empaquetar
+'''
+Escribir una función empaquetar para una lista, donde empaquetar significa indicar
+la repetición de valores consecutivos mediante una tupla (valor, cantidad de repeticiones). 
+Debe devolver una lista de tuplas.
+Ejemplo:
+>>>empaquetar([1, 1, 1, 3, 5, 1, 1, 3, 3])
+[(1, 3), (3, 1), (5, 1), (1, 2), (3, 2)]
+'''
+'''
+def empaquetar(lista):
+    """
+    empaqueta = cuento numero de numeros xd
+    """
+    lista_de_paquetes: list = list()
+    if len (lista) >0:
+
+        ultimo = lista[0]
+        cont = 1
+        for i in range (1, len(lista)):
+            
+            if lista[i] == ultimo:
+                cont += 1
+            
+            else:
+                lista_de_paquetes.append( ultimo, cont) )
+                cont = 1
+                ultimo = lista[i]
+        
+        lista_de_paquetes.append( (lista[i],cont) )    
+    
+    return lista_de_paquetes
+
+print(empaquetar( [1, 1, 1, 3, 5, 1, 1, 3, 3]) )
+'''
+
+#ej 7.11 - Plegado de un texto
+
+'''
+Escribir una función que reciba un texto y una longitud y devuelva una lista de cadenas de como 
+máximo esa longitud. Las líneas deben ser cortadas correctamente en los espacios (sin cortar 
+las palabras).
+Por ejemplo, para el texto 'Voy a aprobar Algoritmos 1' y la longitud 18, la función deberá 
+devolver 'Voy a aprobar'.
+'''
+'''
+def plegar_texto(texto, longitud):
+    """
+    hace cosas raras recortando los textos
+    """
+    lista_texto_cortado: list = list()
+
+    list_texto_orig = texto.split()
+
+    len_tot = 0
+    for palabra in list_texto_orig:
+        len_tot += len(palabra)
+        if len_tot <= longitud:
+            lista_texto_cortado.append(palabra)
+    
+    cadena_texto_cortado = ' '.join(lista_texto_cortado)
+    
+    return cadena_texto_cortado
+
+print(plegar_texto ('Voy a aprobar Algoritmos 1', 21) )
+'''
