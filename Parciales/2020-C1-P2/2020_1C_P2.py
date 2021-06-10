@@ -30,89 +30,102 @@ Obs.
  funciones.
  -Se deberá contemplar alguna estructura que permita guardar el código de color y el nombre
 '''
-def datos_produccion(pedidos, tanques) -> None:
-    #cremas mas producida                #pedidos = {codigo_crema: {tipo_envase: cantiad_envases} }
-    total_cremas = []                   #tanques = {codigo_crema : [nombre, cantidad] }
-    for codigo_crema in pedidos:
-        total_crema= 0
-        for tipo_envase in codigo_crema.values():
-            total_crema += tipo_envase.values()*tipo_envase
-        total_cremas.append( [codigo_crema, total_crema] )
 
-    max_cant = total_cremas[0][1]
-    crema_mas_produc = ''
-    for i in range( len(total_cremas) ):
-        if total_cremas[i][1] >= max_cant:
-            crema_mas_produc = total_cremas[i][0]
-    
-    for codigo, values in tanques:
-        if codigo == crema_mas_produc:
-            print(values[0]) # = nombre
+#pedidos = {codigo_crema: cantidad }
+#tanques = {codigo_crema : [nombre, cantidad] }
+#envases = {tipo_envase: cantidad_de_envases}
+def datos_produccion(pedidos, envases, tanques) -> None:
+    #cremas mas producida               
+    cantidades_produc = list()
 
-    print('crema_mas_produc:',crema_mas_produc)
+    for cantidad in pedidos.values():
+        cantidades_produc.append(cantidad) 
     
+    max_cant_produc = max(cantidades_produc)
+
+    crema_mas_produc=''
+    for crema, cantidad in pedidos.items():
+        if cantidad == max_cant_produc:
+            crema_mas_produc = crema
+    
+    print('las crema mas producida fue', tanques [crema_mas_produc][0],
+    'con un total de',max_cant_produc,'cm3' )
+
     #envase mas producido
-    todos_los_envases = []
-    for codigo_crema in pedidos:
-        total_envases_crema = 0
-        for tipo_envase in codigo_crema.values():
-            total_envases_crema += tipo_envase.values()
-        todos_los_envases.append( [tipo_envase, total_envases_crema] )
+    envases_produc = list()
+
+    for cantidad in envases.values():
+        envases_produc.append(cantidad) 
     
-    max_cant = todos_los_envases[0][1]
+    max_envase_produc = max(envases_produc)
+       
     envase_mas_produc = ''
-    for i in range( len(todos_los_envases) ):
-        if todos_los_envases[i][1] >= max_cant:
-            envase_mas_produc = todos_los_envases[i][0]
+    for tipo_envase, cantidad_de_envases in envases.items():
+        if cantidad_de_envases == max_envase_produc:
+            envase_mas_produc = tipo_envase
+
+    print('El envase mas producido fue el de', envase_mas_produc, 'cm3'),    
     
-    print('envase mas producido:', envase_mas_produc)
+    #sobrante en tanques                            #pedidos = {codigo_crema: cantidad }
+    sobrante_por_tanque = []
+    for codigo_crema, cantidad in pedidos.items():      #tanques = {codigo_crema : [nombre, cantidad] }
+        sobrante = tanques[codigo_crema][1] - cantidad
+        sobrante_por_tanque.append( (tanques[codigo_crema][0],sobrante) )
+    
+    print('crema  sobrante en cm3')
+    for sobra in sobrante_por_tanque:
+        print(sobra[0].ljust(10), sobra[1])
 
-    #for i in range()
-    #de baja
 
+def cargar_pedidos(tanques:dict) -> dict:
 
-def cargar_pedidos(tanques) -> dict:
-        
-    pedidos: dict = dict()           
+    pedidos: dict = dict()
+    envases: dict = dict()
+
     basta = False
     while not basta:
-
-        sin_cantidad = False
-        while not sin_cantidad:
-            codigo_crema = input('Ingrese codigo de crema a producir: ')
-            
-            print('ingrese envase 1- 300 2- 500 3- 1000')
-            opc = int (input('')) 
-            if opc == 1:
-                tipo_envase = 300
-            
-            elif opc == 2:
-               tipo_envase = 500
-            else: 
-                tipo_envase = 1000
         
-            cantidad_envases = input('Ingrese numero de envase a producir: ')        
+        print('tanques')
+        print(tanques)
+
+        codigo_crema = int(input('Ingrese codigo de crema a producir: '))
             
-            total = cantidad_envases * tipo_envase
+        print('ingrese envase 1- 300 2- 500 3- 1000')
+        opc = int (input('')) 
+        if opc == 1:
+            tipo_envase = 300
+            
+        elif opc == 2:
+            tipo_envase = 500
+        else: 
+            tipo_envase = 1000
+        
+        cantidad_envases = int(input('Ingrese numero de envases a producir: '))        
+            
+        total_produc = cantidad_envases * tipo_envase
 
-            if tanques[codigo_crema][1] <= total:
-                if codigo_crema not in pedidos:     #si la crema no fue pedida
-                    pedidos[codigo_crema] = dict()
-                    pedidos[codigo_crema][tipo_envase] = cantidad_envases
-
-                else:                               # si ya esta la crema chequeo el envase
-                    if tipo_envase not in pedidos[codigo_crema]:
-                        pedidos[codigo_crema][tipo_envase] = cantidad_envases
-                    else:
-                        pedidos[codigo_crema][tipo_envase] += cantidad_envases
-
-                basta = int( input( 'Quiere ingresar otra crema? 1-si 0-no: ') )
-                if basta == 0:
-                    basta = True                    
+        if total_produc <= tanques[codigo_crema][1]:
+            if codigo_crema not in pedidos:     #si la crema no fue pedida
+                pedidos[codigo_crema] = total_produc       #pedidos = {codigo_crema: total }
+            else:                               # si ya esta la crema chequeo el envase
+                pedidos[codigo_crema] += total_produc
+            
+            if tipo_envase not in envases:
+                envases[tipo_envase] = cantidad_envases
             else:
-                print('\nNo alcanza la materia prima ingrese de nuevo\n')
-    
-    return pedidos
+                envases[tipo_envase] += cantidad_envases
+            
+            opc = int( input( 'Quiere ingresar otra crema? 1-si 0-no: ') )
+            if opc == 0:
+                basta = True 
+
+        else:
+            print('\nNo alcanza la materia prima ingrese de nuevo\n')
+        
+        print(envases)
+        print(pedidos)
+
+    return pedidos, envases
 
 def cargar_tanques() -> dict:
     tanques: dict = dict()
@@ -132,7 +145,7 @@ def cargar_tanques() -> dict:
 def main() -> None:
     
     tanques = cargar_tanques()
-    pedidos = cargar_pedidos(tanques)
-    datos_produccion(pedidos, tanques)
+    pedidos,envases = cargar_pedidos(tanques)
+    datos_produccion(pedidos,envases, tanques)
 
 main()
