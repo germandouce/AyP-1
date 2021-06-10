@@ -72,9 +72,9 @@ dsps,
 Condiciones de aprobacion
 ejs de numeracion BIEN!
 los ejs de programacion, algo bien hecho de los 3 ejs
-o si tengo uno mal y 2 maomenos de esos, 1 bien, y algo 
+o si tengo uno mal y 2 masomenos. De esos, 1 bien, y algo 
 bien del otro.
-El largo es el importante!
+El largo es el mas importante!
 
 NO AGREGAR DOCUMENTACION
 NO VALIDAR!!!
