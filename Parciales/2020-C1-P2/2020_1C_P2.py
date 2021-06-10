@@ -1,10 +1,58 @@
 #2020 1C P2
 #07/07/20
+#total ej num + 2 cortitos = 1 hr 5 min
+# me quedan 55 min xa ABM (u 1hr 15 min si tengo suerte y dan mais tempo) 
+
+#ej 1 + 2 ) 17:00 - 17:25 -> 25 min
+'''
+#ej 1)
+ 
+#21 digits
+#1101001111011,10100101 (base 2) = 1A7B, A5 (base 16)
+
+#ej 2)
+#2019(base 10) = 133203 (base 4)
+#2019(base 10) = 11111100011 (base 4)
+'''                 
+#ej 3) 16:22 - 176:27 -> 5 min (10 min x enunciado raro..)
+#(ya lo hice una vez)
+'''
+3) Se pide realizar una función que devuelva el número entero más pequeño de un listado ingresado 
+por el usuario, tal que la suma de los N números exceda un valor pasado por parámetro en la función.
+'''
+'''
+# def maspeq(max:int)->int:
+#     suma=0
+#     lista=[]
+#     while suma<max:
+#         n=int(input("Ingrese un numero entero: "))
+#         suma+=n
+#         lista.append(n)
+#     return min(lista)
+
+# print(maspeq(12))
+
+def minimo(limite):
+    sum = 0
+    numeros: list = list()
+    
+    while sum <= limite:
+        num =  int(input('Ingrese un numero: '))
+        sum += num
+        numeros.append(num)
+    
+    minimo = min (numeros)
+
+    return minimo
+
+print(minimo(12))
+'''
 
 #Ej 4 
-#   19:35 - 
+#   19:35 - 23:30 --> 4horas XDN 'T 
+#   13:30 - 14:52 --> 1:22 min XD
 '''
-4) Una importante empresa de cosmética nos solicita realizar un programa para la automatización de su 
+Una importante empresa de cosmética nos solicita realizar un programa para la automatización de su 
 producciónde cremas.  La línea de producción consta de 5 tipos de cremas (Humectante clásica {cod.100},  
 Antiage colageno {cod.200},  Facial con UV {cod.300},  Desmaquillante{cod.400},  Vitamina A {cod. 10}) 
 y   3 envases (200 cm3,  500cm3 y 1000 cm3).
@@ -30,7 +78,7 @@ Obs.
  funciones.
  -Se deberá contemplar alguna estructura que permita guardar el código de color y el nombre
 '''
-
+'''
 #pedidos = {codigo_crema: cantidad }
 #tanques = {codigo_crema : [nombre, cantidad] }
 #envases = {tipo_envase: cantidad_de_envases}
@@ -149,3 +197,48 @@ def main() -> None:
     datos_produccion(pedidos,envases, tanques)
 
 main()
+'''
+
+#ej 5) (ya lo habia hecho jeje) 
+#16:31 - 16:59 (con detallesitos..) -> 28 min
+'''
+Escribir un programa que primero solicite una palabra al usuario y luego le permita al usuario 
+ingresar 5 palabras. El sistema deberá calcular cuántas y cuáles palabras de las 5 ingresadas pueden
+escribirse exactamente con las letras de la palabra ingresada al principio (utilizando todas las 
+letras y sin repetir ninguna). 
+Ej: Palabra inicial: CASO palabras
+5 palabras: MAMA, CLASE, SACO, COSA, PEPE EL sistema deberá devolver 2 palabras (SACO y COSA)
+'''
+'''
+def cinco_palabras()-> list:
+    print('ingrese 5 palabras')
+    
+    palabras_a_chequear: list = list()
+    for i in range(5):
+        pal = input('Ingrese palalabra: ').lower()
+        palabras_a_chequear.append(pal)
+    
+    print('palabras a chequear:',palabras_a_chequear)
+    
+    return palabras_a_chequear
+
+def chequeo_palabras(palabras_a_chequear: list, pal_inicial:str)->list:    
+    posibles=[]
+
+    for palabra in palabras_a_chequear:
+        vale = True
+        for letra in pal_inicial:
+            if palabra.count(letra) != pal_inicial.count(letra):
+                vale = False
+        if vale:
+            posibles.append(palabra.upper())
+
+    return posibles
+     
+def main()-> None:
+    pal_inicial = input('ingrese una palabra: ').lower()
+    palabras_a_chequear = cinco_palabras() 
+    posibles = chequeo_palabras(palabras_a_chequear, pal_inicial)
+    print('se pueden escribir:',posibles)
+main()
+'''
