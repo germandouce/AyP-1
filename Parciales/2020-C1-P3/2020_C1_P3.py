@@ -92,7 +92,7 @@ def main()-> None:
 main()
 '''
 
-#ej 3) # 19:05 -
+#ej 3) # 19:05 - 20:52 no corre del todo bien...
 '''
 Para  celebrar  el  Día  del  Niño,  en  una  plaza  de  gran  extensión,  se  ha  construido  un  
 caminito  de  baldosas  cuadradas  de  hormigón  de  3  colores:  blanco,  gris  y  negro.  El  
