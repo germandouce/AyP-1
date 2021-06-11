@@ -1,3 +1,11 @@
+#ej 1)
+#a) 32442,51(base 6) -> 4490,86111(base 10) (TFN)
+
+#b) 6658,633 (base 10) -> 10117,5624 (base 9) (BM/MD  con error menor a 10^-4)  
+
+#c) 1223,24 (base 4) -> 6B,B (base 16) (BP mirando tablas! 4->16) NO USAR TFN Y MS/DS Xq tira error!
+#Y ademas es muuy largo)
+
 #ej 2) 15:12 - 15:45 33 mins
 '''
 Escriba una función que dada una lista de denominaciones de billetes de la moneda corriente de un 
@@ -8,6 +16,7 @@ ser descompuesto y devolver un diccionario con la descomposición.
 Construya el programa principal donde utiliza dicha función. 
 Ej: Lista = [10,20,50,100,200,500,1000] 
 Valor = 1690  Diccionario = {10:0,20:2,50:1;100:1;200:0;500:1;1000:1}
+'''
 '''
 def validar_opcion(opc_minimas: int, opc_maximas: int, texto: str = '') -> str:
     """
@@ -81,170 +90,78 @@ def main()-> None:
     print( cajero(lista_billetes) )     #devuelvo {denominacion: cantidad_de_billetes}
 
 main()
-
-
-
-
-
-
 '''
-Ejercicio) "@RumboCircular" es un emprendimiento que enseña a cuidar el medioambiente. Rumbo Circular además de dictar cursos de capacitación sobre medioambiente en empresas, lanzó un conjunto de cursos para la comunidad general.
-Estos cursos son los siguientes:
-- Aprendé a hacer tu propio compost (1 día de curso). Costo $950
-- Los niños y el medioambiente (para padres e hijes) (2 días de curso). Costo $990
-- Tu huerta orgánica (4 días de curso). Costo $2500
-El gran éxito de de estos cursos hizo que RumboCircular nos consultara para que los asesoremos para la creación de un pequeño sistema que permita organizar la asistencia de los participantes.
-Los requerimientos que nos solicitan son los siguientes:
-a- ABM (Alta – Baja – Modificación) de cursos. Se podrá cargar la siguiente infomación de los cursos. Nombre, cantidad de días, costo, cantidad de vacantes, fechas de dictado.
-b- Listar todos los cursos cuyo costo sea superior a 1150 pesos.
-c- Mostrar el o los cursos cuya cantidad de vacantes sea la máxima.
-d- Mostrar todos los cursos que tengan al menos 3 fechas de dictado.
+
+#ej 3) # 19:05 -
 '''
-# cursos = {
-#   codigo: {
-#       nombre: str,
-#       costo: float,
-#       cantidad_de_dias: int,
-#       cantidad_de_vacantes: int,
-#       fechas_de_dictado: list(str(dd/mm/yy))
-#   }
-# }
-# cursos = [
-#   [
-#       nombre,
-#       costo,
-#       dias,
-#       vacantes,
-#       fechas = [
-#           dia,
-#           dia
-#       ]
-#   ]
-# ]
-#PRE:  No tiene
-#POST: Va a dar de alta un nuevo curso, la llave del curso
-#      debe ser distinta a las demas
+Para  celebrar  el  Día  del  Niño,  en  una  plaza  de  gran  extensión,  se  ha  construido  un  
+caminito  de  baldosas  cuadradas  de  hormigón  de  3  colores:  blanco,  gris  y  negro.  El  
+caminito  no  tiene  bifurcaciones  y  para  que  quedase  más  vistoso,  se  cuidó  que  las  
+baldosas contiguas tuvieran ***diferente color***. 
+
+Lamentablemente el caminito ha perdido muchas de sus baldosas, ya que debieron ser quitadas  para  
+realizar  un  complejo  tendido  de  cañerías. La  figura  muestra  el  estado  actual del caminito. 
+
+Los  huecos  dejados  por  las  baldosas  removidas  se  muestran  cuadriculados.  Quienes  deben  
+reconstruir  el  caminito  desean  dejarlo  tal  como  estaba,  pero  no  se  llevó  el  registro de
+los colores y ubicaciones de las baldosas removidas. Por lo tanto, se decide reconstruirlo
+respetando  las  que  quedaron  siguiendo  la  consigna  original  de  que  las  contiguas no queden
+del mismo color, comprando las baldosas nuevas que hagan falta.Para ayudar en la reconstrucción se 
+pide que escriba una 
+función caminito(BALDOSAS)que  devuelva  un  posible  diseño  para  reconstruir  el  caminito y  
+que  también  lo  escriba  por pantalla. Su  parámetro  es  “baldosas”:  una  PALABRA  conteniendo  
+caracteres  ‘B’  (blanco),  ‘N’  (negro), ‘G’ (gris) o ‘R’ (removido) separadas con coma “,” 
+describiendo la vereda en su estado actual, esperando que sustituyas las ‘R’ por las letras que 
+describan los colores de tu propuesta. La longitud de la palabra no es conocida.Tu propuesta de 
+caminito deberá ser devuelta por la función y  escrita por pantalla la palabra con la propuesta.
+
+Ejemplo:El parámetro BALDOSAS describe la figura y contiene: R,G ,N ,R,R,N,R ,R,R,B,R,N 
+El programa deberá escribir por pantalla una línea como la siguiente BGNBGNGBGBGN
 '''
-def dar_de_alta_curso(cursos:dict):
-    curso = dict()
-    llave = 0
-    nombre = ""
-    costo = 0.0
-    dias = 0
-    vacantes = 0
-    fechas = list()
-    flag_seguir_ingresando = True
-    llave = int(input("Ingrese el código del nuevo curso: "))
-    nombre = input("Ingrese el nombre del curso: ")
-    costo = float(input("Ingrese el costo del curso: "))
-    dias = int(input("Ingrese la cantidad de días del curso: "))
-    vacantes = int(input("Ingrese la cantidad de vacantes del curso: "))
-    while flag_seguir_ingresando:
-        fecha = ""
-        fecha = input(f"Ingrese una fecha para el curso: ")
-        fechas.append(fecha)
-        ingresar_corte = input("¿Quiere seguir ingresando datos <s/n>? ")
-        if ingresar_corte != "s":
-            flag_seguir_ingresando = False
-    curso["nombre"] = nombre
-    curso["costo"] = costo
-    curso["cantidad_de_dias"] = dias
-    curso["cantidad_de_vacantes"] = vacantes
-    curso["fechas_de_dictado"] = fechas
-    cursos[llave] = curso
-def modificar_curso(cursos: dict):
-    opcion = 0
-    entrada = ""
-    for key, value in cursos.items():
-        llave = "nombre"
-        print(f"{key} - {value[llave]}")
-    opcion = int(input("Ingrese una opción: "))
-    for key, value in cursos[opcion].items():
-        print(f"{key} - {value}")
-    entrada = input("¿Qué desea modificar del curso?: ")
-    if entrada == "nombre":
-        nombre = input(f"Ingrese el nuevo {entrada}: ")
-        cursos[opcion][entrada] = nombre
-    elif entrada == "costo":
-        costo = float(input(f"Ingrese el nuevo {entrada}"))
-        cursos[opcion][entrada] = costo
-    elif entrada == "cantidad_de_dias":
-        cantidad_de_dias = int(input(f"Ingrese la nueva {entrada}"))
-        cursos[opcion][entrada] = cantidad_de_dias
-    elif entrada == "cantidad_de_vacantes":
-        cantidad_de_vacantes = int(input(f"Ingrese la nueva {entrada}"))
-        cursos[opcion][entrada] = cantidad_de_vacantes
-    elif entrada == "fechas_de_dictado": 
-        flag_seguir_ingresando = True
-        fechas_de_dictado = []
-        ingreso_corte = ""
-        while flag_seguir_ingresando:
-            fecha = int(input(f"Ingrese las nuevas {entrada}"))
-            fechas_de_dictado.append(fecha)
-            ingresar_corte = input("¿Quiere seguir ingresando datos <s/n>? ")
-            if ingresar_corte != "s":
-                flag_seguir_ingresando = False
-        cursos[opcion][entrada] = fechas_de_dictado
-def dar_de_baja_curso(cursos: dict):
-    opcion = 0
-    entrada = ""
-    for key, value in cursos.items():
-        llave = "nombre"
-        print(f"{key} - {value[llave]}")
-    opcion = int(input("¿Qué curso desea eliminar?: "))
-    cursos.pop(opcion)
-def ABMCursos(cursos: dict) -> None:
-    dar_de_alta_curso(cursos)
-def ingresar_opcion(opciones: list):
-    opcion = 0
-    for x in range(len(opciones)):
-        print(f"{x + 1} - {opciones[x]}")
-    opcion = int(input("Ingrese una opción: "))
-    return opcion
-def main() -> None:
-    opciones = [
-        "ABM (Alta – Baja – Modificación) de cursos",
-        "Listar todos los cursos cuyo costo sea superior a 1150 pesos",
-        "Mostrar el o los cursos cuya cantidad de vacantes sea la máxima",
-        "Mostrar todos los cursos que tengan al menos 3 fechas de dictado"
-    ]
-    cursos = {
-        1: {
-            "nombre": "Aprendé a hacer tu propio compost",
-            "costo": 950.0,
-            "cantidad_de_dias": 1,
-            "cantidad_de_vacantes": 4,
-            "fechas_de_dictado": ["10/06/2021"]
-        },
-        2: {
-            "nombre": "Los niños y el medioambiente",
-            "costo": 990.0,
-            "cantidad_de_dias": 2,
-            "cantidad_de_vacantes": 5,
-            "fechas_de_dictado": ["09/06/2021", "15/06/2021"]
-        },
-        3: {
-            "nombre": "Tu huerta orgánica",
-            "costo": 2500.0,
-            "cantidad_de_dias": 4,
-            "cantidad_de_vacantes": 10,
-            "fechas_de_dictado": ["01/06/2021", "04/06/2021", "21/06/2021"]
-        }    
-    }
-    opcion = 0
-    opcion = ingresar_opcion(opciones)
-    while opcion != 5:
-        if opcion == 1:
-            ABMCursos(cursos)
-            opcion = ingresar_opcion(opciones)
-        elif opcion == 2:
-            pass
-            opcion = ingresar_opcion(opciones)
-        elif opcion == 3:
-            pass
-            opcion = ingresar_opcion(opciones)
-        elif opcion == 4:
-            pass
-            opcion = ingresar_opcion(opciones)
-main()
+#"baldosas" una palavra = es str
+#CASOS BORDE:
+#
+'''
+import random
+
+def caminito(baldosas:str)->str:
+    baldosas_splitted = baldosas.split(',')
+    while 'R' in baldosas_splitted:
+        for b in range( len(baldosas_splitted) ):
+            if baldosas_splitted[b] == 'R':
+                if baldosas_splitted[b] == 0 and baldosas_splitted[b+1]!='R': #si es la primera me fijo en la contigua
+                    baldosas_splitted[b] = 'B'
+                elif baldosas_splitted[b] == baldosas_splitted[ len(baldosas_splitted)-1]: 
+                    #si es a ultima solo miro la anterior
+                    if baldosas_splitted[b-1] =='B':
+                        baldosas_splitted[b] = random.choice(['N','G'])
+                    elif baldosas_splitted[b-1] =='N':
+                        baldosas_splitted[b] = random.choice(['G','B'])
+                    if baldosas_splitted[b-1] =='G':
+                        baldosas_splitted[b] = random.choice(['N','B'])
+                else: # 0 < b < len(baldosas_splitted) -1 
+                    if baldosas_splitted[b+1] =='B' and baldosas_splitted[b-1] == 'N':
+                        baldosas_splitted[b] = 'G'
+                    elif baldosas_splitted[b+1] =='N' and baldosas_splitted[b-1] == 'B':
+                        baldosas_splitted[b] = 'G'
+                    elif baldosas_splitted[b+1] =='G' and baldosas_splitted[b-1] == 'N':
+                        baldosas_splitted[b] = 'B'
+                    elif baldosas_splitted[b+1] =='N' and baldosas_splitted[b-1] == 'G':
+                        baldosas_splitted[b] = 'B'
+                    elif baldosas_splitted[b+1] =='G' and baldosas_splitted[b-1] == 'B':
+                        baldosas_splitted[b] = 'N'
+                    elif baldosas_splitted[b+1] =='B' and baldosas_splitted[b-1] == 'G':
+                        baldosas_splitted[b] = 'N'
+    return baldosas_splitted
+
+baldosas = 'R,G,N,R,R,N,R,R,N,R,R,B' 
+print(caminito(baldosas))
+
+  
+#                     no_2 = baldosas_splitted[b+1]
+#                     conj = set()
+#                     conj.add(no_1)
+#                     conj.add(no_2)
+#                     est = {'B','N','G'} - conj
+#                     baldosas_splitted[b] = est
 '''
