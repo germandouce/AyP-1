@@ -887,3 +887,50 @@ b- Listar todos los cursos cuyo costo sea superior a 1150 pesos.
 c- Mostrar el o los cursos cuya cantidad de vacantes se la máxima.
 d- Mostrar todos los cursos que tengan al menos 3 fechas de dictado.
 '''
+#CLASE: 17: práctica parcial
+#jueves 10/6/2020
+
+#parcial 11/08/20
+#ej 2) (corto??)
+'''
+Escriba una función que dada una lista de denominaciones de billetes de la moneda corriente de un 
+país, permita descomponer un importe otorgado por el usuario en las cantidades correspondientes a 
+cada una de las denominaciones cual si fuera un cajero automático y suponiendo que siempre elige 
+otorgar billetes del mayor valor posible. La función debe controlar que el importe sea factible de 
+ser descompuesto y devolver un diccionario con la descomposición.  Construya el programa principal 
+donde utiliza dicha función.  
+Ej: Lista = [10,20,50,100,200,500,1000]  
+Valor = 1690  Diccionario = {10:0,20:2,50:1;100:1;200:0;500:1;1000:1}
+'''
+#20:00 - 20:25 --> 25 minutos
+#hacer q usuario ingrese lista y ordenarla
+'''
+def cajero(lista)-> dict:
+    importe = int(input('Ingrese importe a descomponer: '))
+    
+    es_posible = False
+    for billete in lista:
+        if importe%billete == 0: #con q alguno divida enteramente ya puedo descomponer
+            es_posible = True
+    if es_posible:
+        lista = lista[::-1] #doy vuelta suponiendo q ingreso de menor a mayor
+        descomp =  dict()
+        for billete in lista:
+            descomp[billete] = 0
+
+        for billete in lista:
+            if importe>= billete:
+                cantidad = importe//billete
+                resto = importe%billete
+                descomp[billete] = cantidad
+                importe = resto
+
+    else:
+        print('no es posible descomponer')
+
+    return descomp
+
+lista = [10,20,50,100,200,500,1000]
+print(cajero(lista))
+
+'''

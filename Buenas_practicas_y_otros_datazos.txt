@@ -76,10 +76,13 @@ o si tengo uno mal y 2 masomenos. De esos, 1 bien, y algo
 bien del otro.
 El largo es el mas importante!
 
+#aclarar algo basico de como funciona la funcion
+
 NO AGREGAR DOCUMENTACION
 NO VALIDAR!!!
 mejores soluciones (o bastante buenas) diccionarios de 
 diccionarios
+
 
 ALREDEDOR DE 15 MINUTOS !!
 
