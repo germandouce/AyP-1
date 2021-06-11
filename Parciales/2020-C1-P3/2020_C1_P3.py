@@ -1,4 +1,4 @@
-#ej 2)
+#ej 2) 15:12 - 15:45 33 mins
 '''
 Escriba una función que dada una lista de denominaciones de billetes de la moneda corriente de un 
 país, permita descomponer un importe otorgado por el usuario en las cantidades correspondientes a 
