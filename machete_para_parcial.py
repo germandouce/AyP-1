@@ -1,5 +1,5 @@
 
-#Validador de ocpiones para menu
+#VALIDADOR DE OPCIONES PARA MENU
 #Util para menus y para corte de ciclos tipo seguir ingresando( 1- si  0- no)
 
 def validar_opcion(opc_minimas: int, opc_maximas: int, texto: str = '') -> str:
@@ -19,7 +19,7 @@ def validar_opcion(opc_minimas: int, opc_maximas: int, texto: str = '') -> str:
     return opc
 
 
-
+#INGRESO DE NUMEROS ENTEROS O FLOTANTES CORTA CON CUALQUIER LETRA
 def ingreso_numeros_corta_letra():
     #lista_de_numeros = ingreso_numeros_corta_letra()
     """
@@ -38,8 +38,8 @@ def ingreso_numeros_corta_letra():
     
     return lista
 
-#Ciclo xa ingreso con corte manual:
 
+#CICLO DE INGRESO DE ELEMENTOS CON CORTE MANUAL
 def ingreso_elementos() -> list:
     #ingreso_elementos()
     lista = list()
