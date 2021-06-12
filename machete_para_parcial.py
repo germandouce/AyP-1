@@ -61,13 +61,10 @@ def ingreso_elementos() -> list:
         #opc o funcion xa ingresar datos
 
         opc = int( validar_opcion(0,1, 'Desea seguir ingresando? 1- Si 0 - No: ') )
-        
         if opc == 0:
             cortar = True
-
+    
     return lista
-
-
 
 #FUNCIONES XA MOSTRAR DATOS A USUARIO
 def listar_cursos_max_precio(cursos) -> None:  #listar_cursos_condicion_del_ejercicio
@@ -115,10 +112,71 @@ def alta_curso(cursos: dict) -> None:
 
 
 def baja_curso(cursos: dict) -> None:
-    pass
-def modificar_curso(cursos: dict) -> None:
-    pass
+    for curso, datos in cursos.items():
+        
+        llave = "nombre"
+        print(f"{curso} - {datos[llave]}")
 
+    opciones = list(cursos.keys())
+    
+    opc = input('¿Que curso desea modificar?: ')
+    while ( not opc.isnumeric() ) or ( int(opc) not in opciones):
+        opc = input('ingrse una opcion valida: ')
+    opc = int(opc)
+
+    cursos.pop(opc)
+
+
+def modificar_curso(cursos: dict) -> None:
+    
+    #muestro cursos
+    for curso, datos in cursos.items():
+        llave = "nombre"
+        print(f"{curso} - {datos[llave]}")
+    
+    opciones = list(cursos.keys())
+    
+    opc = input('¿Que curso desea modificar?: ')
+    while ( not opc.isnumeric() ) or ( int(opc) not in opciones):
+        opc = input('ingrse una opcion valida: ') 
+    opc = int(opc)
+
+    #muestro datos del curso elegido xa modificar
+    for key, value in cursos[opc].items():
+        print(f"{key} - {value}")
+    
+    #Pregunto q desea modificar
+    entrada = input("¿Qué desea modificar del curso?: ")
+    if entrada == "nombre":
+        nombre = input(f"Ingrese el nuevo {entrada}: ")
+        cursos[opc][entrada] = nombre
+
+    elif entrada == "costo":
+        costo = float(input(f"Ingrese el nuevo {entrada}"))
+        cursos[opc][entrada] = costo
+
+    elif entrada == "cantidad_de_dias":
+        cantidad_de_dias = int(input(f"Ingrese la nueva {entrada}"))
+        cursos[opc][entrada] = cantidad_de_dias
+
+    elif entrada == "cantidad_de_vacantes":
+        cantidad_de_vacantes = int(input(f"Ingrese la nueva {entrada}"))
+        cursos[opc][entrada] = cantidad_de_vacantes
+
+    elif entrada == "fechas_de_dictado": 
+        
+        cortar = False
+        fechas_de_dictado = list()
+
+        while not cortar:
+            fecha = input(f"Ingrese las nuevas {entrada}: ")
+            fechas_de_dictado.append(fecha)
+
+            seguir = int(validar_opcion(0,1,"¿Quiere seguir ingresando fechas 1- Si 0- No ?: "))
+            if seguir == 0:
+                cortar = True
+        
+        cursos[opc][entrada] = fechas_de_dictado
 
 
 #DERIVADOR DE OPCIONES abm_cursos
@@ -132,10 +190,10 @@ def abm_cursos (opc, cursos):
     if opc == 0:
         alta_curso(cursos)
     
-    elif opc == 0.5: #uno!!!
+    elif opc == 1:
         baja_curso(cursos)
     
-    if(opc == 1):
+    if(opc == 2):
         modificar_curso(cursos)
     
     elif(opc == 2):
@@ -188,23 +246,24 @@ def main():
         #MENU DE OPCIONES DEL ABM:
         print('''
         Bienvenido  al sistema de registros de cursos de RumboCircular, ¿Que desea hacer? 
-        0.Dar de alta un curso
-        1.Modicar uno de los tres cursos    #1 alta          
-        2.Mostrar los cursos con un coste mayor a 1150  #2 baja
-        3.Seleccionar asistentes para un curso          #3 modificacion
-        4.Mostrar el listado de cursos y asistentes     #4 mostrar
-        5.Cerrar el programa (MUESTRA CURSOS!!1) ''')       #última opcion es cerrar programa
+        0.Dar de ALTA un curso
+        1.Dar de BAJA un curso
+        2.MODIFICAR uno de los tres cursos    #1 alta          
+        3.Mostrar los cursos con un coste mayor a 1150  #2 baja
+        4.Seleccionar asistentes para un curso          #3 modificacion
+        5.Mostrar el listado de cursos y asistentes     #4 mostrar
+        6.Cerrar el programa (MUESTRA CURSOS!!1) ''')       #última opcion es cerrar programa
 
-        opc = int( validar_opcion(0,5, 'Ingrese una opcion: '))
+        opc = int( validar_opcion(0,6, 'Ingrese una opcion: '))
 
-        if opc != 5:
+        if opc != 6:
             abm_cursos(opc, cursos)
         
         else:
             
-            for codigo, curso in cursos.items():
-                print(codigo,':')
-                for dato in curso:
-                    print(f'{dato}: {curso[dato]}')
+            for curso, datos in cursos.items():
+                print(f'\n{curso}:')
+                for llave in datos:
+                    print(f'{llave}: {datos[llave]}')
             cerrar = True
 main()

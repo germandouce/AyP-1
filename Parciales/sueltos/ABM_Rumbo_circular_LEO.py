@@ -107,6 +107,7 @@ def modificar_curso(cursos: dict):
         cursos[opcion][entrada] = fechas_de_dictado
 
 
+
 def dar_de_baja_curso(cursos: dict):
     opcion = 0
     entrada = ""
@@ -119,7 +120,7 @@ def dar_de_baja_curso(cursos: dict):
 
 def ABMCursos(cursos: dict) -> None:
     dar_de_alta_curso(cursos)
-
+    dar_de_baja_curso(cursos)
 
 def ingresar_opcion(opciones: list):
     opcion = 0
