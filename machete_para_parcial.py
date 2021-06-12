@@ -1,11 +1,18 @@
 #MACHETE PARA PARCIAL
 #FUNCIONES MUY UTILES Y USADAS
 
+
+#MAIN SIMPLE
+def main()-> None:
+    #main()
+    pass
+
+
 #VALIDADOR DE OPCIONES PARA MENU
 #Util para menus y para corte de ciclos tipo seguir ingresando( 1- si  0- no)
 
 def validar_opcion(opc_minimas: int, opc_maximas: int, texto: str = '') -> str:
-    #ej: opc = validar_opcion(1, 2, 'texto en str con pregunta')
+    #ej: opc = int (validar_opcion(1, 2, 'texto en str con pregunta') )
     """
     PRE: "opc_minimas" y "opc_maximas" son dos números enteros que 
     simbolizan la cantidad de opciones posibles."texto" es un parametro
@@ -60,8 +67,144 @@ def ingreso_elementos() -> list:
 
     return lista
 
-#MAIN
-def main()-> None:
-    #main()
+
+
+#FUNCIONES XA MOSTRAR DATOS A USUARIO
+def listar_cursos_max_precio(cursos) -> None:  #listar_cursos_condicion_del_ejercicio
     pass
 
+def cargar_asistentes(cursos) -> None:      # funcion especifica de modificacion y o alta mmm
+    pass
+
+def mostrar_cursos_ordenados(cursos) -> None:   #mostra todos los cursos (ordenados)
+    pass
+
+
+#FUNCIONES DE ALTA - BAJA - MODIFICACION
+def alta_curso(cursos: dict) -> None:
+    
+    curso = dict()  #el nuevo curso es un diccionario con datos q seran clave
+    llave = int(input("Ingrese el código del nuevo curso: ")) #sera el codigo o clave ppal del curso
+    
+    #Pido datos del curso
+    nombre = input("Ingrese el nombre del curso: ")    #estos datos se agregan al cursos[llave]
+    costo = float(input("Ingrese el costo del curso: "))        #como claves
+    dias = int(input("Ingrese la cantidad de días del curso: "))
+    vacantes = int(input("Ingrese la cantidad de vacantes del curso: "))
+    
+    fechas = list()
+    flag_seguir_ingresando = True
+    while flag_seguir_ingresando:
+        fecha = ""
+        fecha = input(f"Ingrese una fecha para el curso: ")
+        fechas.append(fecha)
+        ingresar_corte = input("¿Quiere seguir ingresando datos <s/n>? ")
+        if ingresar_corte != "s":
+            flag_seguir_ingresando = False
+    
+    #Guardo los datos en la tabla del curso  
+    curso["nombre"] = nombre
+    curso["costo"] = costo
+    curso["cantidad_de_dias"] = dias
+    curso["cantidad_de_vacantes"] = vacantes
+    curso["fechas_de_dictado"] = fechas
+
+    #Convierto el curso: cursos[llave] en key de la tabla cursos
+    cursos[llave] = curso   
+
+
+
+def baja_curso(cursos: dict) -> None:
+    pass
+def modificar_curso(cursos: dict) -> None:
+    pass
+
+
+
+#DERIVADOR DE OPCIONES abm_cursos
+def abm_cursos (opc, cursos):
+    '''
+    #PRE: Recibe la opc elegida en el menu  y las estructura ppal 
+    utilizada para guardar y operar con el ABM
+
+    #POST: Redirige a la funcion q corresponda xa hacer lo pedido x el usuari
+    '''
+    if opc == 0:
+        alta_curso(cursos)
+    
+    elif opc == 0.5: #uno!!!
+        baja_curso(cursos)
+    
+    if(opc == 1):
+        modificar_curso(cursos)
+    
+    elif(opc == 2):
+        listar_cursos_max_precio(cursos)    #Que cuesten mas de 1150$  ( segun x condicion)
+
+    elif(opc == 3):
+        cargar_asistentes(cursos)
+
+    elif(opc == 4):
+        mostrar_cursos_ordenados(cursos)
+    #AGREGAR MAS OPCIONES O QUITAR SI ES NECESARIO
+
+
+#MAIN XA ABM
+def main():
+    cerrar = False
+
+    #Estructura a usar en el ABM xa guardar y modificar los datos {}, [] etc:
+    # cursos = [["Aprende  a hacer tu propio compost",1 ,950],
+    # ["Los niños y el medioambiente(para padres e hijes)",2,990],
+    # ["Tu huerta orgánica",4,2500]]
+
+    cursos ={   
+
+        1: {
+            "nombre": "Aprendé a hacer tu propio compost",
+            "costo": 950.0,
+            "cantidad_de_dias": 1,
+            "cantidad_de_vacantes": 4,
+            "fechas_de_dictado": ["10/06/2021"]
+        },
+            2: {
+            "nombre": "Los niños y el medioambiente",
+            "costo": 990.0,
+            "cantidad_de_dias": 2,
+            "cantidad_de_vacantes": 5,
+            "fechas_de_dictado": ["09/06/2021", "15/06/2021"]
+        },
+            3: {
+            "nombre": "Tu huerta orgánica",
+            "costo": 2500.0,
+            "cantidad_de_dias": 4,
+            "cantidad_de_vacantes": 10,
+            "fechas_de_dictado": ["01/06/2021", "04/06/2021", "21/06/2021"]
+        }    
+    }
+
+    while not cerrar:
+
+        #MENU DE OPCIONES DEL ABM:
+        print('''
+        Bienvenido  al sistema de registros de cursos de RumboCircular, ¿Que desea hacer? 
+        0.Dar de alta un curso
+        1.Modicar uno de los tres cursos    #1 alta          
+        2.Mostrar los cursos con un coste mayor a 1150  #2 baja
+        3.Seleccionar asistentes para un curso          #3 modificacion
+        4.Mostrar el listado de cursos y asistentes     #4 mostrar
+        5.Cerrar el programa (MUESTRA CURSOS!!1) ''')       #última opcion es cerrar programa
+
+        opc = int( validar_opcion(0,5, 'Ingrese una opcion: '))
+
+        if opc != 5:
+            abm_cursos(opc, cursos)
+        
+        else:
+            
+            for codigo, curso in cursos.items():
+                print(codigo,':')
+                for dato in curso:
+                    print(f'{dato}: {curso[dato]}')
+            cerrar = True
+main()
