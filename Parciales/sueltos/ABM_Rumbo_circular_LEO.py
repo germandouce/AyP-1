@@ -5,9 +5,12 @@ Estos cursos son los siguientes:
 - Aprendé a hacer tu propio compost (1 día de curso). Costo $950
 - Los niños y el medioambiente (para padres e hijes) (2 días de curso). Costo $990
 - Tu huerta orgánica (4 días de curso). Costo $2500
-El gran éxito de de estos cursos hizo que RumboCircular nos consultara para que los asesoremos para la creación de un pequeño sistema que permita organizar la asistencia de los participantes.
+El gran éxito de de estos cursos hizo que RumboCircular nos consultara para que los asesoremos para 
+la creación de un pequeño sistema que permita organizar la asistencia de los participantes.
 Los requerimientos que nos solicitan son los siguientes:
-a- ABM (Alta – Baja – Modificación) de cursos. Se podrá cargar la siguiente infomación de los cursos. Nombre, cantidad de días, costo, cantidad de vacantes, fechas de dictado.
+a- ABM (Alta – Baja – Modificación) de cursos. Se podrá cargar la siguiente infomación de los cursos. 
+Nombre, cantidad de días, costo, cantidad de vacantes, fechas de dictado.
+
 b- Listar todos los cursos cuyo costo sea superior a 1150 pesos.
 c- Mostrar el o los cursos cuya cantidad de vacantes sea la máxima.
 d- Mostrar todos los cursos que tengan al menos 3 fechas de dictado.
@@ -36,7 +39,7 @@ d- Mostrar todos los cursos que tengan al menos 3 fechas de dictado.
 #PRE:  No tiene
 #POST: Va a dar de alta un nuevo curso, la llave del curso
 #      debe ser distinta a las demas
-'''
+
 def dar_de_alta_curso(cursos:dict):
     curso = dict()
     llave = 0
@@ -46,9 +49,11 @@ def dar_de_alta_curso(cursos:dict):
     vacantes = 0
     fechas = list()
     flag_seguir_ingresando = True
-    llave = int(input("Ingrese el código del nuevo curso: "))
-    nombre = input("Ingrese el nombre del curso: ")
-    costo = float(input("Ingrese el costo del curso: "))
+
+    llave = int(input("Ingrese el código del nuevo curso: "))   #sera clave ppal del curso
+    
+    nombre = input("Ingrese el nombre del curso: ")    #estos datos se agregan al cursos[llave]
+    costo = float(input("Ingrese el costo del curso: "))        #como claves
     dias = int(input("Ingrese la cantidad de días del curso: "))
     vacantes = int(input("Ingrese la cantidad de vacantes del curso: "))
     while flag_seguir_ingresando:
@@ -63,7 +68,10 @@ def dar_de_alta_curso(cursos:dict):
     curso["cantidad_de_dias"] = dias
     curso["cantidad_de_vacantes"] = vacantes
     curso["fechas_de_dictado"] = fechas
-    cursos[llave] = curso
+
+    cursos[llave] = curso       #convierto el curso: cursos[llave] en clave de cursos
+
+
 def modificar_curso(cursos: dict):
     opcion = 0
     entrada = ""
@@ -97,6 +105,8 @@ def modificar_curso(cursos: dict):
             if ingresar_corte != "s":
                 flag_seguir_ingresando = False
         cursos[opcion][entrada] = fechas_de_dictado
+
+
 def dar_de_baja_curso(cursos: dict):
     opcion = 0
     entrada = ""
@@ -105,14 +115,20 @@ def dar_de_baja_curso(cursos: dict):
         print(f"{key} - {value[llave]}")
     opcion = int(input("¿Qué curso desea eliminar?: "))
     cursos.pop(opcion)
+
+
 def ABMCursos(cursos: dict) -> None:
     dar_de_alta_curso(cursos)
+
+
 def ingresar_opcion(opciones: list):
     opcion = 0
     for x in range(len(opciones)):
         print(f"{x + 1} - {opciones[x]}")
     opcion = int(input("Ingrese una opción: "))
     return opcion
+
+
 def main() -> None:
     opciones = [
         "ABM (Alta – Baja – Modificación) de cursos",
@@ -158,5 +174,10 @@ def main() -> None:
         elif opcion == 4:
             pass
             opcion = ingresar_opcion(opciones)
+    
+    for codigo, curso in cursos.items():
+        print(codigo,':')
+        for dato in curso:
+            print(f'{dato}: {curso[dato]}')
+        
 main()
-'''
