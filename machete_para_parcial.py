@@ -1,3 +1,5 @@
+#MACHETE PARA PARCIAL
+#FUNCIONES MUY UTILES Y USADAS
 
 #VALIDADOR DE OPCIONES PARA MENU
 #Util para menus y para corte de ciclos tipo seguir ingresando( 1- si  0- no)
@@ -20,7 +22,7 @@ def validar_opcion(opc_minimas: int, opc_maximas: int, texto: str = '') -> str:
 
 
 #INGRESO DE NUMEROS ENTEROS O FLOTANTES CORTA CON CUALQUIER LETRA
-def ingreso_numeros_corta_letra():
+def ingreso_numeros_corta_letra()-> list:
     #lista_de_numeros = ingreso_numeros_corta_letra()
     """
     PRE: no contiene parametros
@@ -48,6 +50,8 @@ def ingreso_elementos() -> list:
     while not cortar:
         
         print('Ingrese algo')
+        
+        #opc o funcion xa ingresar datos
 
         opc = int( validar_opcion(0,1, 'Desea seguir ingresando? 1- Si 0 - No: ') )
         
@@ -55,3 +59,9 @@ def ingreso_elementos() -> list:
             cortar = True
 
     return lista
+
+#MAIN
+def main()-> None:
+    #main()
+    pass
+
