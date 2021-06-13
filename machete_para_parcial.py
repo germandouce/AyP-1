@@ -29,7 +29,7 @@ def validar_opcion(opc_minimas: int, opc_maximas: int, texto: str = '') -> str:
 
 
 #INGRESO DE NUMEROS ENTEROS O FLOTANTES CORTA CON CUALQUIER LETRA
-def ingreso_numeros_corta_letra()-> list:
+def ingreso_numeros_corta_letra() -> list:
     #lista_de_numeros = ingreso_numeros_corta_letra()
     """
     PRE: no contiene parametros
@@ -66,15 +66,74 @@ def ingreso_elementos() -> list:
     
     return lista
 
+#IMPRIMIR DATOS DE DICT
+def mostrar_curso(curso : dict) -> None:
+    for llave, dato in curso.items():
+        print(f"{llave}: {dato}")
+
+
 #FUNCIONES XA MOSTRAR DATOS A USUARIO
-def listar_cursos_max_precio(cursos) -> None:  #listar_cursos_condicion_del_ejercicio
-    pass
+def listar_cursos_precio_mayor(cursos:dict) -> None:  #listar_cursos_condicion_del_ejercicio
+    print('Cursos con precio mayor a: ')
+    limite = int(input('Ingrese valor de referencia: '))
 
-def cargar_asistentes(cursos) -> None:      # funcion especifica de modificacion y o alta mmm
-    pass
+    cantidad = 0    
+    for curso in cursos.values():
+        if curso['costo'] >= limite:
+            mostrar_curso(curso)
+            print()
+            cantidad += 1
+    print(f'Hay {cantidad}, cursos con precio mayor a {limite}')
 
-def mostrar_cursos_ordenados(cursos) -> None:   #mostra todos los cursos (ordenados)
-    pass
+def mostrar_curso_con_max_vacantes(cursos) -> None: #muestra cursos ordenados y el q tiene mas (hace todo)
+    
+    vacantes_por_curso = [] #creo lista donde guradare los curso y sus repectivas vacantes
+    
+    for curso in cursos.values():
+        vacantes_por_curso.append( [ curso['nombre'], curso['cantidad_de_vacantes'] ])
+    vacantes_por_curso.sort(reverse =  True, key= lambda curso: curso[1] ) #curso [1] es la cantidad de vacantes de cda curso q agregu
+    
+    max_cantidad =  max(vacantes_por_curso)
+    print()    
+
+    for cursito in vacantes_por_curso:
+        print(f'{cursito[0]} tiene {cursito[1]} vacantes')                
+    print()
+    
+    print('Curso (s) con max cantidad de vacantes')
+    for cursito in vacantes_por_curso:
+        if cursito[1] == max_cantidad[1]:
+            print(f'{cursito[0]} con {cursito[1]} vacantes')                
+
+#FUNCION PARA MOSTRAR NOMBRE DE UNA CLAVE SU VALOR DE UN DICT DE DICT
+def mostrar_nombre_cursos(cursos)->None:
+    for curso, datos in cursos.items():
+        llave = "nombre"
+        print(f"{curso} - {datos[llave]}")
+
+
+def mostrar_cursos_ordenados_con_asistentes(cursos: dict) -> None:   #mostra todos los cursos (ordenados)
+    #cursos = sorted(cursos)        
+    for datos in cursos.values():
+        nombre = 'nombre'
+        if 'asistentes' in datos.keys():
+            asistentes = 'asistentes'
+            print(f'{datos[nombre]} - Asistentes: {datos[asistentes]}')
+        else:
+            print(f'{datos[nombre]} - No tiene asistentes')
+
+
+def cargar_asistentes(cursos: dict) -> None:   
+    
+    mostrar_nombre_cursos(cursos)
+
+    opc = int(input('¿A que curso desea agregar asistentes?: '))
+    nombre_asistente = input('Igrese nombre del asistente: ')
+    
+    if 'asistentes' not in cursos[opc].keys():
+        cursos[opc]['asistentes'] = [nombre_asistente]
+    else:
+        cursos[opc]['asistentes'].append(nombre_asistente)
 
 
 #FUNCIONES DE ALTA - BAJA - MODIFICACION
@@ -110,16 +169,13 @@ def alta_curso(cursos: dict) -> None:
     cursos[llave] = curso   
 
 
-
 def baja_curso(cursos: dict) -> None:
-    for curso, datos in cursos.items():
-        
-        llave = "nombre"
-        print(f"{curso} - {datos[llave]}")
+
+    mostrar_nombre_cursos(cursos)
 
     opciones = list(cursos.keys())
     
-    opc = input('¿Que curso desea modificar?: ')
+    opc = input('¿Que curso desea DAR DE BAJA?: ')
     while ( not opc.isnumeric() ) or ( int(opc) not in opciones):
         opc = input('ingrse una opcion valida: ')
     opc = int(opc)
@@ -196,15 +252,17 @@ def abm_cursos (opc, cursos):
     if(opc == 2):
         modificar_curso(cursos)
     
-    elif(opc == 2):
-        listar_cursos_max_precio(cursos)    #Que cuesten mas de 1150$  ( segun x condicion)
-
     elif(opc == 3):
-        cargar_asistentes(cursos)
+        listar_cursos_precio_mayor(cursos)    #Que cuesten mas de 1150$  ( segun x condicion)
 
     elif(opc == 4):
-        mostrar_cursos_ordenados(cursos)
-    #AGREGAR MAS OPCIONES O QUITAR SI ES NECESARIO
+        cargar_asistentes(cursos)
+
+    elif(opc == 5):
+        mostrar_cursos_ordenados_con_asistentes(cursos)
+
+    elif(opc == 6):
+        mostrar_curso_con_max_vacantes(cursos)
 
 
 #MAIN XA ABM
@@ -226,7 +284,7 @@ def main():
             "fechas_de_dictado": ["10/06/2021"]
         },
             2: {
-            "nombre": "Los niños y el medioambiente",
+            "nombre": "Los niños y el medio ambiente",
             "costo": 990.0,
             "cantidad_de_dias": 2,
             "cantidad_de_vacantes": 5,
@@ -245,18 +303,19 @@ def main():
 
         #MENU DE OPCIONES DEL ABM:
         print('''
-        Bienvenido  al sistema de registros de cursos de RumboCircular, ¿Que desea hacer? 
-        0.Dar de ALTA un curso
-        1.Dar de BAJA un curso
-        2.MODIFICAR uno de los tres cursos    #1 alta          
-        3.Mostrar los cursos con un coste mayor a 1150  #2 baja
-        4.Seleccionar asistentes para un curso          #3 modificacion
-        5.Mostrar el listado de cursos y asistentes     #4 mostrar
-        6.Cerrar el programa (MUESTRA CURSOS!!1) ''')       #última opcion es cerrar programa
+Bienvenido  al sistema de registros de cursos de RumboCircular, ¿Que desea hacer? 
+0.Dar de ALTA un curso
+1.Dar de BAJA un curso
+2.MODIFICAR uno de los tres cursos  #modificar valores de las claves de dict dentro de dict        
+3.Mostrar los cursos con un coste mayor a 1150 #Mostrar valores dentro del dict chico q cumplen x condicion
+4.Cargar asistentes para un curso   #Agregar clave a dict dentro de dict
+5.Mostrar el listado de cursos ORDENADOS y sus asistentes   #muestra varios datos ESPECIFICOS SI LO HAY
+6.Mostrar el o los cursos cuya cantidad de vacantes sea la máxima #mostrar datos segun el max de ellos
+7.Cerrar el programa (MUESTRA CURSOS!!1) ''')
 
-        opc = int( validar_opcion(0,6, 'Ingrese una opcion: '))
+        opc = int( validar_opcion(0,7, 'Ingrese una opcion: '))
 
-        if opc != 6:
+        if opc != 7:
             abm_cursos(opc, cursos)
         
         else:
