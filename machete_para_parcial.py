@@ -90,8 +90,8 @@ def mostrar_curso_con_max_vacantes(cursos) -> None: #muestra cursos ordenados y 
     vacantes_por_curso = [] #creo lista donde guradare los curso y sus repectivas vacantes
     
     for curso in cursos.values():
-        vacantes_por_curso.append( [ curso['nombre'], curso['cantidad_de_vacantes'] ])
-    vacantes_por_curso.sort(reverse =  True, key= lambda curso: curso[1] ) #curso [1] es la cantidad de vacantes de cda curso q agregu
+        vacantes_por_curso.append( [curso['cantidad_de_vacantes'], curso['nombre'] ])
+    vacantes_por_curso.sort(reverse =  True, key= lambda curso: curso[0] ) #curso [1] es la cantidad de vacantes de cda curso q agregu
     
     max_cantidad =  max(vacantes_por_curso)
     print()    
