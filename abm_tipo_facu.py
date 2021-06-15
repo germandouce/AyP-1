@@ -1,18 +1,4 @@
-#ej 3) 12:45 - 14:18
 '''
-La facultad de Ingeniería de la Universidad de Buenos Aires nos encarga la confección de un sistema 
-de análisis de los alumnos activos que cursan carreras en dicha casa de estudios.
-Para ello el sistema deberá permitir, a demanda del usuario, ingresar para cada alumno activo, lo 
-siguiente:
-
-* Padrón
-* Nombre
-* Apellido
-* Carrera
-* Cantidad de materias aprobadas
-* Nota promedio
-* Año de Ingreso
-
 Luego el programa deberá permitir emitir los siguientes reportes:
 a) Indicar la carrera que tiene los mejores alumnos en base al promedio de todos ellos
 b) Determinar el promedio de materias aprobadas de los alumnos de una carrera que se le solicita al 
@@ -21,6 +7,7 @@ c) Determinar el apellido más frecuente en la facultad
 d) Determinar la antigüedad promedio de los alumnos (en base a la fecha de hoy) que estén en el 
 último cuarto de la carrera, suponiendo que todas las carreras tienen 48 materias
 '''
+
 # carreras = {
 #   {nombre (de la carrera):
 #              nota_total:             
@@ -360,25 +347,3 @@ Bienvenido  al sistema de registros de cursos de RumboCircular, ¿Que desea hace
 
 
 main()
-
-
-#ej 4
-'''
-Escriba una función que retorne el número de veces que aparece la palabra "gatito" en cualquier 
-lugar del string dado, excepto que se va a aceptar cualquier letra en lugar de la "t", por lo que 
-"gakifo" y "galico" contarían. 
-Ej.: contar_palabra("gagigoyxgato") -> 1 
-contar_palabra("gaxioogaittogaaioo") -> 2 
-contar_palabra("gaittoagatitoggaiioo") -> 2 
-'''
-'''
-
-def contar_palabra(texto:str)-> int:
-    pal =  'gatito'
-    palabras_texto = list() 
-    
-string strBuscado = ‘ga’+[a-z]+’i’+’[a-z]+’o’        
-    
-texto = ''
-print(contar_palabra(texto))
-'''
