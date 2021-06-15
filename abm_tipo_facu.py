@@ -1,4 +1,5 @@
 '''
+Cargar alumnos, dsps:
 Luego el programa deberá permitir emitir los siguientes reportes:
 a) Indicar la carrera que tiene los mejores alumnos en base al promedio de todos ellos
 b) Determinar el promedio de materias aprobadas de los alumnos de una carrera que se le solicita al 
