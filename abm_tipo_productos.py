@@ -1,13 +1,10 @@
 '''
-a) Permita al usuario realizar el ingreso de un paciente. Para ello se solicita:
-- DNI
-- Nombre y Apellido
-- Cantidad de consultas asistidas
-- Tratamientos realizados (Tipo y cantidad. Puede ser ninguno)
-b) Emita un reporte que informe el tratamiento más solicitado por los pacientes.
-c) Emita un reporte que informe el monto total de tratamientos vendidos.
-d) Emita un reporte que informe el total de pacientes nuevos y viejos.
-e) Emita un reporte que informe cuál es el tratamiento más solicitado por los pacientes nuevos.
+Un pequeño menú que permita :
+a- La carga o modificación de un pedido (Un pedido puede estar compuesto por más de un artículo)
+b- La carga o modificación de un stock existente
+c- Listar los pedidos de un nro de cuenta o Razón Social dada
+d- Mostrar el pedido cuya valorización sea la mayor
+e- Listar todos los pedidos cargados.
 '''
 #ejemplo de modelacion
 

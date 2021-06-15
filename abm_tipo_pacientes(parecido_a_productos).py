@@ -1,12 +1,15 @@
 '''
-Un pequeño menú que permita :
-a- La carga o modificación de un pedido (Un pedido puede estar compuesto por más de un artículo)
-b- La carga o modificación de un stock existente
-c- Listar los pedidos de un nro de cuenta o Razón Social dada
-d- Mostrar el pedido cuya valorización sea la mayor
-e- Listar todos los pedidos cargados.
-'''
+a) Permita al usuario realizar el ingreso de un paciente. Para ello se solicita:
+- DNI
+- Nombre y Apellido
+- Cantidad de consultas asistidas
+- Tratamientos realizados (Tipo y cantidad. Puede ser ninguno)
+b) Emita un reporte que informe el tratamiento más solicitado por los pacientes.
+c) Emita un reporte que informe el monto total de tratamientos vendidos.
+d) Emita un reporte que informe el total de pacientes nuevos y viejos.
+e) Emita un reporte que informe cuál es el tratamiento más solicitado por los pacientes nuevos.
 
+'''
 #estructura abm:
     # tratamientos = {
     #           {1:
@@ -20,7 +23,7 @@ e- Listar todos los pedidos cargados.
     #            {dni:
     #                 nombre:    
     #                 consultas                     
-    #                  tratamientos_realizados {tipo_tratamiento: cantidad 
+    #                 tratamientos_realizados {tipo_tratamiento: cantidad 
     #                                                   
     #                    } 
     #               }
@@ -80,7 +83,7 @@ def mostrar_tratamiento_pacientes_nuevos(pacientes:dict, tratamientos: dict) -> 
 
 def mostrar_tratamiento_mas_solicitado(tratamientos) -> None: #muestra cursos ordenados y el q tiene mas (hace todo)
     
-    cantidad_de_tratamientos = [] #creo lista donde guradare los curso y sus repectivas vacantes
+    cantidad_de_tratamientos = [] #creo lista donde guradare los tratamieentos y sus repectivas cantidades
     
     for tratamiento in tratamientos.values():
         cantidad_de_tratamientos.append( [tratamiento['cantidad'], tratamiento['nombre'] ])
