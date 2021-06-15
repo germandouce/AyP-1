@@ -1,3 +1,19 @@
+#METODOS CLAVE!
+
+# diccionario.keys() :Devuelve una secuencia desordenada, con todas las claves que se hayan 
+# ingresado al diccionario
+
+# diccionario.values(): Devuelve una secuencia desordenada, con todos los valores que se hayan 
+# ingresado al diccionario.
+
+# diccionario.items(): Devuelve una secuencia desordenada con tuplas de dos elementos, en las 
+# que el primer elemento es la clave y el segundo el valor.
+
+# diccionario.get(clave,[]) # devuelve el valor de la clave dada, en el caso de que la clave no 
+# exista, devuelve el parámetro por omisión (2do parametro)
+
+#NO OLVIDAR .lower() en claves! EN TODOS LADOS!!
+
 #MACHETE PARA PARCIAL
 #FUNCIONES MUY UTILES Y USADAS
 
