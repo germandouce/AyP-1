@@ -25,6 +25,10 @@
 #                {articulos_de_pedido: id_artculo: [cantidad, color] }
 #                  }
 
+#ejemplo de modelacion
+
+
+
 def validar_opcion(opc_minimas: int, opc_maximas: int, texto: str = '') -> str:
     #ej: opc = int (validar_opcion(1, 2, 'texto en str con pregunta') )
     """
@@ -76,36 +80,27 @@ def mostrar_tratamiento_pacientes_nuevos(pacientes:dict, tratamientos: dict) -> 
     
 
 
-def mostrar_pedido_mas_caro(pedidos:dict, articulos:dict) -> None: 
+def mostrar_pedido_mas_caro(pedidos:dict) -> None: 
     
-    articulos_por_pedido = {} #creo lista donde guradare los articulos pedidos y su cant
-                                #articulos_por_pedido : [id_articulo, cant]
-    for pedido, datos in pedidos.items():                                
-        for articulo in datos['articulos_de_pedido']:
-            if pedido not in articulos_por_pedido:      
-                articulos_por_pedido[pedido]= [ pedido['articulo_de_pedido'], pedido['articulo_de_pedido'][0] ]
-            else: 
-                articulos_por_pedido[pedido][0].append( pedido['articulo_de_pedido'])
-                articulos_por_pedido[pedido][1].append (pedido['articulo_de_pedido'])
+    precio_pedidos = [] #creo lista donde guradare los pedidos y sus precios
     
-    precio_por_pedido = []
-    for id_articulo, datos in articulos.items():
-        for pedido in articulos_por_pedido:
-            if id_articulo == articulos_por_pedido[0]:
-                precio_por_pedido.append(pedido, articulos_por_pedido[1]*datos["precio"])
+    for pedido, datos in pedidos.items():
+        precio_pedidos.append( [datos['total_pedido'], pedido ])
+    
+    precio_pedidos.sort(reverse =  True, key= lambda tratamiento: tratamiento[0] ) 
+        
+    max_precio =  max(precio_pedidos)
+    print()    
 
-    print(precio_por_pedido)
-    #max_cantidad =  max(cantidad_de_tratamientos)
-    # print()    
-
-    # for trata in cantidad_de_tratamientos:
+    # for pedido in cantidad_de_tratamientos:
     #     print(f'{trata[1]} fue solicitado {trata[0]} veces')                
     # print()
     
-    # print('tratamiento (s) mas solicitado')
-    # for trata in cantidad_de_tratamientos:
-    #     if trata[0] == max_cantidad[0]:
-    #         print(f'{trata[1]} fue solicitado {trata[0]} veces')                
+    print('pedido (s) mas caro')
+    for pedido in precio_pedidos:
+        if pedido[0] == max_precio[0]:
+            print(f'El pedido {pedido[1]} dio una ganancia de {pedido[0]} $')   
+                   
 
 #FUNCION PARA MOSTRAR NOMBRE DE UNA CLAVE SU VALOR DE UN DICT DE DICT
 def mostrar_nombre_articulos(articulos)->None:
@@ -114,13 +109,12 @@ def mostrar_nombre_articulos(articulos)->None:
         print(f"{articulo} - {datos[llave]}")
 
 
-def mostrar_monto_total_tratamientos_vendidos(tratamientos: dict) -> None:   #mostra todos los cursos (ordenados)
-    #cursos = sorted(cursos)        
-    monto_total = 0
-    for tratamiento in tratamientos.values():
-        monto_total += tratamiento['cantidad']*tratamiento['costo']
-    
-    print(f'Te hiciste unos {monto_total} $ en total entre todos los tratamientos')
+def mostrar_todos_los_pedidos(pedidos: dict, articulos: dict) -> None:   #mostra todos los cursos (ordenados)
+    for pedido, datos in pedidos.items():
+        print(f'\n{pedido}:')
+        for llave in datos:
+            print(f'{llave}: {datos[llave]}')
+
 
 def mostrar_pedidos_cuenta_dada(pedidos: dict) -> None:   
     
@@ -128,48 +122,52 @@ def mostrar_pedidos_cuenta_dada(pedidos: dict) -> None:
 
     for pedido in pedidos.values():
         if pedido["id_cliente"] == id_cliente:
-            print (pedido['articulos_de_pedido'])
-
+            for art, datos in pedido["articulos_pedidos"].items():
+                print(f'{art}: {datos}')
+        print('total pedido en $:',pedido["total_pedido"])
 
 #FUNCIONES DE ALTA - BAJA - MODIFICACION
 def alta_pedido(articulos:dict, clientes:dict,  pedidos: dict,) -> None:
     
     pedido = dict()  
     id_pedido = int(input("Ingrese el id del nuevo pedido: ")) 
-    
-    #Pido datos del pedido y el cliente
+
+
     id_cliente = input("Ingrese id del cliente: ")   
     razon_social = input("Ingrese el nombre y apellido del cliente: ")    
-
-    articulos_de_pedido = dict()    #articulos_de_pedido ={id_articulo: [cantidad, color] }
     
-    print('lista de articulos disponibles')
-    mostrar_nombre_articulos(articulos)
+    articulos_pedidos = {}
 
+    print('lista de articulos disponibles\n')
+    mostrar_nombre_articulos(articulos)
     
     print('Ingreese el articulo que desea comprar')
 
     continuar_ingreso = True
     
+    total_pedido = 0
     while continuar_ingreso:
+        
         id_articulo = int(input("Ingrese el id del articulo: "))
         cantidad = int(input(f"Ingrese la cantidad de articulos de ese tipo: ") )
         color = input("Ingrese el color del los articulos: ")
 
-        articulos_de_pedido[id_articulo] = [cantidad, color] # dentro del dict pedidos
-            
-        clientes[id_cliente] = razon_social   # dentro del dict independiente clientes
+        articulos_pedidos[id_articulo] = [cantidad, color]
+
+        total_pedido += cantidad * articulos[id_articulo]["precio"]
 
         corte = input("¿Quiere seguir ingresando articulos <s/n>? ")
         if corte != "s":
             continuar_ingreso = False
         
         else:
-            continuar_ingreso = False
+            continuar_ingreso = True
 
-    #Guardo los datos en la tabla pedidos y en clientes  
+    #Guardo los datos del pedido
     pedido["id_cliente"] = id_cliente
-    pedido["articulos_de_pedido"] = articulos_de_pedido
+    pedido["razon_social"] = razon_social
+    pedido["articulos_pedidos"] = articulos_pedidos #dicciionario con pedidos 
+    pedido["total_pedido"] = total_pedido   #total del pedio
 
     #Convierto el pedido: pedido[id_pedido] en clave de la tabla pedidos
     pedidos[id_pedido] = pedido
@@ -246,23 +244,55 @@ def abm_textil (opc, articulos:dict, clientes: dict, pedidos: dict):
         mostrar_pedidos_cuenta_dada(pedidos)   #tratamiento mas elegido por pacientes
 
     elif(opc == 4):
-        mostrar_pedido_mas_caro(pedidos, articulos) #muestra nuevos y viejos
+        mostrar_pedido_mas_caro(pedidos) #muestra nuevos y viejos
 
     elif(opc == 5):
-         mostrar_monto_total_tratamientos_vendidos(tratamientos) #muestra total vendido en sopes
+         mostrar_monto_total_tratamientos_vendidos(tratamientos,articulos) #muestra total vendido en sopes
 
     elif(opc == 6):
-        mostrar_tratamiento_mas_solicitado(tratamientos) #muestra tratamiento mas solicitado entre todos
+        mostrar_todos_los_pedidos(pedidos,articulos) #muestra tratamiento mas solicitado entre todos
 
 
 #MAIN XA ABM
 def main():
     cerrar = False
+    #Articulos = {'id'}: [desc, color, cant, precio]}
+    #clientes = {'id': razon_social}
+    #pedidos = {'id': [id_articulo, id_cliente, cantidad, color]}
 
-    #Estructura a usar en el ABM xa guardar y modificar los datos {}, [] etc:
-    # cursos = [["Aprende  a hacer tu propio compost",1 ,950],
-    # ["Los niños y el medioambiente(para padres e hijes)",2,990],
-    # ["Tu huerta orgánica",4,2500]]
+
+    #Articulos = {'id_articulo':
+    #                           desc:
+    #                           color:
+    #                           cant:
+    #                           precio:
+
+    #clientes = {'id': razon_social}
+
+
+    #pedidos = {'id': id_cliente: id_cliente
+    #                {articulos_de_pedido: id_artculo: [cantidad, color] }
+    #                  }
+
+    #estructura abm:
+    # articulos = {
+    #               {id_articulo:
+    #                           desc:
+    #                           color:             
+    #                           cantidad: 
+    #                           precio:    
+    #            }    
+    #           
+    #                   }
+    # pedidos = { 
+    #            {id_pedido: id_cliente:
+    #                        razon_social:
+    #                        articulos_pedidos= {id_articulo} [cantidad, color]                                               
+    #                        total   
+    #                     }                                      
+    #               } 
+    #
+    # clientes = {'id': razon_social}
 
     
     articulos = {}
@@ -281,7 +311,7 @@ Bienvenido  al sistema de registros de cursos de RumboCircular, ¿Que desea hace
 3.Mostrar pedidos de una cuenta dada #Mostrar valores dentro del dict chico q cumplen x condicion
 4.Mostrar el pedido cuya valorizacion sea la mayor
 5.Mostrar monto total ganado con tratamientos vendidos  #muestra varios datos ESPECIFICOS SI LO HAY
-6.Mostrar el tratamiento mas solicitado por los pacientes #mostrar datos segun el max de ellos
+6.Listar todos los pedidos cargados
 7.Cerrar el programa (MUESTRA todo!!1) ''')
 
         opc = int( validar_opcion(0,7, 'Ingrese una opcion: '))
