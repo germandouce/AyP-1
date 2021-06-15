@@ -1,4 +1,35 @@
+'''
+a) Permita al usuario realizar el ingreso de un paciente. Para ello se solicita:
+- DNI
+- Nombre y Apellido
+- Cantidad de consultas asistidas
+- Tratamientos realizados (Tipo y cantidad. Puede ser ninguno)
+b) Emita un reporte que informe el tratamiento más solicitado por los pacientes.
+c) Emita un reporte que informe el monto total de tratamientos vendidos.
+d) Emita un reporte que informe el total de pacientes nuevos y viejos.
+e) Emita un reporte que informe cuál es el tratamiento más solicitado por los pacientes nuevos.
+'''
 #ejemplo de modelacion
+
+# articulos = {
+    #               {id_articulo:
+    #                           desc:
+    #                           color:             
+    #                           cantidad: 
+    #                           precio:    
+    #            }    
+    #           
+    #                   }
+    # pedidos = { 
+    #            {id_pedido: id_cliente:
+    #                        razon_social:
+    #                        articulos_pedidos= {id_articulo} [cantidad, color]                                               
+    #                        total   
+    #                     }                                      
+    #               } 
+    #
+    # clientes = {'id': razon_social}
+
 
 
 
@@ -229,24 +260,7 @@ def abm_textil (opc, articulos:dict, clientes: dict, pedidos: dict):
 #MAIN XA ABM
 def main():
     cerrar = False
-    #Articulos = {'id'}: [desc, color, cant, precio]}
-    #clientes = {'id': razon_social}
-    #pedidos = {'id': [id_articulo, id_cliente, cantidad, color]}
-
-
-    #Articulos = {'id_articulo':
-    #                           desc:
-    #                           color:
-    #                           cant:
-    #                           precio:
-
-    #clientes = {'id': razon_social}
-
-
-    #pedidos = {'id': id_cliente: id_cliente
-    #                {articulos_de_pedido: id_artculo: [cantidad, color] }
-    #                  }
-
+       
     #estructura abm:
     # articulos = {
     #               {id_articulo:
