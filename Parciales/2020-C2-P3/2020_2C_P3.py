@@ -39,6 +39,7 @@ d) Determinar la antigüedad promedio de los alumnos (en base a la fecha de hoy)
 #   }
 # }
 
+
 def validar_opcion(opc_minimas: int, opc_maximas: int, texto: str = '') -> str:
     #ej: opc = int (validar_opcion(1, 2, 'texto en str con pregunta') )
     """
@@ -276,7 +277,7 @@ def modificar_alumno(cursos: dict) -> None:
 def abm_alumnos (opc, alumnos:dict, carreras:dict):
     '''
     #PRE: Recibe la opc elegida en el menu  y las estructura ppal 
-    utilizada para guardar y operar con el ABM
+    #utilizada para guardar y operar con el ABM
 
     #POST: Redirige a la funcion q corresponda xa hacer lo pedido x el usuari
     '''
@@ -334,7 +335,7 @@ def main():
     while not cerrar:
 
         #MENU DE OPCIONES DEL ABM:
-        print('''
+        print("""
 Bienvenido  al sistema de registros de cursos de RumboCircular, ¿Que desea hacer? 
 0.Dar de ALTA un alumno
 1.Indicar carrera con mejores alumnos en base a promedio
@@ -343,7 +344,7 @@ Bienvenido  al sistema de registros de cursos de RumboCircular, ¿Que desea hace
 4.Mostrar antiguedad promedio alumnos en el ultimo 4to carrera
 5.Mostrar monto total ganado con tratamientos vendidos  #muestra varios datos ESPECIFICOS SI LO HAY
 6.Mostrar el tratamiento mas solicitado por los pacientes #mostrar datos segun el max de ellos
-7.Cerrar el programa (MUESTRA todo!!1) ''')
+7.Cerrar el programa (MUESTRA todo!!1) """)
 
         opc = int( validar_opcion(0,7, 'Ingrese una opcion: '))
 
@@ -361,24 +362,30 @@ Bienvenido  al sistema de registros de cursos de RumboCircular, ¿Que desea hace
 
 main()
 
-
+'''
 #ej 4
-'''
-Escriba una función que retorne el número de veces que aparece la palabra "gatito" en cualquier 
-lugar del string dado, excepto que se va a aceptar cualquier letra en lugar de la "t", por lo que 
-"gakifo" y "galico" contarían. 
-Ej.: contar_palabra("gagigoyxgato") -> 1 
-contar_palabra("gaxioogaittogaaioo") -> 2 
-contar_palabra("gaittoagatitoggaiioo") -> 2 
-'''
+# """
+# Escriba una función que retorne el número de veces que aparece la palabra "gatito" en cualquier 
+# lugar del string dado, excepto que se va a aceptar cualquier letra en lugar de la "t", por lo que 
+# "gakifo" y "galico" contarían. 
+# Ej.: contar_palabra("gagigoyxgato") -> 1 
+# contar_palabra("gaxioogaittogaaioo") -> 2 
+# contar_palabra("gaittoagatitoggaiioo") -> 2 
 '''
 
-def contar_palabra(texto:str)-> int:
-    pal =  'gatito'
-    palabras_texto = list() 
-    
-string strBuscado = ‘ga’+[a-z]+’i’+’[a-z]+’o’        
-    
-texto = ''
-print(contar_palabra(texto))
+'''
+def contador_de_gatitos(palabra:str)->None:
+    aparicion_de_gatito = list()
+    palabras = [palabra[i:i+6] for i in range(0, len(palabra), 6)]
+    print(palabras)
+    for palabra in palabras:
+        verificador = list()
+        for letra in palabra:
+            verificador.append(letra)
+            if len(verificador) == 6:
+                if verificador[0] == 'g' and verificador[1] == 'a' and verificador[3] == 'i' and verificador[5] == 'o':
+                    aparicion_de_gatito.append(palabra)
+    print(len(aparicion_de_gatito))
+
+print(contador_de_gatitos("aagaxitogordo"))
 '''

@@ -78,7 +78,7 @@ Obs.
  funciones.
  -Se deberá contemplar alguna estructura que permita guardar el código de color y el nombre
 '''
-'''
+
 #pedidos = {codigo_crema: cantidad }
 #tanques = {codigo_crema : [nombre, cantidad] }
 #envases = {tipo_envase: cantidad_de_envases}
@@ -197,7 +197,7 @@ def main() -> None:
     datos_produccion(pedidos,envases, tanques)
 
 main()
-'''
+
 
 #ej 5) (ya lo habia hecho jeje) 
 #16:31 - 16:59 (con detallesitos..) -> 28 min
