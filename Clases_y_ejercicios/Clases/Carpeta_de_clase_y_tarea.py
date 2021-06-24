@@ -1022,8 +1022,10 @@ a- indicar cuántas veces aparece y en qué línea del poema está.
 b- copiar la línea a un archivo llamado salida.txt
 Además se deberá implementar try except para la apertura de archivos
 '''
-
+'''
 with open('archivos/entrada.txt','r') as poema:
     for linea in poema:
         print(linea)    
-                        
+''' 
+
+#CLASE                     
