@@ -6,7 +6,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 NOMBRE_DEL_ARCHIVO = "cadenas.txt"
 RUTA = os.path.join(BASE_DIR, NOMBRE_DEL_ARCHIVO)
 TAMANIO = 6
-LINEAS = 1000
+LINEAS = 100
 
 def escribir_archivo(letras: str) -> None:
 
@@ -15,8 +15,7 @@ def escribir_archivo(letras: str) -> None:
             string_random =  "".join(sample(letras, TAMANIO))      
             archivo.write(string_random + '\n')
     
-
-
+    
 def main() -> None:
     letras = string.ascii_lowercase
     escribir_archivo(letras)
