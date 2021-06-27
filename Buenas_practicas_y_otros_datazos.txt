@@ -1,10 +1,10 @@
-*COMMANDS*
+## COMMANDS
 
 Run python file: python[3] <file_name>
 See python version: python --version
 mypy <file_name>
 
-*DATAZOS Y BUENAS PRÁCTICAS*
+## DATAZOS Y BUENAS PRÁCTICAS
 
 CONSTANTESENMAYUSCULAYTODOJUNTO
 
@@ -76,7 +76,7 @@ o si tengo uno mal y 2 masomenos. De esos, 1 bien, y algo
 bien del otro.
 El largo es el mas importante!
 
-#aclarar algo basico de como funciona la funcion
+aclarar algo basico de como funciona la funcion
 
 NO AGREGAR DOCUMENTACION
 NO VALIDAR!!!
@@ -89,7 +89,7 @@ ALREDEDOR DE 15 MINUTOS !!
 PENSAR ESTRUCTURA EN UN PAPEL
 
 
-RECOMENDACIONES XA ABM
+# RECOMENDACIONES XA ABM
 
 
 F1 ABM
@@ -104,7 +104,18 @@ F2 OPCIONES DE MUESTRAS
 
 MAIN MENU
 	ABM
-	
+
+# QUE ES UN LOG?
+
+Es un archivo de texto (en gral .txt) que guarda un fecha u horario con
+la informacion de determinado evento.
+Por ejemplo un LOG de errores es un .txt q contiene las fechas y horas
+en q se producen los errores con el respctivo codigo o nombre del error
+y alguna info adicional útil.
+
+# XA TP2:
+Conviene tener un scrpit xa crear archivos y carpetas
+
 
 
 
