@@ -1,3 +1,4 @@
+from typing import Final
 import pylint
 #CLASE 01 - INTRO A LA COMPUTACION
 #CLASE 02 - NUMERACION
@@ -939,93 +940,4 @@ print(cajero(lista))
 #Martes 15/06/2021
 
 #CLASE 19: REVISION DEL PARCIAL
-#Jueves 17/06/2021
-
-#CLASE 22/06/21
-
-#CLASE 20: MANEJO DE ARCHIVOS
-#Martes 22/06/2021
-
-#Ej 1
-'''
-Se les proporcionará un archivo cadenas.txt donde cada línea contiene una cadena generada de forma 
-aleatoria. Lo que se les pide es que lean cada línea del archivo y mostrar mediante consola el primer 
-carácter de cada cadena.
-'''
-'''
-ruta_archivo =  'archivos/cadenas.txt'
-with open(ruta_archivo,'r') as archivo:
-    for linea in archivo:
-        print(linea[0], end = ' ')
-'''
-#Exepciones: 
-#raise exception
-'''
-raise Exception('ola')
-'''
-#assert
-'''
-def multipliar(a,b):
-    return a-b
-
-assert(4 == multipliar(2,2) )
-'''
-#ejemplo con funcion isinstance
-'''
-def division(a:int, b:int) ->float :
-    if not isinstance(a, int) or not isinstance(b, int):
-        raise ValueError("a y b deben ser enteros")
-    else:
-        resultado = a/b
-
-    return resultado
-
-print(division('a',5 ))
-'''
-#Ej 2
-'''
-Se les proporcionará un archivo numeros.txt, donde cada línea contiene un número de forma aleatoria. Lo 
-que les pedimos es leer el archivo y calcular la suma de todos esos números y mediante un assert 
-verificar que la suma sea igual a 2.613.60
-'''
-'''
-def suma():
-    ruta = 'archivos/numeros.txt'
-    with open(ruta,'r') as arch:
-        sum = 0
-        for num in arch:         #cada linea es un numero
-            sum += int(num)
-    return sum
-
-assert(suma() == 2613600)
-'''
-'''
-import os
-
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-NOMBRE_DEL_ARCHIVO = "cadenasv2.txt"
-RUTA = os.path.join(BASE_DIR, NOMBRE_DEL_ARCHIVO)
-'''
-
-#Ejercicio Tarea!!!!
-
-#FUNCIONES UTILES XA ARCHIVOS!!
-
-#otro ej de tarea:
-'''
-EJERCICIO PARA LA CLASE QUE VIENE!
-Se pide hacer un programa que abra un archivo de texto llamado entrada.txt el mismo contiene el 
-siguiente poema de Ruben Dario
---poema--
-y permita al usuario poder buscar palabras. Si las mismas se encuentran deberá:
-a- indicar cuántas veces aparece y en qué línea del poema está.
-b- copiar la línea a un archivo llamado salida.txt
-Además se deberá implementar try except para la apertura de archivos
-'''
-'''
-with open('archivos/entrada.txt','r') as poema:
-    for linea in poema:
-        print(linea)    
-''' 
-
-#CLASE                     
+#Jueves 17/06/2021                    
