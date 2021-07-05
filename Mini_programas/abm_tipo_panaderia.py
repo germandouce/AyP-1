@@ -26,6 +26,28 @@ d. La impresión de un reporte donde indique en cuantos pedidos se encontró cad
 
 e. Indicar el % de pedidos superiores a $1000
 '''
+#estructura abm:
+    # menu = {                              #guardo el nomrbe de los articulos
+    #               {id_articulo:
+    #                           nombre:
+    #                           precio:             
+    #                              
+    #            }    
+    #           
+    #                   }
+    # pedidos = {                           # guardo los pedidos con su respectivo total
+    #            {id_pedido: id_cliente:
+    #                        razon_social:
+    #                        articulos_pedidos= {id_articulo: cantidad}                                               
+    #                        total   
+    #                     }                                      
+    #               } 
+    #
+    # clientes = {'id_cliente':                   #Guardo las deuddas de cada cliente con su nombre
+    #                           razon_social
+    #                           deuda        
+    #                                           }
+
 def validar_opcion(opc_minimas: int, opc_maximas: int, texto: str = '') -> str:
     #ej: opc = int (validar_opcion(1, 2, 'texto en str con pregunta') )
     """
