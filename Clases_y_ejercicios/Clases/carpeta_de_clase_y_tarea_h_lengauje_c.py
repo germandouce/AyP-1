@@ -355,3 +355,8 @@ with open('archivos/entrada.txt','r') as poema:
 '''
 
 #CLASE 21: GIT Y GITHUB
+
+#CLASE 22:       
+
+#CLASE 23 ---> FIN CURSADA: LENGUAJE C + TP DRIVEHUB
+#VER EN CARPETA LENGUAJE C
