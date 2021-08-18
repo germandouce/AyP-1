@@ -102,7 +102,7 @@ arch.close()
 for linea in arch:
     print(linea)
 '''
-# readlines() devuelve una lista con las lineas del arhivos (cada linea es un ele)
+# readlines() devuelve una lista con las lineas del archivos (cada linea es un ele)
 #ejemplo 2 # MEJOR!! con with open
 '''
 ruta = 'archivos/entrada.txt'
@@ -360,3 +360,21 @@ with open('archivos/entrada.txt','r') as poema:
 
 #CLASE 23 ---> FIN CURSADA: LENGUAJE C + TP DRIVEHUB
 #VER EN CARPETA LENGUAJE C
+
+#DATAZO SOBRE DICCIONARIOS!!!
+'''
+random_dict ={
+    "hola": 1,
+    "chau":123,
+    "juan":123,
+    "jose":432,
+    "roberto":432
+}
+print(type(random_dict.get))
+clave_con_max_valor = max(random_dict, key = random_dict.get)
+clave_con_min_valor = min(random_dict, key = random_dict.get)
+
+print(clave_con_max_valor, clave_con_min_valor)
+
+#collable
+'''
