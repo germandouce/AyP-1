@@ -1,0 +1,8 @@
+50.0,pepe
+100.0,ger
+50.0,ger
+100.0,pepe
+0.0,jose
+0.0,1
+100.0,pepe
+0.0,german
